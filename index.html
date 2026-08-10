@@ -1036,7 +1036,9 @@ const PLANS = {
           resources:[{label:"Configurateur ë-C3", url:"https://store.citroen.fr/"}]}},
         {text:"Identifier les 3 principaux concurrents de chaque modèle phare (Clio, 208, Sandero…)", work:{type:"table", columns:["Modèle Citroën","Concurrent 1","Concurrent 2","Concurrent 3","Différenciateur Citroën"], seed:[{"Modèle Citroën":"C3"},{"Modèle Citroën":"C3 Aircross"},{"Modèle Citroën":"C5 Aircross"}],
           lesson:"Avant de remplir le tableau, regarde où se situent tes concurrents directs dans le classement des ventes françaises 2025 : Clio, 208 et Sandero pour la C3 ; Captur et 2008 pour la C3 Aircross ; Qashqai et Tiguan pour la C5 Aircross.",
-          resources:[{label:"Classement des ventes France 2025", url:"https://www.capcar.fr/blog/bilan-des-voitures-les-plus-vendues-en-france"}]}}
+          resources:[{label:"Classement des ventes France 2025", url:"https://www.capcar.fr/blog/bilan-des-voitures-les-plus-vendues-en-france"}]}},
+        {text:"Réviser la gamme complète en flashcards jusqu'à retrouver segment, énergie et point clé de chaque modèle sans hésiter", work:{type:"flashcards", brand:"citroen",
+          lesson:"Passe en revue les 9 modèles Citroën dans le désordre : pour chacun, retrouve son segment, son énergie et l'argument clé à retenir avant de retourner la carte. Objectif avant l'entretien : zéro hésitation sur les 9 cartes, dans n'importe quel ordre."}}
       ]},
     {titre:"Semaine 2 — Process de vente & outils", goal:"Comprendre le parcours client et les outils concession",
       items:[
@@ -1086,7 +1088,9 @@ const PLANS = {
         {text:"Comprendre l'écosystème recharge électrique (types de bornes, temps de charge, réseaux partenaires)", work:{type:"notes",
           lesson:"Deux types de recharge à savoir expliquer : la recharge AC (à domicile ou au travail, plusieurs heures, pour un usage quotidien) et la recharge DC rapide (30 à 80 % en moins de 30 minutes sur les modèles récents grâce à l'architecture 800V des EV6 et EV9, utile en trajet longue distance). Kia propose son propre service Kia Charge donnant accès à un large réseau de bornes publiques."}},
         {text:"Comparer Kia à Hyundai et aux marques généralistes sur 2-3 points clés", work:{type:"table", columns:["Critère","Kia","Hyundai / généraliste"], seed:[{"Critère":"Garantie"},{"Critère":"Prix"},{"Critère":"Image de marque"}],
-          lesson:"Kia et Hyundai partagent des plateformes techniques (même groupe) mais se différencient par le design et le positionnement tarifaire : Kia mise sur un style plus affirmé et une garantie plus longue (7 ans vs généralement 5 ans chez Hyundai). Remplis le tableau avec ces bases avant de le préciser avec les fiches produits."}}
+          lesson:"Kia et Hyundai partagent des plateformes techniques (même groupe) mais se différencient par le design et le positionnement tarifaire : Kia mise sur un style plus affirmé et une garantie plus longue (7 ans vs généralement 5 ans chez Hyundai). Remplis le tableau avec ces bases avant de le préciser avec les fiches produits."}},
+        {text:"Réviser toute la gamme Kia (12 modèles, du Picanto à l'EV9) en flashcards jusqu'à l'automatisme", work:{type:"flashcards", brand:"kia",
+          lesson:"La gamme Kia est la plus large des trois marques à réviser : entraîne-toi jusqu'à savoir situer instantanément chaque modèle (segment, énergie, point clé), y compris la logique de nommage EV2 à EV9. C'est la base pour orienter un client vers le bon modèle en quelques secondes."}}
       ]},
     {titre:"Semaine 2 — Outils & process concession", goal:"Se familiariser avec le fonctionnement commercial",
       items:[
@@ -1137,7 +1141,9 @@ const PLANS = {
           resources:[{label:"TVA récupérable sur véhicule", url:"https://www.legalplace.fr/guides/recuperation-tva-vehicule/"},{label:"Avantage en nature véhicule 2026", url:"https://www.legisocial.fr/reperes-sociaux/avantage-en-nature-vehicule-2026.html"}]}},
         {text:"Repérer pour chaque marque un modèle « produit d'appel » et un modèle « premium » côté pro", work:{type:"table", columns:["Marque","Produit d'appel","Produit premium"], seed:brandSeedRows("Marque"),
           lesson:"Repère pour chaque marque un modèle d'entrée qui fait venir le client (prix, praticité) et un modèle qui fait monter le panier (finition, motorisation, image). Utilise les fiches marques de ce site : chaque gamme y est déjà classée par segment.",
-          resources:[{label:"Ouvrir la fiche marque Seat", brand:"seat"},{label:"Ouvrir la fiche marque Cupra", brand:"cupra"},{label:"Ouvrir la fiche marque Škoda", brand:"skoda"},{label:"Ouvrir la fiche marque BYD", brand:"byd"},{label:"Ouvrir la fiche marque Volkswagen", brand:"vw"},{label:"Ouvrir la fiche marque Audi", brand:"audi"}]}}
+          resources:[{label:"Ouvrir la fiche marque Seat", brand:"seat"},{label:"Ouvrir la fiche marque Cupra", brand:"cupra"},{label:"Ouvrir la fiche marque Škoda", brand:"skoda"},{label:"Ouvrir la fiche marque BYD", brand:"byd"},{label:"Ouvrir la fiche marque Volkswagen", brand:"vw"},{label:"Ouvrir la fiche marque Audi", brand:"audi"}]}},
+        {text:"Réviser en flashcards les gammes des 6 marques (Seat, Cupra, Škoda, BYD, Volkswagen, Audi) mélangées", work:{type:"flashcards", brands:["seat","cupra","skoda","byd","vw","audi"],
+          lesson:"Ce jeu mélange les modèles des 6 marques Valauto : le nom de la marque s'affiche sur chaque carte pour t'aider à t'y retrouver au début, mais l'objectif est de reconnaître rapidement le segment et l'énergie de chaque modèle, marque par marque, sans confondre les gammes."}}
       ]},
     {titre:"Semaine 2 — Financement & gestion de flotte", goal:"Maîtriser les outils financiers spécifiques au B2B",
       items:[
@@ -1374,6 +1380,8 @@ function buildWorkspace(panel, workId, work){
   const practiceEl = panel.querySelector('[data-practice]');
   if(work.type === "table"){
     buildTable(practiceEl, workId, work.columns, work.seed);
+  } else if(work.type === "flashcards"){
+    buildFlashcards(practiceEl, workId, work);
   } else {
     buildNotes(practiceEl, workId, !!work.counter);
   }
@@ -1484,6 +1492,68 @@ function buildTable(panel, workId, columns, seed){
   });
 }
 
+function flashcardDeck(work){
+  if(work.cards && work.cards.length){
+    return work.cards.map(c => ({front:c.q, back:c.a, sub:c.sub||''}));
+  }
+  const brandKeys = work.brands || (work.brand ? [work.brand] : []);
+  const cards = [];
+  brandKeys.forEach(bk => {
+    const b = BRANDS[bk];
+    if(!b) return;
+    b.gamme.forEach(g => cards.push({
+      front:g.modele,
+      back:`${g.segment} — ${g.energie}`,
+      sub:g.note,
+      brandLabel: brandKeys.length > 1 ? b.name : ''
+    }));
+  });
+  return cards;
+}
+
+function buildFlashcards(panel, workId, work){
+  const cards = flashcardDeck(work);
+  if(!cards.length){ panel.innerHTML = ''; return; }
+
+  const key = 'fc-'+workId;
+  let known = {};
+  try{ known = JSON.parse(localStorage.getItem(key) || '{}'); }catch(e){}
+  let order = shuffle(cards.map((_,i)=>i));
+  let idx = 0;
+  let showBack = false;
+
+  function persist(){
+    try{ localStorage.setItem(key, JSON.stringify(known)); }catch(e){}
+  }
+
+  function render(){
+    const ci = order[idx];
+    const c = cards[ci];
+    const mastered = Object.values(known).filter(Boolean).length;
+    panel.innerHTML = `
+      <div class="flash-card" data-flip>
+        <div class="fc-label">${c.brandLabel ? esc(c.brandLabel)+' · ' : ''}${showBack ? 'Segment · Énergie' : 'Modèle'}</div>
+        <div class="fc-content">${esc(showBack ? c.back : c.front)}</div>
+        <div class="fc-sub">${showBack ? esc(c.sub || '') : 'Clique sur la carte pour révéler la réponse'}</div>
+      </div>
+      <div class="flash-controls">
+        <button class="btn-mini" data-prev type="button">← Précédent</button>
+        <span class="flash-progress">${idx+1} / ${order.length} · ${mastered}/${cards.length} maîtrisées</span>
+        <button class="btn-mini" data-next type="button">Suivant →</button>
+      </div>
+      <div class="row-actions" style="justify-content:center">
+        <button class="btn-mini" data-shuffle type="button">🔀 Mélanger</button>
+        <button class="btn-mini" data-known type="button">${known[ci] ? '↺ À revoir' : '✓ Je maîtrise'}</button>
+      </div>`;
+    panel.querySelector('[data-flip]').addEventListener('click', () => { showBack = !showBack; render(); });
+    panel.querySelector('[data-prev]').addEventListener('click', () => { idx = (idx-1+order.length)%order.length; showBack=false; render(); });
+    panel.querySelector('[data-next]').addEventListener('click', () => { idx = (idx+1)%order.length; showBack=false; render(); });
+    panel.querySelector('[data-shuffle]').addEventListener('click', () => { order = shuffle(cards.map((_,i)=>i)); idx=0; showBack=false; render(); });
+    panel.querySelector('[data-known]').addEventListener('click', () => { known[ci] = !known[ci]; persist(); render(); });
+  }
+  render();
+}
+
 /* ---------------- CHECKBOX PROGRESS ---------------- */
 function toggleItem(pageKey, id){
   const cb = document.getElementById(id);
@@ -1555,6 +1625,12 @@ function planToMarkdown(pageKey, planItems){
         } else {
           md += '_Pas encore rempli._\n';
         }
+      } else if(work.type === "flashcards"){
+        const cardsCount = flashcardDeck(work).length;
+        let known = {};
+        try{ known = JSON.parse(localStorage.getItem('fc-'+workId) || '{}'); }catch(e){}
+        const mastered = Object.values(known).filter(Boolean).length;
+        md += `Flashcards de révision : ${mastered} / ${cardsCount} maîtrisées.\n`;
       } else {
         let note = '';
         try{ note = localStorage.getItem('note-'+workId) || ''; }catch(e){}
