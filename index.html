@@ -161,6 +161,38 @@ footer h4{color:var(--text);font-size:13px;margin-bottom:8px}
 .progress-bar{height:8px;background:var(--panel2);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));width:0%;transition:width .3s ease}
 .progress-label{font-size:12px;color:var(--muted);margin-top:6px}
+
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -2px;border-radius:8px}
+table.gamme,table.worktable{min-width:560px}
+
+/* ---- responsive / mobile ---- */
+@media (max-width:760px){
+  header.top{padding:10px 14px}
+  .top-inner{gap:8px}
+  .brandmark .t1{font-size:15px}
+  nav.tabs{gap:5px}
+  nav.tabs button{padding:7px 11px;font-size:12.5px}
+  main{padding:16px 14px 60px}
+  .hero{padding:18px;border-radius:12px}
+  .hero h1{font-size:20px}
+  .hero p{font-size:13.5px}
+  .pill{font-size:11.5px}
+  h2.section-title{font-size:16px;margin:26px 0 12px}
+  .card-grid{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .overlay{padding:0;align-items:stretch}
+  .modal{border-radius:0;max-width:100%;min-height:100%;margin-bottom:0}
+  .modal .mhead{padding:16px}
+  .modal .mbody{padding:16px}
+  .week{padding:14px}
+  .week .wk-goal{margin-left:0}
+  .item-top{flex-wrap:wrap}
+  .work-toggle{margin-left:24px}
+  .flash-card{padding:20px;min-height:100px}
+  .flash-controls,.row-actions{flex-wrap:wrap;gap:8px}
+  .export-row{justify-content:stretch}
+  .export-row .btn-mini{flex:1;justify-content:center}
+}
 </style>
 </head>
 <body>
@@ -769,12 +801,14 @@ function renderBrandDetails(key){
         <h4 style="margin:0">Gamme de véhicules</h4>
         <button class="btn-mini" id="flash-btn" type="button">🧠 Réviser la gamme</button>
       </div>
-      <table class="gamme">
-        <thead><tr><th>Modèle</th><th>Segment</th><th>Énergie</th><th>À retenir</th></tr></thead>
-        <tbody>
-          ${b.gamme.map(g=>`<tr><td><b>${esc(g.modele)}</b></td><td>${esc(g.segment)}</td><td><span class="tag">${esc(g.energie)}</span></td><td>${esc(g.note)}</td></tr>`).join('')}
-        </tbody>
-      </table>
+      <div class="table-scroll">
+        <table class="gamme">
+          <thead><tr><th>Modèle</th><th>Segment</th><th>Énergie</th><th>À retenir</th></tr></thead>
+          <tbody>
+            ${b.gamme.map(g=>`<tr><td><b>${esc(g.modele)}</b></td><td>${esc(g.segment)}</td><td><span class="tag">${esc(g.energie)}</span></td><td>${esc(g.note)}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
 
       <h4 style="margin:18px 0 8px">Points clés pour l'entretien</h4>
       <ul class="points">
@@ -969,10 +1003,12 @@ function buildTable(panel, workId, columns, seed){
   }
 
   panel.innerHTML = `
-    <table class="worktable">
-      <thead><tr>${columns.map(c=>`<th>${esc(c)}</th>`).join('')}<th></th></tr></thead>
-      <tbody data-body></tbody>
-    </table>
+    <div class="table-scroll">
+      <table class="worktable">
+        <thead><tr>${columns.map(c=>`<th>${esc(c)}</th>`).join('')}<th></th></tr></thead>
+        <tbody data-body></tbody>
+      </table>
+    </div>
     <div class="row-actions">
       <button class="btn-mini" data-add type="button">+ Ajouter une ligne</button>
       <span class="save-indicator" data-saved>Enregistré ✓</span>
