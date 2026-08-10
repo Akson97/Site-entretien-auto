@@ -45,6 +45,12 @@ nav.tabs button{
 nav.tabs button:hover{border-color:var(--accent)}
 nav.tabs button.active{background:var(--accent);border-color:var(--accent);color:#05070a;font-weight:600}
 
+.overview-bar{max-width:1180px;margin:14px auto 0;padding:0 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ov-label{font-size:12px;color:var(--muted)}
+.ov-brand{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--text);font-size:12.5px;transition:border-color .15s ease}
+.ov-brand:hover{border-color:var(--accent)}
+.ov-brand b{color:var(--good);font-weight:700}
+
 main{max-width:1180px;margin:0 auto;padding:28px 24px 80px}
 section.page{display:none;animation:fade .25s ease}
 section.page.active{display:block}
@@ -56,10 +62,9 @@ section.page.active{display:block}
 }
 .hero h1{margin:0 0 8px;font-size:26px}
 .hero p{margin:6px 0;color:var(--muted);max-width:820px}
-.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.pill{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12.5px;color:var(--muted)}
 
 h2.section-title{font-size:19px;margin:34px 0 14px;padding-top:6px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.section-hint{font-size:12.5px;color:var(--muted);margin:-6px 0 14px}
 h2.section-title .num{width:26px;height:26px;border-radius:8px;background:var(--accent);color:#05070a;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
 
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
@@ -140,6 +145,8 @@ table.worktable input{width:100%;background:var(--panel2);border:1px solid var(-
 .lesson-text{font-size:13px;color:var(--text);line-height:1.55}
 .lesson-text p{margin:0 0 8px}
 .lesson-text p:last-child{margin-bottom:0}
+.example-box{background:rgba(255,180,84,.08);border:1px solid rgba(255,180,84,.35);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.example-label{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--warn);font-weight:700;margin-bottom:6px}
 .resource-links{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
 .practice-label{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:4px 0 8px}
 .remove-row{background:transparent;border:none;color:#ff6b6b;cursor:pointer;font-size:13px}
@@ -178,7 +185,7 @@ table.gamme,table.worktable{min-width:560px}
   .hero{padding:18px;border-radius:12px}
   .hero h1{font-size:20px}
   .hero p{font-size:13.5px}
-  .pill{font-size:11.5px}
+  .overview-bar{padding:0 14px;margin-top:10px}
   h2.section-title{font-size:16px;margin:26px 0 12px}
   .card-grid{grid-template-columns:1fr}
   .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -213,6 +220,13 @@ table.gamme,table.worktable{min-width:560px}
   </div>
 </header>
 
+<div class="overview-bar" id="overview-bar">
+  <span class="ov-label">Progression globale :</span>
+  <button class="ov-brand" data-page="citroen"><span class="brand-dot" style="background:#c4131a"></span>Citroën <b id="ov-citroen">0%</b></button>
+  <button class="ov-brand" data-page="kia"><span class="brand-dot" style="background:#bb162b"></span>Kia <b id="ov-kia">0%</b></button>
+  <button class="ov-brand" data-page="valauto"><span class="brand-dot" style="background:#001e50"></span>Valauto <b id="ov-valauto">0%</b></button>
+</div>
+
 <main>
 
   <!-- ACCUEIL -->
@@ -227,52 +241,21 @@ table.gamme,table.worktable{min-width:560px}
     <div class="card-grid" id="grid-citroen"></div>
 
     <h2 class="section-title"><span class="num">2</span>Plan d'action — montée en autonomie (4 semaines)</h2>
+    <p class="section-hint">🎯 Ta feuille de route de révision pour les prochaines semaines : à faire maintenant, avant et pendant le process de recrutement.</p>
     <div class="timeline" id="plan-citroen"></div>
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progress-citroen"></div></div>
       <div class="progress-label"><span id="progress-label-citroen">0%</span> du plan complété</div>
-      <div class="export-row"></div>
+      <div class="export-row"><button class="btn-mini" id="export-citroen" type="button">📥 Exporter mes notes (.md)</button></div>
     </div>
-  
 
-<h2 class="section-title"><span class="num">📊</span>Plan 100 jours pour être autonome</h2>
-
-<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
-<h3 style="margin-top:0;color:var(--accent);font-size:16px">PHASE 1: J1-30 (Maîtrise Produit)</h3>
-<div class="note-box">
-<strong>Objectif:</strong> Expert produit Citroën, capable de vendre seul | <strong>KPI:</strong> 2-3 ventes, 0 callback non résolu, NPS > 6
-</div>
-<ul style="color:var(--text);font-size:13px;line-height:1.6">
-<li><strong>Semaine 1:</strong> Gamme complète (9 modèles) maîtrisée • Autonomie réelle vs WLTP • Tarifs par finition</li>
-<li><strong>Semaine 2:</strong> 10 objections + réponses prêtes • LLD vs crédit vs LOA • TCO vs Peugeot/Renault</li>
-<li><strong>Semaine 3-4:</strong> Premiers essais en showroom • 5 ventes accomplies • Process client maîtrisé (accueil → découverte → essai → devis)</li>
-<li><strong>À demander:</strong> Accès showroom gratuit • CRM formation (2h) • 1 mentor 2x/semaine • 5+ leads qualifiés/semaine</li>
-</ul>
-</div>
-
-<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
-<h3 style="margin:0 0 12px;color:var(--good);font-size:16px">PHASE 2: J31-60 (Autonomie Commerciale)</h3>
-<div class="note-box">
-<strong>Objectif:</strong> Vendeur autonome, capable de conclure • <strong>KPI:</strong> CA > 15k€, 6+ ventes, NPS > 7
-</div>
-<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
-<li><strong>Semaine 5-6:</strong> Négociation prix/marges maîtrisée • Financement personnalisé • Objections avancées</li>
-<li><strong>Semaine 7-8:</strong> Cycle vente solo (découverte → conclure) • Suivi client post-vente • Cross-selling</li>
-<li><strong>À day 60:</strong> 6+ ventes accomplies • Récurrence > 0 (clients reviennent) • Feedback manager positif</li>
-</ul>
-</div>
-
-<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px">
-<h3 style="margin:0 0 12px;color:var(--warn);font-size:16px">PHASE 3: J61-100 (Scalabilité & Leadership)</h3>
-<div class="note-box">
-<strong>Objectif:</strong> Leader ventes, multi-marques • <strong>KPI:</strong> 30k€+ CA/mois, 8+ ventes/mois, NPS > 8
-</div>
-<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
-<li><strong>Semaine 9-10:</strong> Prospection active (15+ leads/mois) • Événements (1 salon ou event/mois) • Partenariats PME</li>
-<li><strong>Semaine 11-14:</strong> Fidélisation client (newsletter, SAV proactif) • Team leadership si possible • Mentorat nouveaux VRP</li>
-<li><strong>À day 100:</strong> 30k€+ CA/mois • 8+ ventes/mois • Clients ambassadeurs • Proposition CDI/prime</li>
-</ul>
-</div>
+    <h2 class="section-title"><span class="num">📊</span>Plan 100 jours pour être autonome</h2>
+    <p class="section-hint">💬 Ce que tu peux présenter en entretien pour montrer que tu as anticipé ta prise de poste : ta montée en compétence une fois embauché(e), pas ce qu'il faut faire avant l'entretien.</p>
+    <div class="timeline" id="plan100-citroen"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress100-citroen"></div></div>
+      <div class="progress-label"><span id="progress100-label-citroen">0%</span> du plan 100 jours complété</div>
+    </div>
 
 </section>
 
@@ -287,48 +270,21 @@ table.gamme,table.worktable{min-width:560px}
     <div class="card-grid" id="grid-kia"></div>
 
     <h2 class="section-title"><span class="num">2</span>Plan d'action — montée en autonomie (4 semaines)</h2>
+    <p class="section-hint">🎯 Ta feuille de route de révision pour les prochaines semaines : à faire maintenant, avant et pendant le process de recrutement.</p>
     <div class="timeline" id="plan-kia"></div>
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progress-kia"></div></div>
       <div class="progress-label"><span id="progress-label-kia">0%</span> du plan complété</div>
-      <div class="export-row"></div>
+      <div class="export-row"><button class="btn-mini" id="export-kia" type="button">📥 Exporter mes notes (.md)</button></div>
     </div>
 
-<h2 class="section-title"><span class="num">📊</span>Plan 100 jours pour être autonome</h2>
-
-<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
-<h3 style="margin-top:0;color:var(--accent);font-size:16px">PHASE 1: J1-30 (Expert EV)</h3>
-<div class="note-box">
-<strong>Objectif:</strong> Expert Kia/EV, capable de vendre EV6 vs Tesla • <strong>KPI:</strong> 2-3 ventes EV, 0 callback, NPS > 6
-</div>
-<ul style="color:var(--text);font-size:13px;line-height:1.6">
-<li><strong>Semaine 1-2:</strong> Portfolio complet (Niro, EV6, EV9) • Technologie 800V • vs Tesla Model 3 en détail</li>
-<li><strong>Semaine 3-4:</strong> Garantie 10 ans (avantage clé) • Recharge rapide (18 min) • Premiers ventes EV6</li>
-<li><strong>À demander:</strong> Accès showroom EV6 • Test drives illimités • 1 expert EV (mentor) • 5+ clients premium/semaine</li>
-</ul>
-</div>
-
-<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
-<h3 style="margin:0 0 12px;color:var(--good);font-size:16px">PHASE 2: J31-60 (Autonomie Commerciale Kia)</h3>
-<div class="note-box">
-<strong>Objectif:</strong> Vendeur EV leader • <strong>KPI:</strong> CA > 15k€, 6+ ventes, NPS > 7
-</div>
-<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
-<li><strong>Semaine 5-8:</strong> Cycles vente complets • Négociation pricing Kia • Objections EV maîtrisées</li>
-<li><strong>À day 60:</strong> 6+ ventes • Spécialiste EV reconnu en concession • Client satisfaction > 8/10</li>
-</ul>
-</div>
-
-<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px">
-<h3 style="margin:0 0 12px;color:var(--warn);font-size:16px">PHASE 3: J61-100 (Leader Multi-Marques EV)</h3>
-<div class="note-box">
-<strong>Objectif:</strong> Référent groupe EV, client premium • <strong>KPI:</strong> 30k€+ CA/mois, 8+ ventes, NPS > 8
-</div>
-<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
-<li><strong>Semaine 9-14:</strong> Prospection B2B flottes électriques • Partenariats PME • Leadership EV réseau</li>
-<li><strong>À day 100:</strong> Meilleur vendeur EV Kia • 30k€+ CA/mois • Clients VIP • Proposition évolution</li>
-</ul>
-</div>
+    <h2 class="section-title"><span class="num">📊</span>Plan 100 jours pour être autonome</h2>
+    <p class="section-hint">💬 Ce que tu peux présenter en entretien pour montrer que tu as anticipé ta prise de poste : ta montée en compétence une fois embauché(e), pas ce qu'il faut faire avant l'entretien.</p>
+    <div class="timeline" id="plan100-kia"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress100-kia"></div></div>
+      <div class="progress-label"><span id="progress100-label-kia">0%</span> du plan 100 jours complété</div>
+    </div>
 
   </section>
 
@@ -343,48 +299,21 @@ table.gamme,table.worktable{min-width:560px}
     <div class="card-grid" id="grid-valauto"></div>
 
     <h2 class="section-title"><span class="num">2</span>Plan d'action — montée en autonomie (4 semaines)</h2>
+    <p class="section-hint">🎯 Ta feuille de route de révision pour les prochaines semaines : à faire maintenant, avant et pendant le process de recrutement.</p>
     <div class="timeline" id="plan-valauto"></div>
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progress-valauto"></div></div>
       <div class="progress-label"><span id="progress-label-valauto">0%</span> du plan complété</div>
-      <div class="export-row"></div>
+      <div class="export-row"><button class="btn-mini" id="export-valauto" type="button">📥 Exporter mes notes (.md)</button></div>
     </div>
 
-<h2 class="section-title"><span class="num">📊</span>Plan 100 jours pour être autonome</h2>
-
-<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
-<h3 style="margin-top:0;color:var(--accent);font-size:16px">PHASE 1: J1-30 (Expert B2B Multi-Marques)</h3>
-<div class="note-box">
-<strong>Objectif:</strong> Comprendre 6 marques (VW, Audi, Skoda, Cupra, Seat, BYD), TCO PME • <strong>KPI:</strong> 2-3 ventes pro, 0 callback, NPS > 6
-</div>
-<ul style="color:var(--text);font-size:13px;line-height:1.6">
-<li><strong>Semaine 1-2:</strong> 6 marques maîtrisées (1-liner chaque) • Stratégie "pas 1 réponse, 6 solutions" • TCO comparatif</li>
-<li><strong>Semaine 3-4:</strong> Arguments B2B: -30% coûts énergie, -60% maintenance, recharge nuit • Premiers deals PME</li>
-<li><strong>À demander:</strong> Accès CRM pro • Liste 20 PME/flottes • 1 mentor B2B (2x/semaine) • Pricing pro document</li>
-</ul>
-</div>
-
-<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
-<h3 style="margin:0 0 12px;color:var(--good);font-size:16px">PHASE 2: J31-60 (Commercial B2B Autonome)</h3>
-<div class="note-box">
-<strong>Objectif:</strong> Conclure deals PME/flottes • <strong>KPI:</strong> CA > 15k€, 3+ deals B2B, NPS > 7
-</div>
-<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
-<li><strong>Semaine 5-8:</strong> Prospection téléphonique (5 PME/jour) • Présentation TCO • Négociation financing pro</li>
-<li><strong>À day 60:</strong> 3+ deals PME • Portefeuille 10+ prospects chauds • Process vente B2B maîtrisé</li>
-</ul>
-</div>
-
-<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px">
-<h3 style="margin:0 0 12px;color:var(--warn);font-size:16px">PHASE 3: J61-100 (Leader Flottes France)</h3>
-<div class="note-box">
-<strong>Objectif:</strong> Contrats flottes, multi-sites • <strong>KPI:</strong> 30k€+ CA/mois, 8+ ventes pro/mois, NPS > 8
-</div>
-<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
-<li><strong>Semaine 9-14:</strong> Salons flottes • Partenariats gestionnaires de flottes • Contrats multi-véhicules</li>
-<li><strong>À day 100:</strong> 30k€+ CA/mois • Leader flottes régional • 8+ ventes/mois • Clients stratégiques fidèles</li>
-</ul>
-</div>
+    <h2 class="section-title"><span class="num">📊</span>Plan 100 jours pour être autonome</h2>
+    <p class="section-hint">💬 Ce que tu peux présenter en entretien pour montrer que tu as anticipé ta prise de poste : ta montée en compétence une fois embauché(e), pas ce qu'il faut faire avant l'entretien.</p>
+    <div class="timeline" id="plan100-valauto"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress100-valauto"></div></div>
+      <div class="progress-label"><span id="progress100-label-valauto">0%</span> du plan 100 jours complété</div>
+    </div>
 
   </section>
 
@@ -395,6 +324,7 @@ table.gamme,table.worktable{min-width:560px}
 Semaine intensive 7 jours • Trois marques: Citroën, Kia, Valauto<br>
 Plan 100-Day inclus par marque • Mise à jour: Août 2026
 </p>
+<div class="export-row" style="justify-content:flex-start;margin-top:10px"><button class="btn-mini" id="export-all" type="button">📥 Tout exporter (3 marques) en .md</button></div>
 </footer>
     </main>
 
@@ -681,7 +611,8 @@ const PLANS = {
           lesson:"La méthode SPANCO découpe la vente en 6 étapes : Suspect (cible potentielle) → Prospect (premier contact qualifié) → Analyse (découverte des besoins) → Négociation → Conclusion (closing) → Ordre (suivi et fidélisation). En concession, la phase « Analyse » est la plus décisive : pose des questions ouvertes sur l'usage avant de proposer un modèle.\n\nLa méthode CAB (Caractéristique → Avantage → Bénéfice) t'aide ensuite à transformer chaque caractéristique technique en bénéfice concret pour ce client précis.",
           resources:[{label:"La méthode SPANCO expliquée", url:"https://go.sellsy.com/blog/methode-spanco"}]}},
         {text:"Lister les objections fréquentes (prix, image de marque, délai de livraison) et préparer une réponse pour chacune", work:{type:"table", columns:["Objection","Réponse préparée"], seed:[{},{},{}],
-          lesson:"Structure chaque réponse en 4 temps : Reformuler l'objection pour montrer que tu as compris, Valider qu'elle est légitime, Répondre avec un fait ou un chiffre concret, puis Vérifier que la réponse convient avant d'avancer. Évite de te justifier ou de contre-attaquer : une objection est une demande d'information, pas une attaque."}},
+          lesson:"Structure chaque réponse en 4 temps : Reformuler l'objection pour montrer que tu as compris, Valider qu'elle est légitime, Répondre avec un fait ou un chiffre concret, puis Vérifier que la réponse convient avant d'avancer. Évite de te justifier ou de contre-attaquer : une objection est une demande d'information, pas une attaque.",
+          example:"Exemple pour l'objection « C'est trop cher » : Reformuler (« Vous trouvez que le prix d'entrée est élevé par rapport à ce que vous attendiez ») → Valider (« C'est une remarque légitime, la C3 n'est pas la moins chère du segment ») → Répondre avec un fait (« Sur 5 ans, la consommation et l'entretien sont inférieurs à une essence équivalente, donc le coût total se rééquilibre ») → Vérifier (« Est-ce plutôt le prix d'achat ou le budget mensuel qui vous inquiète ? »)."}},
         {text:"Se former aux bases de la reprise véhicule d'occasion (cote Argus, points de contrôle)", work:{type:"notes",
           lesson:"La cote Argus sert de référence de dépréciation pour chaque véhicule. Une offre de reprise en concession se situe généralement 10 à 15 % sous cette cote (marge de revente, remise en état, risques).\n\n4 critères font varier une cote : le kilométrage réel, l'état carrosserie/intérieur, le carnet d'entretien, et le niveau d'équipement d'origine.",
           resources:[{label:"Cote Argus officielle", url:"https://www.largus.fr/cote/"},{label:"Comprendre l'écart cote / reprise", url:"https://www.capcar.fr/blog/cote-reprise-voiture-argus"}]}},
@@ -697,7 +628,10 @@ const PLANS = {
         {text:"Lister 3 questions à poser au recruteur sur l'accompagnement et la formation interne", work:{type:"table", columns:["Question à poser"], seed:[{},{},{}],
           lesson:"Les meilleures questions montrent que tu projettes déjà dans le poste : sur la formation initiale, sur le mode de rémunération (fixe + commissions), sur les objectifs des 3 premiers mois, ou sur l'accompagnement par un vendeur senior. Évite les questions dont la réponse est déjà sur le site Citroën."}},
         {text:"Préparer un pitch de 2 minutes : pourquoi Citroën, pourquoi moi, pourquoi maintenant", work:{type:"notes", counter:true,
-          lesson:"Structure ton pitch en 3 temps : pourquoi Citroën (une raison concrète et vérifiable, comme la reconquête de parts de marché en 2025), pourquoi toi (2-3 qualités ou expériences transférables), pourquoi maintenant (ta disponibilité et ta motivation immédiate). Vise 220 à 260 mots pour tenir dans 2 minutes à l'oral."}}
+          lesson:"Structure ton pitch en 3 temps : pourquoi Citroën (une raison concrète et vérifiable, comme la reconquête de parts de marché en 2025), pourquoi toi (2-3 qualités ou expériences transférables), pourquoi maintenant (ta disponibilité et ta motivation immédiate). Vise 220 à 260 mots pour tenir dans 2 minutes à l'oral.",
+          example:"Exemple (à adapter avec tes propres mots, ne pas apprendre par cœur) : « Je postule chez Citroën parce que c'est une marque en reconquête sur le marché français — la part de marché est passée de 6,5 % à 7,1 % en 2025, et j'ai envie de faire partie de cette dynamique plutôt que d'arriver dans une marque qui stagne. Côté profil, j'ai une vraie appétence pour le contact client et j'apprends vite : sur mes expériences précédentes, j'ai toujours été à l'aise pour cerner un besoin et rassurer quelqu'un qui hésite avant une décision importante. Et je suis disponible immédiatement, avec une vraie motivation à m'investir sur la durée, pas juste à décrocher un poste. »"}},
+        {text:"Réviser les chiffres clés Citroën (parts de marché, ventes, best-sellers) en flashcards avant l'entretien", work:{type:"flashcards", statsBrand:"citroen",
+          lesson:"Ce jeu reprend les chiffres de la fiche marque (part de marché, immatriculations, modèle vedette...). Un recruteur qui entend un chiffre exact et à jour retient tout de suite que tu as fait tes devoirs — entraîne-toi jusqu'à les ressortir sans hésiter."}}
       ]}
   ],
   kia:[
@@ -731,9 +665,11 @@ const PLANS = {
     {titre:"Semaine 3 — Vente consultative & digital", goal:"Savoir vendre une transition vers l'électrique",
       items:[
         {text:"Préparer un argumentaire TCO simple pour convaincre un client hésitant sur l'électrique", work:{type:"notes", counter:true,
-          lesson:"Le TCO (coût total de possession) additionne : prix d'achat net de reprise, financement, énergie, entretien, assurance et décote — sur toute la durée de détention. Une électrique coûte souvent plus cher à l'achat mais moins cher à l'usage (énergie, entretien réduit car moins de pièces d'usure) : c'est cette addition complète qu'il faut montrer à un client qui ne regarde que le prix catalogue."}},
+          lesson:"Le TCO (coût total de possession) additionne : prix d'achat net de reprise, financement, énergie, entretien, assurance et décote — sur toute la durée de détention. Une électrique coûte souvent plus cher à l'achat mais moins cher à l'usage (énergie, entretien réduit car moins de pièces d'usure) : c'est cette addition complète qu'il faut montrer à un client qui ne regarde que le prix catalogue.",
+          example:"Exemple : « Sur 5 ans, une Kia électrique coûte plus cher à l'achat qu'une essence équivalente — mais avec un plein électrique à la maison nettement moins cher qu'un plein essence, et un entretien réduit (pas de vidange, moins de pièces d'usure), le coût total de possession devient inférieur dès la 3ᵉ année, sans compter la garantie 7 ans qui rassure sur la revente. »"}},
         {text:"Travailler le traitement d'objections spécifiques (autonomie, revente, image de marque coréenne)", work:{type:"table", columns:["Objection","Réponse préparée"], seed:[{},{},{}],
-          lesson:"Les objections les plus fréquentes sur l'électrique portent sur l'autonomie réelle, la revente et la recharge à domicile. Réponds toujours avec un chiffre vérifiable (autonomie WLTP, garantie batterie) plutôt qu'une opinion générale."}},
+          lesson:"Les objections les plus fréquentes sur l'électrique portent sur l'autonomie réelle, la revente et la recharge à domicile. Réponds toujours avec un chiffre vérifiable (autonomie WLTP, garantie batterie) plutôt qu'une opinion générale.",
+          example:"Exemple pour l'objection « Une marque coréenne, ça revend mal » : Reformuler (« Vous vous demandez si vous allez retrouver votre argent à la revente ») → Valider (« C'est une question légitime ») → Répondre avec un fait (« Kia offre une garantie de 7 ans / 150 000 km, la plus longue du marché généraliste — un acheteur d'occasion sait que le véhicule est encore couvert plusieurs années après l'achat, ce qui soutient la valeur de revente ») → Vérifier (« Est-ce que la revente à moyen terme est un critère important pour vous, ou plutôt l'usage au quotidien ? »)."}},
         {text:"Comprendre le rôle des avis clients et de la présence digitale dans la décision d'achat", work:{type:"notes",
           lesson:"Avant de se déplacer en concession, la majorité des clients consultent les avis Google et les comparatifs en ligne. Une concession avec de bons avis convertit mieux : sache où trouver et comment présenter les avis de la concession si un client hésite encore."}},
         {text:"Simuler une vente complète du premier contact à la signature", work:{type:"notes",
@@ -748,7 +684,9 @@ const PLANS = {
         {text:"Préparer des exemples concrets (expériences passées) transférables à la vente automobile", work:{type:"notes",
           lesson:"Même sans expérience automobile, des expériences en relation client, vente, ou négociation sont transférables : identifie 2-3 situations concrètes où tu as convaincu, rassuré ou géré une objection, et prépare-les sous forme d'anecdotes courtes (contexte → action → résultat)."}},
         {text:"Préparer 3 questions sur la formation interne Kia et l'accompagnement des nouveaux vendeurs", work:{type:"table", columns:["Question à poser"], seed:[{},{},{}],
-          lesson:"Demande des précisions sur le tutorat (qui t'accompagne les premières semaines), le rythme de formation produit, et la façon dont la progression est évaluée. Ce sont des questions qui montrent que tu penses déjà à ta montée en compétence, pas juste à décrocher le poste."}}
+          lesson:"Demande des précisions sur le tutorat (qui t'accompagne les premières semaines), le rythme de formation produit, et la façon dont la progression est évaluée. Ce sont des questions qui montrent que tu penses déjà à ta montée en compétence, pas juste à décrocher le poste."}},
+        {text:"Réviser les chiffres clés Kia (parts de marché, ventes, mix électrifié) en flashcards avant l'entretien", work:{type:"flashcards", statsBrand:"kia",
+          lesson:"Ce jeu reprend les chiffres de la fiche marque Kia (immatriculations, part de marché, mix électrifié...). Sais-tu expliquer le recul de Kia en 2025 avec un chiffre exact plutôt qu'une impression vague ? C'est ce genre de précision qui distingue un candidat préparé."}}
       ]}
   ],
   valauto:[
@@ -788,7 +726,8 @@ const PLANS = {
         {text:"Construire un argumentaire comparatif TCO par marque et par segment (ex : BYD électrique vs Volkswagen thermique)", work:{type:"table", columns:["Marque","Modèle","Prix catalogue","Conso / Autonomie","Entretien estimé","Avantage TCO"], seed:brandSeedRows("Marque"),
           lesson:"Le TCO complet = prix catalogue net de remise + coût de financement + énergie/carburant sur la durée + entretien + assurance − valeur de revente estimée. Une BYD électrique a un prix catalogue plus élevé qu'une Volkswagen thermique équivalente mais un coût d'énergie et d'entretien nettement inférieur : c'est cette addition qui doit trancher, pas le prix affiché seul."}},
         {text:"Préparer 3 scénarios clients types (artisan, PME 10 véhicules, grande flotte) avec une recommandation par marque", work:{type:"table", columns:["Profil client","Besoin principal","Contraintes","Marque / modèle recommandé"], seed:[{"Profil client":"Artisan"},{"Profil client":"PME (10 véhicules)"},{"Profil client":"Grande flotte"}],
-          lesson:"Pour chaque profil, identifie le vrai enjeu business du client (pas seulement son budget) : un artisan cherche la fiabilité et la récupération de TVA, une PME de 10 véhicules cherche à lisser son budget (LLD), une grande flotte cherche le meilleur TCO sur le volume. Adapte ta recommandation de marque à cet enjeu, pas seulement au prix."}},
+          lesson:"Pour chaque profil, identifie le vrai enjeu business du client (pas seulement son budget) : un artisan cherche la fiabilité et la récupération de TVA, une PME de 10 véhicules cherche à lisser son budget (LLD), une grande flotte cherche le meilleur TCO sur le volume. Adapte ta recommandation de marque à cet enjeu, pas seulement au prix.",
+          example:"Exemple pour le profil « Artisan » : Besoin principal = véhicule utilitaire fiable et TVA récupérable • Contraintes = budget serré, faible tolérance à l'immobilisation (temps d'arrêt = perte de chantier) • Marque / modèle recommandé = Škoda ou Seat utilitaire, argument prix + fiabilité plutôt qu'image de marque."}},
         {text:"Simuler un rendez-vous de vente B2B avec un proche jouant le rôle du dirigeant d'entreprise", work:{type:"notes",
           lesson:"Structure le rendez-vous B2B en 4 temps : découverte des enjeux de l'entreprise (pas seulement du véhicule), présentation comparative multimarque chiffrée, réponse aux objections (souvent budgétaires ou sur la nouveauté d'une marque comme BYD), puis proposition concrète avec chiffrage TCO à l'appui."}}
       ]},
@@ -801,10 +740,74 @@ const PLANS = {
         {text:"Lister les points de vigilance à clarifier avec le directeur commercial (répartition du portefeuille, objectifs, accompagnement terrain)", work:{type:"table", columns:["Point à clarifier","Question précise à poser"], seed:[{},{},{}],
           lesson:"Avant de démarrer, clarifie avec le directeur commercial : comment est réparti le portefeuille clients entre vendeurs, quels sont les objectifs des 90 premiers jours, et quel accompagnement terrain est prévu (binôme, shadowing, formation constructeur)."}},
         {text:"Préparer un pitch centré sur la valeur ajoutée d'un vendeur multimarques face à un client pro : conseil neutre et comparatif", work:{type:"notes", counter:true,
-          lesson:"Ton pitch doit positionner la valeur d'un vendeur multimarque : contrairement à un vendeur mono-marque, tu peux recommander objectivement la meilleure solution parmi 6 marques selon le vrai besoin du client — un argument de confiance fort en B2B.\n\nAppuie-toi sur des faits récents : le groupe Volkswagen a atteint 15,3 % de part de marché historique en France en 2025, Cupra progresse de +29,3 % et BYD explose de +150 % — Valauto vend certaines des gammes les plus dynamiques du marché actuel."}}
+          lesson:"Ton pitch doit positionner la valeur d'un vendeur multimarque : contrairement à un vendeur mono-marque, tu peux recommander objectivement la meilleure solution parmi 6 marques selon le vrai besoin du client — un argument de confiance fort en B2B.\n\nAppuie-toi sur des faits récents : le groupe Volkswagen a atteint 15,3 % de part de marché historique en France en 2025, Cupra progresse de +29,3 % et BYD explose de +150 % — Valauto vend certaines des gammes les plus dynamiques du marché actuel.",
+          example:"Exemple : « Je postule chez Valauto parce que je veux vendre du conseil, pas juste une marque : avec 6 marques en portefeuille, je peux proposer objectivement la solution la mieux adaptée à un client pro, du budget artisan à la grande flotte, plutôt que de forcer un seul catalogue. Côté profil, je suis à l'aise pour structurer un raisonnement chiffré (TCO, fiscalité) et j'aime le format B2B où la décision se construit sur plusieurs échanges. Et je suis disponible tout de suite pour monter en compétence sur les 6 gammes. »"}},
+        {text:"Réviser les chiffres clés des 6 marques Valauto (parts de marché, dynamique 2025) en flashcards avant l'entretien", work:{type:"flashcards", statsBrands:["seat","cupra","skoda","byd","vw","audi"],
+          lesson:"Ce jeu mélange les chiffres clés des 6 marques du portefeuille Valauto — de quoi avoir un chiffre exact et à jour sous la main pour chacune, plutôt qu'une impression générale, si le recruteur pousse sur l'une d'elles en particulier."}}
       ]}
   ]
 };
+
+const PLAN100 = {
+  citroen:[
+    {titre:"PHASE 1 : J1-30 (Maîtrise Produit)", objectif:"Expert produit Citroën, capable de vendre seul", kpi:"2-3 ventes, 0 callback non résolu, NPS > 6",
+      items:[
+        "Semaine 1 : Gamme complète (9 modèles) maîtrisée • Autonomie réelle vs WLTP • Tarifs par finition",
+        "Semaine 2 : 10 objections + réponses prêtes • LLD vs crédit vs LOA • TCO vs Peugeot/Renault",
+        "Semaine 3-4 : Premiers essais en showroom • 5 ventes accomplies • Process client maîtrisé (accueil → découverte → essai → devis)",
+        "À demander : accès showroom gratuit • CRM formation (2h) • 1 mentor 2x/semaine • 5+ leads qualifiés/semaine"
+      ]},
+    {titre:"PHASE 2 : J31-60 (Autonomie Commerciale)", objectif:"Vendeur autonome, capable de conclure", kpi:"CA > 15k€, 6+ ventes, NPS > 7",
+      items:[
+        "Semaine 5-6 : Négociation prix/marges maîtrisée • Financement personnalisé • Objections avancées",
+        "Semaine 7-8 : Cycle vente solo (découverte → conclure) • Suivi client post-vente • Cross-selling",
+        "À day 60 : 6+ ventes accomplies • Récurrence > 0 (clients reviennent) • Feedback manager positif"
+      ]},
+    {titre:"PHASE 3 : J61-100 (Scalabilité & Leadership)", objectif:"Leader ventes, multi-marques", kpi:"30k€+ CA/mois, 8+ ventes/mois, NPS > 8",
+      items:[
+        "Semaine 9-10 : Prospection active (15+ leads/mois) • Événements (1 salon ou event/mois) • Partenariats PME",
+        "Semaine 11-14 : Fidélisation client (newsletter, SAV proactif) • Team leadership si possible • Mentorat nouveaux VRP",
+        "À day 100 : 30k€+ CA/mois • 8+ ventes/mois • Clients ambassadeurs • Proposition CDI/prime"
+      ]}
+  ],
+  kia:[
+    {titre:"PHASE 1 : J1-30 (Expert EV)", objectif:"Expert Kia/EV, capable de vendre EV6 vs Tesla", kpi:"2-3 ventes EV, 0 callback, NPS > 6",
+      items:[
+        "Semaine 1-2 : Portfolio complet (Niro, EV6, EV9) • Technologie 800V • vs Tesla Model 3 en détail",
+        "Semaine 3-4 : Garantie 10 ans (avantage clé) • Recharge rapide (18 min) • Premiers ventes EV6",
+        "À demander : accès showroom EV6 • test drives illimités • 1 expert EV (mentor) • 5+ clients premium/semaine"
+      ]},
+    {titre:"PHASE 2 : J31-60 (Autonomie Commerciale Kia)", objectif:"Vendeur EV leader", kpi:"CA > 15k€, 6+ ventes, NPS > 7",
+      items:[
+        "Semaine 5-8 : Cycles vente complets • Négociation pricing Kia • Objections EV maîtrisées",
+        "À day 60 : 6+ ventes • Spécialiste EV reconnu en concession • Client satisfaction > 8/10"
+      ]},
+    {titre:"PHASE 3 : J61-100 (Leader Multi-Marques EV)", objectif:"Référent groupe EV, client premium", kpi:"30k€+ CA/mois, 8+ ventes, NPS > 8",
+      items:[
+        "Semaine 9-14 : Prospection B2B flottes électriques • Partenariats PME • Leadership EV réseau",
+        "À day 100 : Meilleur vendeur EV Kia • 30k€+ CA/mois • Clients VIP • Proposition évolution"
+      ]}
+  ],
+  valauto:[
+    {titre:"PHASE 1 : J1-30 (Expert B2B Multi-Marques)", objectif:"Comprendre 6 marques (VW, Audi, Škoda, Cupra, Seat, BYD), TCO PME", kpi:"2-3 ventes pro, 0 callback, NPS > 6",
+      items:[
+        "Semaine 1-2 : 6 marques maîtrisées (1-liner chaque) • Stratégie « pas 1 réponse, 6 solutions » • TCO comparatif",
+        "Semaine 3-4 : Arguments B2B : -30% coûts énergie, -60% maintenance, recharge nuit • Premiers deals PME",
+        "À demander : accès CRM pro • liste 20 PME/flottes • 1 mentor B2B (2x/semaine) • pricing pro document"
+      ]},
+    {titre:"PHASE 2 : J31-60 (Commercial B2B Autonome)", objectif:"Conclure deals PME/flottes", kpi:"CA > 15k€, 3+ deals B2B, NPS > 7",
+      items:[
+        "Semaine 5-8 : Prospection téléphonique (5 PME/jour) • Présentation TCO • Négociation financing pro",
+        "À day 60 : 3+ deals PME • Portefeuille 10+ prospects chauds • Process vente B2B maîtrisé"
+      ]},
+    {titre:"PHASE 3 : J61-100 (Leader Flottes France)", objectif:"Contrats flottes, multi-sites", kpi:"30k€+ CA/mois, 8+ ventes pro/mois, NPS > 8",
+      items:[
+        "Semaine 9-14 : Salons flottes • Partenariats gestionnaires de flottes • Contrats multi-véhicules",
+        "À day 100 : 30k€+ CA/mois • Leader flottes régional • 8+ ventes/mois • Clients stratégiques fidèles"
+      ]}
+  ]
+};
+const PHASE_COLORS = ['var(--accent)','var(--good)','var(--warn)'];
 
 /* ---------------- HELPERS ---------------- */
 function esc(s){
@@ -846,7 +849,7 @@ function renderBrandCard(key){
   const b = BRANDS[key];
   const mainStats = b.stats.slice(0,3);
   return `
-  <div class="brand-card" style="--accent-c:${b.color}" onclick="openBrand('${key}')">
+  <div class="brand-card" style="--accent-c:${b.color}" data-open-brand-card="${key}">
     <div class="head">
       <span class="name">${esc(b.name)}</span>
       <span class="swatch" style="background:${b.color}"></span>
@@ -905,39 +908,15 @@ function openBrand(key){
 }
 function closeModal(){ document.getElementById('overlay').classList.remove('show'); }
 document.getElementById('overlay').addEventListener('click', e => { if(e.target.id==='overlay') closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+document.addEventListener('click', e => {
+  const card = e.target.closest('[data-open-brand-card]');
+  if(card) openBrand(card.dataset.openBrandCard);
+});
 
 function startFlashcards(key){
-  const b = BRANDS[key];
   const modal = document.getElementById('modal');
-  let order = shuffle(b.gamme.map((_,i)=>i));
-  let idx = 0;
-  let showBack = false;
-
-  function render(){
-    const g = b.gamme[order[idx]];
-    modal.querySelector('.mbody').innerHTML = `
-      <div class="flash-card" id="flashcard">
-        <div class="fc-label">${showBack ? 'Segment · Énergie · À retenir' : 'Modèle'}</div>
-        <div class="fc-content">${showBack ? esc(g.segment) : esc(g.modele)}</div>
-        ${showBack ? `<div class="fc-sub">${esc(g.energie)} — ${esc(g.note)}</div>` : `<div class="fc-sub">Clique sur la carte pour révéler la réponse</div>`}
-      </div>
-      <div class="flash-controls">
-        <button class="btn-mini" id="fc-prev" type="button">← Précédent</button>
-        <span class="flash-progress">${idx+1} / ${order.length}</span>
-        <button class="btn-mini" id="fc-next" type="button">Suivant →</button>
-      </div>
-      <div class="row-actions" style="justify-content:center">
-        <button class="btn-mini" id="fc-shuffle" type="button">🔀 Mélanger</button>
-        <button class="btn-mini" id="fc-back" type="button">← Retour à la fiche</button>
-      </div>
-    `;
-    modal.querySelector('#flashcard').addEventListener('click', () => { showBack = !showBack; render(); });
-    modal.querySelector('#fc-prev').addEventListener('click', () => { idx = (idx-1+order.length)%order.length; showBack=false; render(); });
-    modal.querySelector('#fc-next').addEventListener('click', () => { idx = (idx+1)%order.length; showBack=false; render(); });
-    modal.querySelector('#fc-shuffle').addEventListener('click', () => { order = shuffle(b.gamme.map((_,i)=>i)); idx=0; showBack=false; render(); });
-    modal.querySelector('#fc-back').addEventListener('click', () => renderBrandDetails(key));
-  }
-  render();
+  buildFlashcards(modal.querySelector('.mbody'), 'brand-'+key, {brand:key}, () => renderBrandDetails(key));
 }
 
 /* ---------------- ACTION PLAN RENDERING ---------------- */
@@ -970,7 +949,34 @@ function renderPlan(pageKey, planItems){
     btn.addEventListener('click', () => toggleWorkspacePanel(btn));
   });
 
-  loadProgress(pageKey);
+  loadProgress(pageKey, '');
+}
+
+function renderPlan100(pageKey){
+  const container = document.getElementById('plan100-'+pageKey);
+  let html = '';
+  PLAN100[pageKey].forEach((phase, pi) => {
+    html += `<div class="week"><div class="wk-head"><div class="wk-num" style="background:${PHASE_COLORS[pi]}">P${pi+1}</div><div class="wk-title">${esc(phase.titre)}</div></div>
+      <div class="note-box"><strong>Objectif :</strong> ${esc(phase.objectif)} • <strong>KPI :</strong> ${esc(phase.kpi)}</div>
+      <ul class="checklist">`;
+    phase.items.forEach((item, ii) => {
+      const checkboxId = `chk100-${pageKey}-${pi}-${ii}`;
+      html += `<li id="li-${checkboxId}">
+        <div class="item-top">
+          <input type="checkbox" id="${checkboxId}">
+          <label for="${checkboxId}">${esc(item)}</label>
+        </div>
+      </li>`;
+    });
+    html += `</ul></div>`;
+  });
+  container.innerHTML = html;
+
+  container.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    cb.addEventListener('change', () => toggleItem(pageKey, cb.id, '100-'));
+  });
+
+  loadProgress(pageKey, '100-');
 }
 
 function toggleWorkspacePanel(btn){
@@ -992,6 +998,9 @@ function buildWorkspace(panel, workId, work){
   }
   if(work.resources && work.resources.length){
     html += `<div class="resource-links">${work.resources.map(renderResourceLink).join('')}</div>`;
+  }
+  if(work.example){
+    html += `<div class="example-box"><div class="example-label">💡 Exemple (à adapter, pas à apprendre par cœur)</div><div class="lesson-text">${formatLesson(work.example)}</div></div>`;
   }
   html += `<div class="practice-label">✍️ À toi de jouer</div><div class="practice-area" data-practice></div>`;
   panel.innerHTML = html;
@@ -1117,7 +1126,24 @@ function buildTable(panel, workId, columns, seed){
 
 function flashcardDeck(work){
   if(work.cards && work.cards.length){
-    return work.cards.map(c => ({front:c.q, back:c.a, sub:c.sub||''}));
+    return work.cards.map(c => ({front:c.q, back:c.a, sub:c.sub||'', frontLabel:'Question', backLabel:'Réponse'}));
+  }
+  if(work.statsBrand || work.statsBrands){
+    const brandKeys = work.statsBrands || [work.statsBrand];
+    const cards = [];
+    brandKeys.forEach(bk => {
+      const b = BRANDS[bk];
+      if(!b) return;
+      b.stats.forEach(s => cards.push({
+        front:s.label,
+        back:s.value,
+        sub:s.sub||'',
+        frontLabel:'Chiffre clé',
+        backLabel:'Réponse',
+        brandLabel: brandKeys.length > 1 ? b.name : ''
+      }));
+    });
+    return cards;
   }
   const brandKeys = work.brands || (work.brand ? [work.brand] : []);
   const cards = [];
@@ -1128,20 +1154,27 @@ function flashcardDeck(work){
       front:g.modele,
       back:`${g.segment} — ${g.energie}`,
       sub:g.note,
+      frontLabel:'Modèle',
+      backLabel:'Segment · Énergie',
       brandLabel: brandKeys.length > 1 ? b.name : ''
     }));
   });
   return cards;
 }
 
-function buildFlashcards(panel, workId, work){
+function buildFlashcards(panel, workId, work, onBack){
   const cards = flashcardDeck(work);
   if(!cards.length){ panel.innerHTML = ''; return; }
 
   const key = 'fc-'+workId;
   let known = {};
   try{ known = JSON.parse(localStorage.getItem(key) || '{}'); }catch(e){}
-  let order = shuffle(cards.map((_,i)=>i));
+
+  function priorityOrder(){
+    const all = cards.map((_,i)=>i);
+    return shuffle(all.filter(i => !known[i])).concat(shuffle(all.filter(i => known[i])));
+  }
+  let order = priorityOrder();
   let idx = 0;
   let showBack = false;
 
@@ -1155,7 +1188,7 @@ function buildFlashcards(panel, workId, work){
     const mastered = Object.values(known).filter(Boolean).length;
     panel.innerHTML = `
       <div class="flash-card" data-flip>
-        <div class="fc-label">${c.brandLabel ? esc(c.brandLabel)+' · ' : ''}${showBack ? 'Segment · Énergie' : 'Modèle'}</div>
+        <div class="fc-label">${c.brandLabel ? esc(c.brandLabel)+' · ' : ''}${showBack ? esc(c.backLabel) : esc(c.frontLabel)}</div>
         <div class="fc-content">${esc(showBack ? c.back : c.front)}</div>
         <div class="fc-sub">${showBack ? esc(c.sub || '') : 'Clique sur la carte pour révéler la réponse'}</div>
       </div>
@@ -1165,54 +1198,76 @@ function buildFlashcards(panel, workId, work){
         <button class="btn-mini" data-next type="button">Suivant →</button>
       </div>
       <div class="row-actions" style="justify-content:center">
-        <button class="btn-mini" data-shuffle type="button">🔀 Mélanger</button>
+        <button class="btn-mini" data-shuffle type="button">🔀 Mélanger (priorité aux non maîtrisées)</button>
         <button class="btn-mini" data-known type="button">${known[ci] ? '↺ À revoir' : '✓ Je maîtrise'}</button>
+        ${onBack ? `<button class="btn-mini" data-back type="button">← Retour à la fiche</button>` : ''}
       </div>`;
     panel.querySelector('[data-flip]').addEventListener('click', () => { showBack = !showBack; render(); });
     panel.querySelector('[data-prev]').addEventListener('click', () => { idx = (idx-1+order.length)%order.length; showBack=false; render(); });
     panel.querySelector('[data-next]').addEventListener('click', () => { idx = (idx+1)%order.length; showBack=false; render(); });
-    panel.querySelector('[data-shuffle]').addEventListener('click', () => { order = shuffle(cards.map((_,i)=>i)); idx=0; showBack=false; render(); });
+    panel.querySelector('[data-shuffle]').addEventListener('click', () => { order = priorityOrder(); idx=0; showBack=false; render(); });
     panel.querySelector('[data-known]').addEventListener('click', () => { known[ci] = !known[ci]; persist(); render(); });
+    if(onBack) panel.querySelector('[data-back]').addEventListener('click', onBack);
   }
   render();
 }
 
 /* ---------------- CHECKBOX PROGRESS ---------------- */
-function toggleItem(pageKey, id){
+function toggleItem(pageKey, id, kind){
+  kind = kind || '';
   const cb = document.getElementById(id);
   const li = document.getElementById('li-'+id);
   li.classList.toggle('done', cb.checked);
   try{
-    const raw = localStorage.getItem('prepa-entretiens-'+pageKey);
+    const raw = localStorage.getItem('prepa-entretiens-'+kind+pageKey);
     const state = raw ? JSON.parse(raw) : {};
     state[id] = cb.checked;
-    localStorage.setItem('prepa-entretiens-'+pageKey, JSON.stringify(state));
+    localStorage.setItem('prepa-entretiens-'+kind+pageKey, JSON.stringify(state));
   }catch(e){}
-  updateProgress(pageKey);
+  updateProgress(pageKey, kind);
 }
 
-function loadProgress(pageKey){
+function loadProgress(pageKey, kind){
+  kind = kind || '';
   try{
-    const raw = localStorage.getItem('prepa-entretiens-'+pageKey);
+    const raw = localStorage.getItem('prepa-entretiens-'+kind+pageKey);
     const state = raw ? JSON.parse(raw) : {};
     Object.keys(state).forEach(id => {
       const cb = document.getElementById(id);
       if(cb){ cb.checked = state[id]; document.getElementById('li-'+id).classList.toggle('done', state[id]); }
     });
   }catch(e){}
-  updateProgress(pageKey);
+  updateProgress(pageKey, kind);
 }
 
-function updateProgress(pageKey){
-  const boxes = document.querySelectorAll(`#plan-${pageKey} input[type=checkbox]`);
+function updateProgress(pageKey, kind){
+  kind = kind || '';
+  const containerId = (kind === '100-' ? 'plan100-' : 'plan-') + pageKey;
+  const boxes = document.querySelectorAll(`#${containerId} input[type=checkbox]`);
   const total = boxes.length;
   let done = 0;
   boxes.forEach(b => { if(b.checked) done++; });
   const pct = total ? Math.round(done/total*100) : 0;
-  const fill = document.getElementById('progress-'+pageKey);
-  const label = document.getElementById('progress-label-'+pageKey);
+  const idPrefix = kind === '100-' ? 'progress100-' : 'progress-';
+  const fill = document.getElementById(idPrefix+pageKey);
+  const label = document.getElementById(idPrefix+'label-'+pageKey);
   if(fill) fill.style.width = pct+'%';
   if(label) label.textContent = pct+'%';
+  updateOverview();
+}
+
+function updateOverview(){
+  ['citroen','kia','valauto'].forEach(pk => {
+    const plan4 = document.querySelectorAll(`#plan-${pk} input[type=checkbox]`);
+    const plan100 = document.querySelectorAll(`#plan100-${pk} input[type=checkbox]`);
+    const total = plan4.length + plan100.length;
+    let done = 0;
+    plan4.forEach(b => { if(b.checked) done++; });
+    plan100.forEach(b => { if(b.checked) done++; });
+    const pct = total ? Math.round(done/total*100) : 0;
+    const el = document.getElementById('ov-'+pk);
+    if(el) el.textContent = pct+'%';
+  });
 }
 
 /* ---------------- EXPORT ---------------- */
@@ -1265,13 +1320,29 @@ function planToMarkdown(pageKey, planItems){
   return md;
 }
 
+function plan100ToMarkdown(pageKey){
+  let md = `## Plan 100 jours — ${PAGE_TITLES[pageKey]}\n\n`;
+  let state = {};
+  try{ state = JSON.parse(localStorage.getItem('prepa-entretiens-100-'+pageKey) || '{}'); }catch(e){}
+  PLAN100[pageKey].forEach((phase, pi) => {
+    md += `### ${phase.titre}\n_Objectif : ${phase.objectif} — KPI : ${phase.kpi}_\n\n`;
+    phase.items.forEach((item, ii) => {
+      const id = `chk100-${pageKey}-${pi}-${ii}`;
+      md += `- [${state[id] ? 'x' : ' '}] ${item}\n`;
+    });
+    md += '\n';
+  });
+  return md;
+}
+
 function exportPlan(pageKey){
-  downloadText(planToMarkdown(pageKey, PLANS[pageKey]), `plan-${pageKey}.md`);
+  const md = planToMarkdown(pageKey, PLANS[pageKey]) + plan100ToMarkdown(pageKey);
+  downloadText(md, `plan-${pageKey}.md`);
 }
 
 function exportAll(){
   let md = `# Préparation entretiens vendeur automobile — Louis\n\n`;
-  ['citroen','kia','valauto'].forEach(pk => { md += planToMarkdown(pk, PLANS[pk]) + '\n---\n\n'; });
+  ['citroen','kia','valauto'].forEach(pk => { md += planToMarkdown(pk, PLANS[pk]) + plan100ToMarkdown(pk) + '\n---\n\n'; });
   downloadText(md, 'preparation-entretiens-complete.md');
 }
 
@@ -1283,6 +1354,10 @@ document.getElementById('grid-valauto').innerHTML = ['seat','cupra','skoda','byd
 renderPlan('citroen', PLANS.citroen);
 renderPlan('kia', PLANS.kia);
 renderPlan('valauto', PLANS.valauto);
+renderPlan100('citroen');
+renderPlan100('kia');
+renderPlan100('valauto');
+updateOverview();
 
 ['citroen','kia','valauto'].forEach(pk => {
   const btn = document.getElementById('export-'+pk);
@@ -1292,14 +1367,21 @@ const exportAllBtn = document.getElementById('export-all');
 if(exportAllBtn) exportAllBtn.addEventListener('click', exportAll);
 
 /* ---------------- NAV ---------------- */
+function switchPage(pageKey){
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.page === pageKey));
+  document.querySelectorAll('section.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+pageKey).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 document.getElementById('tabs').addEventListener('click', e=>{
   const btn = e.target.closest('button');
   if(!btn) return;
-  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('section.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+btn.dataset.page).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+  switchPage(btn.dataset.page);
+});
+document.getElementById('overview-bar').addEventListener('click', e=>{
+  const btn = e.target.closest('[data-page]');
+  if(!btn) return;
+  switchPage(btn.dataset.page);
 });
 </script>
 </body>
