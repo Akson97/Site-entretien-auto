@@ -116,8 +116,8 @@ ul.points li{margin-bottom:7px;font-size:13.5px}
 .timeline{display:flex;flex-direction:column;gap:14px;margin-top:6px}
 .week{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:18px 20px;position:relative}
 .week .wk-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.week .wk-num{width:34px;height:34px;border-radius:10px;background:var(--accent);color:#05070a;font-weight:800;
-  display:flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+.week .wk-num{min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:var(--accent);color:#05070a;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:13px;flex:none;box-sizing:border-box}
 .week .wk-title{font-weight:700;font-size:15.5px}
 .week .wk-goal{font-size:12.5px;color:var(--muted);margin-left:46px;margin-top:-6px;margin-bottom:8px}
 .checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
@@ -240,8 +240,8 @@ table.gamme,table.worktable{min-width:560px}
     <h2 class="section-title"><span class="num">1</span>Fiche marque</h2>
     <div class="card-grid" id="grid-citroen"></div>
 
-    <h2 class="section-title"><span class="num">2</span>Plan d'action — montée en autonomie (4 semaines)</h2>
-    <p class="section-hint">🎯 Ta feuille de route de révision pour les prochaines semaines : à faire maintenant, avant et pendant le process de recrutement.</p>
+    <h2 class="section-title"><span class="num">2</span>Plan de révision — sprint 7 à 14 jours</h2>
+    <p class="section-hint">🎯 Jour 1-7 = l'essentiel à savoir avant l'entretien avec le responsable des ventes. Jour 8-14 = pour approfondir si tu as une 2ᵉ semaine devant toi.</p>
     <div class="timeline" id="plan-citroen"></div>
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progress-citroen"></div></div>
@@ -269,8 +269,8 @@ table.gamme,table.worktable{min-width:560px}
     <h2 class="section-title"><span class="num">1</span>Fiche marque</h2>
     <div class="card-grid" id="grid-kia"></div>
 
-    <h2 class="section-title"><span class="num">2</span>Plan d'action — montée en autonomie (4 semaines)</h2>
-    <p class="section-hint">🎯 Ta feuille de route de révision pour les prochaines semaines : à faire maintenant, avant et pendant le process de recrutement.</p>
+    <h2 class="section-title"><span class="num">2</span>Plan de révision — sprint 7 à 14 jours</h2>
+    <p class="section-hint">🎯 Jour 1-7 = l'essentiel à savoir avant l'entretien avec le responsable des ventes. Jour 8-14 = pour approfondir si tu as une 2ᵉ semaine devant toi.</p>
     <div class="timeline" id="plan-kia"></div>
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progress-kia"></div></div>
@@ -298,8 +298,8 @@ table.gamme,table.worktable{min-width:560px}
     <h2 class="section-title"><span class="num">1</span>Fiches marques (6)</h2>
     <div class="card-grid" id="grid-valauto"></div>
 
-    <h2 class="section-title"><span class="num">2</span>Plan d'action — montée en autonomie (4 semaines)</h2>
-    <p class="section-hint">🎯 Ta feuille de route de révision pour les prochaines semaines : à faire maintenant, avant et pendant le process de recrutement.</p>
+    <h2 class="section-title"><span class="num">2</span>Plan de révision — sprint 7 à 14 jours</h2>
+    <p class="section-hint">🎯 Jour 1-7 = l'essentiel à savoir avant l'entretien avec le responsable des ventes. Jour 8-14 = pour approfondir si tu as une 2ᵉ semaine devant toi.</p>
     <div class="timeline" id="plan-valauto"></div>
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progress-valauto"></div></div>
@@ -576,36 +576,33 @@ const BRANDS = {
 /* ---------------- ACTION PLANS ---------------- */
 const PLANS = {
   citroen:[
-    {titre:"Semaine 1 — Fondamentaux produit", goal:"Connaître la gamme et les techno sur le bout des doigts",
+    {label:"J1-2", titre:"Jour 1-2 — Gamme & chiffres clés", goal:"Mémoriser la gamme et les chiffres avant tout le reste : c'est ce qu'un responsable des ventes teste en premier",
       items:[
         {text:"Étudier toute la gamme Citroën (fiches techniques, motorisations, tarifs) et refaire les fiches de ce site de mémoire", work:{type:"notes",
           lesson:"Toute la gamme Citroën est déjà résumée dans la fiche marque de ce site (segment, énergie, positionnement pour chaque modèle). Ouvre-la, puis lance le mode flashcards pour la retenir modèle par modèle : Ami, C3/ë-C3, C3 Aircross, C4/C4 X, C5 Aircross, C5 X, Berlingo, SpaceTourer, Jumpy/Jumper.\n\nVa ensuite vérifier les tout derniers tarifs et finitions sur le configurateur officiel, ils changent régulièrement.",
           resources:[{label:"Ouvrir la fiche marque Citroën", brand:"citroen"},{label:"Configurateur officiel Citroën", url:"https://store.citroen.fr/"}]}},
-        {text:"Faire un essai ou une visite concession sur C3, C3 Aircross et C5 Aircross", work:{type:"notes",
-          lesson:"Avant de t'y rendre, configure les 3 modèles sur le site officiel pour connaître tarifs et finitions disponibles. En showroom ou pendant l'essai, concentre-toi sur 4 points que les clients remarquent en premier : le confort des sièges Advanced Comfort, l'ergonomie de l'écran tactile central, le volume de coffre, et le silence de roulage.",
-          resources:[{label:"Configurateur officiel Citroën", url:"https://store.citroen.fr/"}]}},
+        {text:"Réviser la gamme complète en flashcards jusqu'à retrouver segment, énergie et point clé de chaque modèle sans hésiter", work:{type:"flashcards", brand:"citroen",
+          lesson:"Passe en revue les 9 modèles Citroën dans le désordre : pour chacun, retrouve son segment, son énergie et l'argument clé à retenir avant de retourner la carte. Objectif avant l'entretien : zéro hésitation sur les 9 cartes, dans n'importe quel ordre."}},
         {text:"Maîtriser l'argumentaire ë-C3 (autonomie, prix, recharge) et Advanced Comfort", work:{type:"notes", counter:true,
           lesson:"L'ë-C3 est l'électrique la plus abordable du marché européen, avec une autonomie WLTP d'environ 320 km (une version à petite batterie encore moins chère est arrivée fin 2025). Elle a fini sur le podium des ventes de véhicules électriques en France en 2025 avec 16 223 immatriculations.\n\nConstruis ton argumentaire autour de 3 points : prix d'accès imbattable pour une électrique, confort Advanced Comfort unique sur ce segment, coût d'usage très inférieur à l'essence sur la durée — puis prépare une réponse chiffrée à « c'est cher » et à « l'autonomie ne me suffit pas ».",
           resources:[{label:"Configurateur ë-C3", url:"https://store.citroen.fr/"}]}},
+        {text:"Réviser les chiffres clés Citroën (parts de marché, ventes, best-sellers) en flashcards avant l'entretien", work:{type:"flashcards", statsBrand:"citroen",
+          lesson:"Ce jeu reprend les chiffres de la fiche marque (part de marché, immatriculations, modèle vedette...). Un recruteur qui entend un chiffre exact et à jour retient tout de suite que tu as fait tes devoirs — entraîne-toi jusqu'à les ressortir sans hésiter."}}
+      ]},
+    {label:"J3-4", titre:"Jour 3-4 — Différenciateurs & process de vente", goal:"Savoir situer Citroën face à la concurrence et comprendre le parcours client",
+      items:[
         {text:"Identifier les 3 principaux concurrents de chaque modèle phare (Clio, 208, Sandero…)", work:{type:"table", columns:["Modèle Citroën","Concurrent 1","Concurrent 2","Concurrent 3","Différenciateur Citroën"], seed:[{"Modèle Citroën":"C3"},{"Modèle Citroën":"C3 Aircross"},{"Modèle Citroën":"C5 Aircross"}],
           lesson:"Avant de remplir le tableau, regarde où se situent tes concurrents directs dans le classement des ventes françaises 2025 : Clio, 208 et Sandero pour la C3 ; Captur et 2008 pour la C3 Aircross ; Qashqai et Tiguan pour la C5 Aircross.",
           resources:[{label:"Classement des ventes France 2025", url:"https://www.capcar.fr/blog/bilan-des-voitures-les-plus-vendues-en-france"}]}},
-        {text:"Réviser la gamme complète en flashcards jusqu'à retrouver segment, énergie et point clé de chaque modèle sans hésiter", work:{type:"flashcards", brand:"citroen",
-          lesson:"Passe en revue les 9 modèles Citroën dans le désordre : pour chacun, retrouve son segment, son énergie et l'argument clé à retenir avant de retourner la carte. Objectif avant l'entretien : zéro hésitation sur les 9 cartes, dans n'importe quel ordre."}}
-      ]},
-    {titre:"Semaine 2 — Process de vente & outils", goal:"Comprendre le parcours client et les outils concession",
-      items:[
-        {text:"Découvrir le CRM et l'outil de configuration/devis utilisés en concession", work:{type:"notes",
-          lesson:"Le configurateur grand public (store.citroen.fr) est une bonne base pour comprendre ce que voit un client en ligne avant de venir en concession : prix, finitions, délais de livraison y sont affichés. En interne, chaque concession utilise un CRM et un outil de devis dédiés au réseau Stellantis.\n\nC'est une excellente question à poser en entretien : « quel CRM utilise la concession et comment se passe la formation dessus ? ».",
-          resources:[{label:"Voir le configurateur grand public", url:"https://store.citroen.fr/"}]}},
-        {text:"Comprendre les offres de financement (LOA, LLD, crédit classique) et leurs cas d'usage", work:{type:"table", columns:["Type de financement","Avantages","Inconvénients","Profil client adapté"], seed:[{"Type de financement":"LOA"},{"Type de financement":"LLD"},{"Type de financement":"Crédit classique"}],
-          lesson:"LOA (Location avec Option d'Achat) : le client peut devenir propriétaire à la fin du contrat. LLD (Location Longue Durée) : le véhicule est toujours restitué, les loyers incluent souvent entretien et assurance, pratique pour un budget lisible. Crédit classique : le client est propriétaire immédiatement mais immobilise plus de trésorerie.\n\nRemplis le tableau avec ces bases, puis complète-le avec ce que t'explique la concession sur les offres Citroën Financement."}},
         {text:"Cartographier le parcours client B2C : accueil → découverte → essai → financement → reprise → livraison", work:{type:"notes",
           lesson:"Un parcours B2C classique en concession suit 6 étapes : accueil et mise en confiance, découverte des besoins (usage, budget, famille, kilométrage), présentation/essai du véhicule adapté, traitement des objections, proposition de financement et reprise, puis livraison et prise en main.\n\nChaque étape a un objectif précis : ne saute jamais la découverte des besoins pour aller directement au prix."}},
-        {text:"Observer un vendeur senior en situation (shadowing) si possible avant l'entretien", work:{type:"notes",
-          lesson:"Pendant le shadowing, note surtout : comment le vendeur ouvre la conversation, les questions qu'il pose pour cerner le budget et l'usage réel, comment il enchaîne sur l'essai, et comment il amène le sujet du financement sans braquer le client. Ce sont des réflexes qui s'observent mieux qu'ils ne s'expliquent."}}
+        {text:"Comprendre les offres de financement (LOA, LLD, crédit classique) et leurs cas d'usage", work:{type:"table", columns:["Type de financement","Avantages","Inconvénients","Profil client adapté"], seed:[{"Type de financement":"LOA"},{"Type de financement":"LLD"},{"Type de financement":"Crédit classique"}],
+          lesson:"LOA (Location avec Option d'Achat) : le client peut devenir propriétaire à la fin du contrat. LLD (Location Longue Durée) : le véhicule est toujours restitué, les loyers incluent souvent entretien et assurance, pratique pour un budget lisible. Crédit classique : le client est propriétaire immédiatement mais immobilise plus de trésorerie.\n\nRemplis le tableau avec ces bases, puis complète-le avec ce que t'explique la concession sur les offres Citroën Financement."}},
+        {text:"Découvrir le CRM et l'outil de configuration/devis utilisés en concession", work:{type:"notes",
+          lesson:"Le configurateur grand public (store.citroen.fr) est une bonne base pour comprendre ce que voit un client en ligne avant de venir en concession : prix, finitions, délais de livraison y sont affichés. En interne, chaque concession utilise un CRM et un outil de devis dédiés au réseau Stellantis.\n\nC'est une excellente question à poser en entretien : « quel CRM utilise la concession et comment se passe la formation dessus ? ».",
+          resources:[{label:"Voir le configurateur grand public", url:"https://store.citroen.fr/"}]}}
       ]},
-    {titre:"Semaine 3 — Techniques de vente & objections", goal:"Passer de la connaissance produit à la vente active",
+    {label:"J5-6", titre:"Jour 5-6 — Objections & argumentaires", goal:"Passer de la connaissance produit à la vente active",
       items:[
         {text:"Travailler une méthode de découverte des besoins (type SPANCO ou CAB) et s'entraîner à la reformuler à l'oral", work:{type:"notes", counter:true,
           lesson:"La méthode SPANCO découpe la vente en 6 étapes : Suspect (cible potentielle) → Prospect (premier contact qualifié) → Analyse (découverte des besoins) → Négociation → Conclusion (closing) → Ordre (suivi et fidélisation). En concession, la phase « Analyse » est la plus décisive : pose des questions ouvertes sur l'usage avant de proposer un modèle.\n\nLa méthode CAB (Caractéristique → Avantage → Bénéfice) t'aide ensuite à transformer chaque caractéristique technique en bénéfice concret pour ce client précis.",
@@ -615,54 +612,58 @@ const PLANS = {
           example:"Exemple pour l'objection « C'est trop cher » : Reformuler (« Vous trouvez que le prix d'entrée est élevé par rapport à ce que vous attendiez ») → Valider (« C'est une remarque légitime, la C3 n'est pas la moins chère du segment ») → Répondre avec un fait (« Sur 5 ans, la consommation et l'entretien sont inférieurs à une essence équivalente, donc le coût total se rééquilibre ») → Vérifier (« Est-ce plutôt le prix d'achat ou le budget mensuel qui vous inquiète ? »)."}},
         {text:"Se former aux bases de la reprise véhicule d'occasion (cote Argus, points de contrôle)", work:{type:"notes",
           lesson:"La cote Argus sert de référence de dépréciation pour chaque véhicule. Une offre de reprise en concession se situe généralement 10 à 15 % sous cette cote (marge de revente, remise en état, risques).\n\n4 critères font varier une cote : le kilométrage réel, l'état carrosserie/intérieur, le carnet d'entretien, et le niveau d'équipement d'origine.",
-          resources:[{label:"Cote Argus officielle", url:"https://www.largus.fr/cote/"},{label:"Comprendre l'écart cote / reprise", url:"https://www.capcar.fr/blog/cote-reprise-voiture-argus"}]}},
-        {text:"Faire un entretien blanc avec un proche en jouant un client difficile", work:{type:"notes",
-          lesson:"Demande à ton proche de jouer un client qui compare 3 devis concurrents et qui doute du prix. Ton objectif n'est pas de « gagner » la discussion mais de rester calme, de reformuler ses doutes et de répondre avec des faits — c'est exactement ce qu'un recruteur veut voir en situation."}}
+          resources:[{label:"Cote Argus officielle", url:"https://www.largus.fr/cote/"},{label:"Comprendre l'écart cote / reprise", url:"https://www.capcar.fr/blog/cote-reprise-voiture-argus"}]}}
       ]},
-    {titre:"Semaine 4 — Vers l'autonomie", goal:"Se projeter concrètement dans le poste",
+    {label:"J7", titre:"Jour 7 — Synthèse avant l'entretien", goal:"Être prêt à pitcher et à répondre aux questions du responsable des ventes",
       items:[
-        {text:"Préparer un plan de montée en compétence à présenter en entretien (ce que je sais déjà / ce que je vais apprendre / comment)", work:{type:"notes",
-          lesson:"Structure ton plan en 3 colonnes : ce que je maîtrise déjà (relationnel, motivation, culture générale auto), ce qu'il me manque (process interne, outils, techniques de closing), et comment je vais combler cet écart (formation interne, shadowing, auto-formation). C'est exactement la structure de ce site : utilise-la telle quelle en entretien."}},
-        {text:"Définir des indicateurs personnels de suivi (taux de transformation, satisfaction client)", work:{type:"table", columns:["Indicateur","Objectif visé"], seed:[{},{}],
-          lesson:"Deux indicateurs reviennent presque toujours en concession : le taux de transformation (nombre de ventes ÷ nombre de visites ou d'essais) et la satisfaction client (souvent mesurée par NPS ou avis Google). Propose-toi un objectif réaliste de progression sur les 90 premiers jours plutôt qu'un chiffre au hasard."}},
-        {text:"Lister 3 questions à poser au recruteur sur l'accompagnement et la formation interne", work:{type:"table", columns:["Question à poser"], seed:[{},{},{}],
-          lesson:"Les meilleures questions montrent que tu projettes déjà dans le poste : sur la formation initiale, sur le mode de rémunération (fixe + commissions), sur les objectifs des 3 premiers mois, ou sur l'accompagnement par un vendeur senior. Évite les questions dont la réponse est déjà sur le site Citroën."}},
         {text:"Préparer un pitch de 2 minutes : pourquoi Citroën, pourquoi moi, pourquoi maintenant", work:{type:"notes", counter:true,
           lesson:"Structure ton pitch en 3 temps : pourquoi Citroën (une raison concrète et vérifiable, comme la reconquête de parts de marché en 2025), pourquoi toi (2-3 qualités ou expériences transférables), pourquoi maintenant (ta disponibilité et ta motivation immédiate). Vise 220 à 260 mots pour tenir dans 2 minutes à l'oral.",
           example:"Exemple (à adapter avec tes propres mots, ne pas apprendre par cœur) : « Je postule chez Citroën parce que c'est une marque en reconquête sur le marché français — la part de marché est passée de 6,5 % à 7,1 % en 2025, et j'ai envie de faire partie de cette dynamique plutôt que d'arriver dans une marque qui stagne. Côté profil, j'ai une vraie appétence pour le contact client et j'apprends vite : sur mes expériences précédentes, j'ai toujours été à l'aise pour cerner un besoin et rassurer quelqu'un qui hésite avant une décision importante. Et je suis disponible immédiatement, avec une vraie motivation à m'investir sur la durée, pas juste à décrocher un poste. »"}},
-        {text:"Réviser les chiffres clés Citroën (parts de marché, ventes, best-sellers) en flashcards avant l'entretien", work:{type:"flashcards", statsBrand:"citroen",
-          lesson:"Ce jeu reprend les chiffres de la fiche marque (part de marché, immatriculations, modèle vedette...). Un recruteur qui entend un chiffre exact et à jour retient tout de suite que tu as fait tes devoirs — entraîne-toi jusqu'à les ressortir sans hésiter."}}
+        {text:"Lister 3 questions à poser au recruteur sur l'accompagnement et la formation interne", work:{type:"table", columns:["Question à poser"], seed:[{},{},{}],
+          lesson:"Les meilleures questions montrent que tu projettes déjà dans le poste : sur la formation initiale, sur le mode de rémunération (fixe + commissions), sur les objectifs des 3 premiers mois, ou sur l'accompagnement par un vendeur senior. Évite les questions dont la réponse est déjà sur le site Citroën."}},
+        {text:"Préparer un plan de montée en compétence à présenter en entretien (ce que je sais déjà / ce que je vais apprendre / comment)", work:{type:"notes",
+          lesson:"Structure ton plan en 3 colonnes : ce que je maîtrise déjà (relationnel, motivation, culture générale auto), ce qu'il me manque (process interne, outils, techniques de closing), et comment je vais combler cet écart (formation interne, shadowing, auto-formation). C'est exactement la structure de ce site : utilise-la telle quelle en entretien."}},
+        {text:"Faire un entretien blanc avec un proche en jouant un client difficile", work:{type:"notes",
+          lesson:"Demande à ton proche de jouer un client qui compare 3 devis concurrents et qui doute du prix. Ton objectif n'est pas de « gagner » la discussion mais de rester calme, de reformuler ses doutes et de répondre avec des faits — c'est exactement ce qu'un recruteur veut voir en situation."}}
+      ]},
+    {label:"J8-14", titre:"Jour 8-14 — Approfondissement (si tu as une 2ᵉ semaine)", goal:"Pour aller plus loin si le temps le permet, sans que ce soit indispensable pour l'entretien",
+      items:[
+        {text:"Faire un essai ou une visite concession sur C3, C3 Aircross et C5 Aircross", work:{type:"notes",
+          lesson:"Avant de t'y rendre, configure les 3 modèles sur le site officiel pour connaître tarifs et finitions disponibles. En showroom ou pendant l'essai, concentre-toi sur 4 points que les clients remarquent en premier : le confort des sièges Advanced Comfort, l'ergonomie de l'écran tactile central, le volume de coffre, et le silence de roulage.",
+          resources:[{label:"Configurateur officiel Citroën", url:"https://store.citroen.fr/"}]}},
+        {text:"Observer un vendeur senior en situation (shadowing) si possible avant l'entretien", work:{type:"notes",
+          lesson:"Pendant le shadowing, note surtout : comment le vendeur ouvre la conversation, les questions qu'il pose pour cerner le budget et l'usage réel, comment il enchaîne sur l'essai, et comment il amène le sujet du financement sans braquer le client. Ce sont des réflexes qui s'observent mieux qu'ils ne s'expliquent."}},
+        {text:"Définir des indicateurs personnels de suivi (taux de transformation, satisfaction client)", work:{type:"table", columns:["Indicateur","Objectif visé"], seed:[{},{}],
+          lesson:"Deux indicateurs reviennent presque toujours en concession : le taux de transformation (nombre de ventes ÷ nombre de visites ou d'essais) et la satisfaction client (souvent mesurée par NPS ou avis Google). Propose-toi un objectif réaliste de progression sur les 90 premiers jours plutôt qu'un chiffre au hasard."}}
       ]}
   ],
   kia:[
-    {titre:"Semaine 1 — Gamme & différenciateurs", goal:"Maîtriser ce qui distingue Kia de ses concurrents",
+    {label:"J1-2", titre:"Jour 1-2 — Gamme & chiffres clés", goal:"Mémoriser la gamme et les chiffres avant tout le reste : c'est ce qu'un responsable des ventes teste en premier",
       items:[
         {text:"Apprendre la gamme complète (thermique, hybride, 100% électrique) et la logique de nommage EV2 à EV9", work:{type:"notes",
           lesson:"La logique de nommage Kia est simple une fois comprise : plus le chiffre après « EV » est élevé, plus le véhicule est grand (EV2/EV3 compacts, EV4/EV5 intermédiaires, EV6 premium, EV9 grand SUV 7 places). La fiche marque Kia de ce site liste toute la gamme (thermique, hybride, électrique) — utilise le mode flashcards pour la retenir, puis va vérifier les tarifs à jour sur le configurateur officiel.",
           resources:[{label:"Ouvrir la fiche marque Kia", brand:"kia"},{label:"Configurateur officiel Kia", url:"https://www.kia.com/fr/achat-location/configurateur/"}]}},
+        {text:"Réviser toute la gamme Kia (12 modèles, du Picanto à l'EV9) en flashcards jusqu'à l'automatisme", work:{type:"flashcards", brand:"kia",
+          lesson:"La gamme Kia est la plus large des trois marques à réviser : entraîne-toi jusqu'à savoir situer instantanément chaque modèle (segment, énergie, point clé), y compris la logique de nommage EV2 à EV9. C'est la base pour orienter un client vers le bon modèle en quelques secondes."}},
         {text:"Maîtriser l'argument garantie 7 ans / 150 000 km et savoir pourquoi elle rassure", work:{type:"notes", counter:true,
           lesson:"La garantie Kia de 7 ans ou 150 000 km est l'une des plus longues du marché généraliste (largement au-dessus des 2-3 ans habituels). C'est l'argument n°1 pour rassurer un client qui hésite sur la fiabilité ou la valeur de revente d'une marque coréenne : le véhicule reste couvert bien après la fin d'un crédit classique de 5 ans."}},
-        {text:"Comprendre l'écosystème recharge électrique (types de bornes, temps de charge, réseaux partenaires)", work:{type:"notes",
-          lesson:"Deux types de recharge à savoir expliquer : la recharge AC (à domicile ou au travail, plusieurs heures, pour un usage quotidien) et la recharge DC rapide (30 à 80 % en moins de 30 minutes sur les modèles récents grâce à l'architecture 800V des EV6 et EV9, utile en trajet longue distance). Kia propose son propre service Kia Charge donnant accès à un large réseau de bornes publiques."}},
+        {text:"Réviser les chiffres clés Kia (parts de marché, ventes, mix électrifié) en flashcards avant l'entretien", work:{type:"flashcards", statsBrand:"kia",
+          lesson:"Ce jeu reprend les chiffres de la fiche marque Kia (immatriculations, part de marché, mix électrifié...). Sais-tu expliquer le recul de Kia en 2025 avec un chiffre exact plutôt qu'une impression vague ? C'est ce genre de précision qui distingue un candidat préparé."}}
+      ]},
+    {label:"J3-4", titre:"Jour 3-4 — Différenciateurs & process de vente", goal:"Maîtriser ce qui distingue Kia de ses concurrents et se familiariser avec le fonctionnement commercial",
+      items:[
         {text:"Comparer Kia à Hyundai et aux marques généralistes sur 2-3 points clés", work:{type:"table", columns:["Critère","Kia","Hyundai / généraliste"], seed:[{"Critère":"Garantie"},{"Critère":"Prix"},{"Critère":"Image de marque"}],
           lesson:"Kia et Hyundai partagent des plateformes techniques (même groupe) mais se différencient par le design et le positionnement tarifaire : Kia mise sur un style plus affirmé et une garantie plus longue (7 ans vs généralement 5 ans chez Hyundai). Remplis le tableau avec ces bases avant de le préciser avec les fiches produits."}},
-        {text:"Réviser toute la gamme Kia (12 modèles, du Picanto à l'EV9) en flashcards jusqu'à l'automatisme", work:{type:"flashcards", brand:"kia",
-          lesson:"La gamme Kia est la plus large des trois marques à réviser : entraîne-toi jusqu'à savoir situer instantanément chaque modèle (segment, énergie, point clé), y compris la logique de nommage EV2 à EV9. C'est la base pour orienter un client vers le bon modèle en quelques secondes."}}
-      ]},
-    {titre:"Semaine 2 — Outils & process concession", goal:"Se familiariser avec le fonctionnement commercial",
-      items:[
+        {text:"Comprendre l'écosystème recharge électrique (types de bornes, temps de charge, réseaux partenaires)", work:{type:"notes",
+          lesson:"Deux types de recharge à savoir expliquer : la recharge AC (à domicile ou au travail, plusieurs heures, pour un usage quotidien) et la recharge DC rapide (30 à 80 % en moins de 30 minutes sur les modèles récents grâce à l'architecture 800V des EV6 et EV9, utile en trajet longue distance). Kia propose son propre service Kia Charge donnant accès à un large réseau de bornes publiques."}},
         {text:"Découvrir le configurateur Kia et les grilles tarifaires par finition", work:{type:"notes",
           lesson:"Le configurateur officiel te permet de simuler n'importe quelle finition avec le tarif exact du mois. La grille tarifaire complète (PDF) liste tous les modèles et finitions sur une seule page : c'est le document à avoir toujours sous la main en rendez-vous client.",
           resources:[{label:"Configurateur officiel Kia", url:"https://www.kia.com/fr/achat-location/configurateur/"},{label:"Grille tarifaire Kia France (PDF)", url:"https://www.kia.com/content/dam/kwcms/kme/fr/fr/assets/contents/utility/pricelist/Kia-France-Tarif-gamme-janvier-2026.pdf"}]}},
         {text:"Comprendre les offres Kia Finance (LOA, LLD, crédit) et leurs avantages", work:{type:"table", columns:["Offre Kia Finance","Avantages","Cas d'usage"], seed:[{},{},{}],
           lesson:"Kia Finance propose les mêmes grandes familles que le marché : LOA (option d'achat en fin de contrat), LLD (restitution systématique, loyers tout compris) et crédit classique. L'avantage de passer par la marque plutôt qu'une banque généraliste : des taux souvent négociés et des offres promotionnelles ponctuelles par modèle, à vérifier sur le configurateur.",
-          resources:[{label:"Simuler un financement", url:"https://www.kia.com/fr/achat-location/configurateur/"}]}},
-        {text:"Identifier le parcours lead digital → prise de rendez-vous → vente en concession", work:{type:"notes",
-          lesson:"La majorité des acheteurs commencent leur recherche en ligne (configurateur, avis, comparateurs) avant de prendre rendez-vous en concession. Le rôle du vendeur est alors de reprendre ce parcours là où le client l'a laissé — ne rabâche pas des infos qu'il a déjà vues en ligne, concentre-toi sur ce que le digital ne peut pas donner : l'essai et le conseil personnalisé."}},
-        {text:"Lister les points de contact du service client Kia (garantie, SAV, assistance)", work:{type:"table", columns:["Point de contact","Rôle / quand l'utiliser"], seed:[{},{},{}],
-          lesson:"La garantie 7 ans est gérée par tout le réseau Kia France, pas seulement la concession de vente : un client peut faire réparer son véhicule ailleurs sans perdre sa garantie. L'assistance routière est généralement incluse les premières années. Ce sont des réassurances fortes à connaître par cœur."}}
+          resources:[{label:"Simuler un financement", url:"https://www.kia.com/fr/achat-location/configurateur/"}]}}
       ]},
-    {titre:"Semaine 3 — Vente consultative & digital", goal:"Savoir vendre une transition vers l'électrique",
+    {label:"J5-6", titre:"Jour 5-6 — Objections & argumentaires", goal:"Savoir vendre une transition vers l'électrique",
       items:[
         {text:"Préparer un argumentaire TCO simple pour convaincre un client hésitant sur l'électrique", work:{type:"notes", counter:true,
           lesson:"Le TCO (coût total de possession) additionne : prix d'achat net de reprise, financement, énergie, entretien, assurance et décote — sur toute la durée de détention. Une électrique coûte souvent plus cher à l'achat mais moins cher à l'usage (énergie, entretien réduit car moins de pièces d'usure) : c'est cette addition complète qu'il faut montrer à un client qui ne regarde que le prix catalogue.",
@@ -670,56 +671,59 @@ const PLANS = {
         {text:"Travailler le traitement d'objections spécifiques (autonomie, revente, image de marque coréenne)", work:{type:"table", columns:["Objection","Réponse préparée"], seed:[{},{},{}],
           lesson:"Les objections les plus fréquentes sur l'électrique portent sur l'autonomie réelle, la revente et la recharge à domicile. Réponds toujours avec un chiffre vérifiable (autonomie WLTP, garantie batterie) plutôt qu'une opinion générale.",
           example:"Exemple pour l'objection « Une marque coréenne, ça revend mal » : Reformuler (« Vous vous demandez si vous allez retrouver votre argent à la revente ») → Valider (« C'est une question légitime ») → Répondre avec un fait (« Kia offre une garantie de 7 ans / 150 000 km, la plus longue du marché généraliste — un acheteur d'occasion sait que le véhicule est encore couvert plusieurs années après l'achat, ce qui soutient la valeur de revente ») → Vérifier (« Est-ce que la revente à moyen terme est un critère important pour vous, ou plutôt l'usage au quotidien ? »)."}},
-        {text:"Comprendre le rôle des avis clients et de la présence digitale dans la décision d'achat", work:{type:"notes",
-          lesson:"Avant de se déplacer en concession, la majorité des clients consultent les avis Google et les comparatifs en ligne. Une concession avec de bons avis convertit mieux : sache où trouver et comment présenter les avis de la concession si un client hésite encore."}},
-        {text:"Simuler une vente complète du premier contact à la signature", work:{type:"notes",
-          lesson:"Simule les 6 étapes d'une vente complète en une seule session : accueil, découverte des besoins, présentation/essai, traitement d'une objection, financement, signature. Chronomètre-toi : un rendez-vous de vente automobile dure rarement plus de 45-60 minutes en une seule fois."}}
+        {text:"Identifier le parcours lead digital → prise de rendez-vous → vente en concession", work:{type:"notes",
+          lesson:"La majorité des acheteurs commencent leur recherche en ligne (configurateur, avis, comparateurs) avant de prendre rendez-vous en concession. Le rôle du vendeur est alors de reprendre ce parcours là où le client l'a laissé — ne rabâche pas des infos qu'il a déjà vues en ligne, concentre-toi sur ce que le digital ne peut pas donner : l'essai et le conseil personnalisé."}}
       ]},
-    {titre:"Semaine 4 — Vers l'autonomie", goal:"Démontrer une trajectoire de progression claire",
+    {label:"J7", titre:"Jour 7 — Synthèse avant l'entretien", goal:"Démontrer une trajectoire de progression claire et être prêt à l'oral",
       items:[
+        {text:"Simuler une vente complète du premier contact à la signature", work:{type:"notes",
+          lesson:"Simule les 6 étapes d'une vente complète en une seule session : accueil, découverte des besoins, présentation/essai, traitement d'une objection, financement, signature. Chronomètre-toi : un rendez-vous de vente automobile dure rarement plus de 45-60 minutes en une seule fois."}},
         {text:"Formaliser un plan de montée en compétence sur 3 mois à présenter à la recruteuse", work:{type:"notes",
           lesson:"Découpe ton plan en jalons mensuels : mois 1 = maîtrise produit et outils, mois 2 = autonomie encadrée sur les rendez-vous simples, mois 3 = portefeuille propre avec objectifs chiffrés. Présente-le comme une feuille de route, pas une liste de vœux."}},
-        {text:"Définir des objectifs personnels mesurables pour les 90 premiers jours", work:{type:"table", columns:["Objectif","Échéance","Indicateur de succès"], seed:[{},{},{}],
-          lesson:"Fixe des objectifs mesurables et progressifs : par exemple un nombre de rendez-vous tenus, un taux de transformation cible, un nombre de ventes. Évite les objectifs flous du type « bien connaître la gamme » — préfère « connaître les 20 modèles et leurs prix sans notes »."}},
-        {text:"Préparer des exemples concrets (expériences passées) transférables à la vente automobile", work:{type:"notes",
-          lesson:"Même sans expérience automobile, des expériences en relation client, vente, ou négociation sont transférables : identifie 2-3 situations concrètes où tu as convaincu, rassuré ou géré une objection, et prépare-les sous forme d'anecdotes courtes (contexte → action → résultat)."}},
         {text:"Préparer 3 questions sur la formation interne Kia et l'accompagnement des nouveaux vendeurs", work:{type:"table", columns:["Question à poser"], seed:[{},{},{}],
           lesson:"Demande des précisions sur le tutorat (qui t'accompagne les premières semaines), le rythme de formation produit, et la façon dont la progression est évaluée. Ce sont des questions qui montrent que tu penses déjà à ta montée en compétence, pas juste à décrocher le poste."}},
-        {text:"Réviser les chiffres clés Kia (parts de marché, ventes, mix électrifié) en flashcards avant l'entretien", work:{type:"flashcards", statsBrand:"kia",
-          lesson:"Ce jeu reprend les chiffres de la fiche marque Kia (immatriculations, part de marché, mix électrifié...). Sais-tu expliquer le recul de Kia en 2025 avec un chiffre exact plutôt qu'une impression vague ? C'est ce genre de précision qui distingue un candidat préparé."}}
+        {text:"Préparer des exemples concrets (expériences passées) transférables à la vente automobile", work:{type:"notes",
+          lesson:"Même sans expérience automobile, des expériences en relation client, vente, ou négociation sont transférables : identifie 2-3 situations concrètes où tu as convaincu, rassuré ou géré une objection, et prépare-les sous forme d'anecdotes courtes (contexte → action → résultat)."}}
+      ]},
+    {label:"J8-14", titre:"Jour 8-14 — Approfondissement (si tu as une 2ᵉ semaine)", goal:"Pour aller plus loin si le temps le permet, sans que ce soit indispensable pour l'entretien",
+      items:[
+        {text:"Comprendre le rôle des avis clients et de la présence digitale dans la décision d'achat", work:{type:"notes",
+          lesson:"Avant de se déplacer en concession, la majorité des clients consultent les avis Google et les comparatifs en ligne. Une concession avec de bons avis convertit mieux : sache où trouver et comment présenter les avis de la concession si un client hésite encore."}},
+        {text:"Lister les points de contact du service client Kia (garantie, SAV, assistance)", work:{type:"table", columns:["Point de contact","Rôle / quand l'utiliser"], seed:[{},{},{}],
+          lesson:"La garantie 7 ans est gérée par tout le réseau Kia France, pas seulement la concession de vente : un client peut faire réparer son véhicule ailleurs sans perdre sa garantie. L'assistance routière est généralement incluse les premières années. Ce sont des réassurances fortes à connaître par cœur."}},
+        {text:"Définir des objectifs personnels mesurables pour les 90 premiers jours", work:{type:"table", columns:["Objectif","Échéance","Indicateur de succès"], seed:[{},{},{}],
+          lesson:"Fixe des objectifs mesurables et progressifs : par exemple un nombre de rendez-vous tenus, un taux de transformation cible, un nombre de ventes. Évite les objectifs flous du type « bien connaître la gamme » — préfère « connaître les 20 modèles et leurs prix sans notes »."}}
       ]}
   ],
   valauto:[
-    {titre:"Semaine 1 — Fondamentaux multimarques & univers pro", goal:"Cartographier l'offre des 6 marques et le client professionnel",
+    {label:"J1-2", titre:"Jour 1-2 — Les 6 marques & chiffres clés", goal:"Mémoriser les gammes et les chiffres des 6 marques avant tout le reste : c'est ce qu'un responsable des ventes teste en premier",
       items:[
         {text:"Construire un tableau comparatif des gammes utilitaires/pro des 6 marques (Seat, Cupra, Skoda, BYD, VW, Audi)", work:{type:"table", columns:["Marque","Modèle utilitaire / pro clé","Segment","Énergie","Argument clé"], seed:brandSeedRows("Marque"),
           lesson:"Chaque marque a un rôle précis dans le portefeuille Valauto : Seat (entrée de gamme accessible), Cupra (sportif/premium, en forte croissance +29,3 % en 2025), Škoda (habitabilité/prix imbattable), BYD (électrique en explosion, +150 % en 2025), Volkswagen (cœur de gamme généraliste) et Audi (premium, en croissance +1,8 %).\n\nOuvre chaque fiche marque de ce site pour ses chiffres et sa gamme complète, puis va vérifier les tout derniers modèles sur les configurateurs officiels avant de remplir le tableau.",
           resources:[{label:"Seat", url:"https://www.seat.fr/"},{label:"Cupra", url:"https://www.cupraofficial.fr/"},{label:"Škoda", url:"https://www.skoda.fr/"},{label:"BYD", url:"https://www.byd.com/fr"},{label:"Volkswagen", url:"https://www.volkswagen.fr/"},{label:"Audi", url:"https://www.audi.fr/"}]}},
+        {text:"Réviser en flashcards les gammes des 6 marques (Seat, Cupra, Škoda, BYD, Volkswagen, Audi) mélangées", work:{type:"flashcards", brands:["seat","cupra","skoda","byd","vw","audi"],
+          lesson:"Ce jeu mélange les modèles des 6 marques Valauto : le nom de la marque s'affiche sur chaque carte pour t'aider à t'y retrouver au début, mais l'objectif est de reconnaître rapidement le segment et l'énergie de chaque modèle, marque par marque, sans confondre les gammes."}},
+        {text:"Repérer pour chaque marque un modèle « produit d'appel » et un modèle « premium » côté pro", work:{type:"table", columns:["Marque","Produit d'appel","Produit premium"], seed:brandSeedRows("Marque"),
+          lesson:"Repère pour chaque marque un modèle d'entrée qui fait venir le client (prix, praticité) et un modèle qui fait monter le panier (finition, motorisation, image). Utilise les fiches marques de ce site : chaque gamme y est déjà classée par segment.",
+          resources:[{label:"Ouvrir la fiche marque Seat", brand:"seat"},{label:"Ouvrir la fiche marque Cupra", brand:"cupra"},{label:"Ouvrir la fiche marque Škoda", brand:"skoda"},{label:"Ouvrir la fiche marque BYD", brand:"byd"},{label:"Ouvrir la fiche marque Volkswagen", brand:"vw"},{label:"Ouvrir la fiche marque Audi", brand:"audi"}]}},
+        {text:"Réviser les chiffres clés des 6 marques Valauto (parts de marché, dynamique 2025) en flashcards avant l'entretien", work:{type:"flashcards", statsBrands:["seat","cupra","skoda","byd","vw","audi"],
+          lesson:"Ce jeu mélange les chiffres clés des 6 marques du portefeuille Valauto — de quoi avoir un chiffre exact et à jour sous la main pour chacune, plutôt qu'une impression générale, si le recruteur pousse sur l'une d'elles en particulier."}}
+      ]},
+    {label:"J3-4", titre:"Jour 3-4 — Profil clients pro & fiscalité", goal:"Cartographier le client professionnel et maîtriser les outils financiers B2B",
+      items:[
         {text:"Identifier les profils clients pro types : artisan, TPE/PME, flotte d'entreprise, loueur longue durée", work:{type:"table", columns:["Profil client","Besoins clés","Marque / modèle recommandé"], seed:[{"Profil client":"Artisan"},{"Profil client":"TPE / PME"},{"Profil client":"Flotte d'entreprise"},{"Profil client":"Loueur longue durée"}],
           lesson:"4 profils reviennent le plus souvent chez un concessionnaire multimarque : l'artisan (véhicule utilitaire, priorité fiabilité et TVA récupérable), la TPE/PME (2 à 10 véhicules, arbitrage LOA/LLD), la grande flotte d'entreprise (appel d'offres, gestionnaire de flotte dédié, négociation sur volume), et le loueur longue durée (achat en gros volume, exigences de revente/valeur résiduelle)."}},
         {text:"Réviser les bases de la fiscalité entreprise : TVA récupérable sur VUL, avantage en nature, amortissement, malus", work:{type:"notes", counter:true,
           lesson:"TVA : elle est récupérable à 100 % sur les véhicules utilitaires (carte grise mention CTTE ou VU, 2 places sans banquette arrière) mais non récupérable sur un véhicule particulier classique, sauf exceptions.\n\nAvantage en nature (2026) : sur un véhicule électrique mis à disposition, l'abattement atteint 70 % (plafonné à 4 641,60 €/an) contre 50 % pour les autres motorisations (plafonné à 2 026,30 €/an) — un argument fort pour orienter une flotte vers l'électrique.\n\nAmortissement et malus écologique varient selon les émissions de CO2 du véhicule : plus il est lourd et polluant, plus la fiscalité est défavorable à l'entreprise.",
           resources:[{label:"TVA récupérable sur véhicule", url:"https://www.legalplace.fr/guides/recuperation-tva-vehicule/"},{label:"Avantage en nature véhicule 2026", url:"https://www.legisocial.fr/reperes-sociaux/avantage-en-nature-vehicule-2026.html"}]}},
-        {text:"Repérer pour chaque marque un modèle « produit d'appel » et un modèle « premium » côté pro", work:{type:"table", columns:["Marque","Produit d'appel","Produit premium"], seed:brandSeedRows("Marque"),
-          lesson:"Repère pour chaque marque un modèle d'entrée qui fait venir le client (prix, praticité) et un modèle qui fait monter le panier (finition, motorisation, image). Utilise les fiches marques de ce site : chaque gamme y est déjà classée par segment.",
-          resources:[{label:"Ouvrir la fiche marque Seat", brand:"seat"},{label:"Ouvrir la fiche marque Cupra", brand:"cupra"},{label:"Ouvrir la fiche marque Škoda", brand:"skoda"},{label:"Ouvrir la fiche marque BYD", brand:"byd"},{label:"Ouvrir la fiche marque Volkswagen", brand:"vw"},{label:"Ouvrir la fiche marque Audi", brand:"audi"}]}},
-        {text:"Réviser en flashcards les gammes des 6 marques (Seat, Cupra, Škoda, BYD, Volkswagen, Audi) mélangées", work:{type:"flashcards", brands:["seat","cupra","skoda","byd","vw","audi"],
-          lesson:"Ce jeu mélange les modèles des 6 marques Valauto : le nom de la marque s'affiche sur chaque carte pour t'aider à t'y retrouver au début, mais l'objectif est de reconnaître rapidement le segment et l'énergie de chaque modèle, marque par marque, sans confondre les gammes."}}
-      ]},
-    {titre:"Semaine 2 — Financement & gestion de flotte", goal:"Maîtriser les outils financiers spécifiques au B2B",
-      items:[
         {text:"Comprendre en détail LOA et LLD professionnelles : différences, avantages comptables, cas d'usage", work:{type:"table", columns:["Critère","LOA","LLD"], seed:[{"Critère":"Propriété du véhicule"},{"Critère":"TVA récupérable"},{"Critère":"Traitement comptable"},{"Critère":"Kilométrage"},{"Critère":"Cas d'usage typique"}],
           lesson:"LOA (Location avec Option d'Achat) : le client peut racheter le véhicule en fin de contrat, une partie de la TVA peut être récupérable selon l'usage. LLD (Location Longue Durée) : restitution systématique, loyers tout compris (entretien, assurance parfois), très prisée des flottes pour sa lisibilité budgétaire et l'absence de risque de revente. Le crédit classique reste possible pour une entreprise qui préfère être propriétaire immédiatement.",
           resources:[{label:"TVA récupérable sur véhicule", url:"https://www.legalplace.fr/guides/recuperation-tva-vehicule/"}]}},
         {text:"Étudier les offres de financement propres à chaque marque (VW Leasing, offres captives du groupe)", work:{type:"table", columns:["Marque","Offre de financement","Particularité"], seed:brandSeedRows("Marque"),
           lesson:"Volkswagen, Audi, Škoda, Seat et Cupra partagent souvent la même structure de financement captif (Volkswagen Financial Services) avec des offres qui peuvent différer par marque. BYD travaille avec des partenaires financiers locaux en France. Vérifie sur chaque site officiel les offres et taux du moment, ils changent régulièrement.",
-          resources:[{label:"Volkswagen", url:"https://www.volkswagen.fr/"},{label:"Audi", url:"https://www.audi.fr/"},{label:"Škoda", url:"https://www.skoda.fr/"},{label:"Seat", url:"https://www.seat.fr/"},{label:"Cupra", url:"https://www.cupraofficial.fr/"},{label:"BYD", url:"https://www.byd.com/fr"}]}},
-        {text:"Comprendre les bases de la gestion de flotte (carte grise société, entretien mutualisé, renouvellement)", work:{type:"notes",
-          lesson:"Une entreprise avec plusieurs véhicules centralise souvent la carte grise au nom de la société, mutualise l'entretien via des cartes carburant/entretien multimarques, et planifie le renouvellement par vagues pour lisser le budget. Comprendre ce fonctionnement te permet de parler le même langage qu'un gestionnaire de flotte."}},
-        {text:"Si possible, échanger avec un partenaire financier ou un gestionnaire de flotte pour du vocabulaire terrain", work:{type:"notes",
-          lesson:"Si tu peux échanger avec un partenaire financier ou un gestionnaire de flotte, prépare 3 questions concrètes : comment se décide LOA vs LLD pour un client, quels sont les critères qui font varier un taux, et quelles marques/modèles reviennent le plus souvent en flotte d'entreprise aujourd'hui."}}
+          resources:[{label:"Volkswagen", url:"https://www.volkswagen.fr/"},{label:"Audi", url:"https://www.audi.fr/"},{label:"Škoda", url:"https://www.skoda.fr/"},{label:"Seat", url:"https://www.seat.fr/"},{label:"Cupra", url:"https://www.cupraofficial.fr/"},{label:"BYD", url:"https://www.byd.com/fr"}]}}
       ]},
-    {titre:"Semaine 3 — Techniques de vente B2B & argumentaires", goal:"Passer d'une logique produit à une logique de solution d'entreprise",
+    {label:"J5-6", titre:"Jour 5-6 — Vente B2B & argumentaires TCO", goal:"Passer d'une logique produit à une logique de solution d'entreprise",
       items:[
         {text:"Se former aux spécificités de la vente B2B (cycle plus long, multi-décideurs, appels d'offres)", work:{type:"notes",
           lesson:"La vente B2B se distingue par un cycle plus long (semaines à mois), plusieurs décideurs (dirigeant, comptable, parfois gestionnaire de flotte), et une décision basée sur le TCO plutôt que le prix affiché. Pour une grande flotte, la vente peut même passer par un appel d'offres formel avec cahier des charges."}},
@@ -727,23 +731,28 @@ const PLANS = {
           lesson:"Le TCO complet = prix catalogue net de remise + coût de financement + énergie/carburant sur la durée + entretien + assurance − valeur de revente estimée. Une BYD électrique a un prix catalogue plus élevé qu'une Volkswagen thermique équivalente mais un coût d'énergie et d'entretien nettement inférieur : c'est cette addition qui doit trancher, pas le prix affiché seul."}},
         {text:"Préparer 3 scénarios clients types (artisan, PME 10 véhicules, grande flotte) avec une recommandation par marque", work:{type:"table", columns:["Profil client","Besoin principal","Contraintes","Marque / modèle recommandé"], seed:[{"Profil client":"Artisan"},{"Profil client":"PME (10 véhicules)"},{"Profil client":"Grande flotte"}],
           lesson:"Pour chaque profil, identifie le vrai enjeu business du client (pas seulement son budget) : un artisan cherche la fiabilité et la récupération de TVA, une PME de 10 véhicules cherche à lisser son budget (LLD), une grande flotte cherche le meilleur TCO sur le volume. Adapte ta recommandation de marque à cet enjeu, pas seulement au prix.",
-          example:"Exemple pour le profil « Artisan » : Besoin principal = véhicule utilitaire fiable et TVA récupérable • Contraintes = budget serré, faible tolérance à l'immobilisation (temps d'arrêt = perte de chantier) • Marque / modèle recommandé = Škoda ou Seat utilitaire, argument prix + fiabilité plutôt qu'image de marque."}},
-        {text:"Simuler un rendez-vous de vente B2B avec un proche jouant le rôle du dirigeant d'entreprise", work:{type:"notes",
-          lesson:"Structure le rendez-vous B2B en 4 temps : découverte des enjeux de l'entreprise (pas seulement du véhicule), présentation comparative multimarque chiffrée, réponse aux objections (souvent budgétaires ou sur la nouveauté d'une marque comme BYD), puis proposition concrète avec chiffrage TCO à l'appui."}}
+          example:"Exemple pour le profil « Artisan » : Besoin principal = véhicule utilitaire fiable et TVA récupérable • Contraintes = budget serré, faible tolérance à l'immobilisation (temps d'arrêt = perte de chantier) • Marque / modèle recommandé = Škoda ou Seat utilitaire, argument prix + fiabilité plutôt qu'image de marque."}}
       ]},
-    {titre:"Semaine 4 — Vers l'autonomie sur un portefeuille", goal:"Montrer qu'on est prêt à gérer un portefeuille clients pro",
+    {label:"J7", titre:"Jour 7 — Synthèse avant l'entretien", goal:"Montrer qu'on est prêt à gérer un portefeuille clients pro et être prêt à l'oral",
       items:[
+        {text:"Simuler un rendez-vous de vente B2B avec un proche jouant le rôle du dirigeant d'entreprise", work:{type:"notes",
+          lesson:"Structure le rendez-vous B2B en 4 temps : découverte des enjeux de l'entreprise (pas seulement du véhicule), présentation comparative multimarque chiffrée, réponse aux objections (souvent budgétaires ou sur la nouveauté d'une marque comme BYD), puis proposition concrète avec chiffrage TCO à l'appui."}},
         {text:"Formaliser un plan de montée en compétence sur 90 jours à présenter au directeur commercial", work:{type:"notes", counter:true,
           lesson:"Découpe ton plan en 3 paliers : jour 1-30 = maîtrise des 6 gammes et des bases fiscales/financement, jour 31-60 = autonomie encadrée sur des rendez-vous simples, jour 61-90 = portefeuille propre avec objectifs de CA par marque. C'est un plan concret que le directeur commercial peut valider immédiatement."}},
-        {text:"Proposer un mode de suivi personnel du CA par marque et par type de client", work:{type:"table", columns:["Marque","Objectif mensuel","Réalisé","Écart"], seed:brandSeedRows("Marque"),
-          lesson:"Un bon reporting commercial suit au minimum : l'objectif mensuel, le réalisé, et l'écart — marque par marque, pour identifier vite où concentrer ses efforts. Ce tableau te sert aussi de trame réutilisable une fois en poste."}},
-        {text:"Lister les points de vigilance à clarifier avec le directeur commercial (répartition du portefeuille, objectifs, accompagnement terrain)", work:{type:"table", columns:["Point à clarifier","Question précise à poser"], seed:[{},{},{}],
-          lesson:"Avant de démarrer, clarifie avec le directeur commercial : comment est réparti le portefeuille clients entre vendeurs, quels sont les objectifs des 90 premiers jours, et quel accompagnement terrain est prévu (binôme, shadowing, formation constructeur)."}},
         {text:"Préparer un pitch centré sur la valeur ajoutée d'un vendeur multimarques face à un client pro : conseil neutre et comparatif", work:{type:"notes", counter:true,
           lesson:"Ton pitch doit positionner la valeur d'un vendeur multimarque : contrairement à un vendeur mono-marque, tu peux recommander objectivement la meilleure solution parmi 6 marques selon le vrai besoin du client — un argument de confiance fort en B2B.\n\nAppuie-toi sur des faits récents : le groupe Volkswagen a atteint 15,3 % de part de marché historique en France en 2025, Cupra progresse de +29,3 % et BYD explose de +150 % — Valauto vend certaines des gammes les plus dynamiques du marché actuel.",
           example:"Exemple : « Je postule chez Valauto parce que je veux vendre du conseil, pas juste une marque : avec 6 marques en portefeuille, je peux proposer objectivement la solution la mieux adaptée à un client pro, du budget artisan à la grande flotte, plutôt que de forcer un seul catalogue. Côté profil, je suis à l'aise pour structurer un raisonnement chiffré (TCO, fiscalité) et j'aime le format B2B où la décision se construit sur plusieurs échanges. Et je suis disponible tout de suite pour monter en compétence sur les 6 gammes. »"}},
-        {text:"Réviser les chiffres clés des 6 marques Valauto (parts de marché, dynamique 2025) en flashcards avant l'entretien", work:{type:"flashcards", statsBrands:["seat","cupra","skoda","byd","vw","audi"],
-          lesson:"Ce jeu mélange les chiffres clés des 6 marques du portefeuille Valauto — de quoi avoir un chiffre exact et à jour sous la main pour chacune, plutôt qu'une impression générale, si le recruteur pousse sur l'une d'elles en particulier."}}
+        {text:"Lister les points de vigilance à clarifier avec le directeur commercial (répartition du portefeuille, objectifs, accompagnement terrain)", work:{type:"table", columns:["Point à clarifier","Question précise à poser"], seed:[{},{},{}],
+          lesson:"Avant de démarrer, clarifie avec le directeur commercial : comment est réparti le portefeuille clients entre vendeurs, quels sont les objectifs des 90 premiers jours, et quel accompagnement terrain est prévu (binôme, shadowing, formation constructeur)."}}
+      ]},
+    {label:"J8-14", titre:"Jour 8-14 — Approfondissement (si tu as une 2ᵉ semaine)", goal:"Pour aller plus loin si le temps le permet, sans que ce soit indispensable pour l'entretien",
+      items:[
+        {text:"Comprendre les bases de la gestion de flotte (carte grise société, entretien mutualisé, renouvellement)", work:{type:"notes",
+          lesson:"Une entreprise avec plusieurs véhicules centralise souvent la carte grise au nom de la société, mutualise l'entretien via des cartes carburant/entretien multimarques, et planifie le renouvellement par vagues pour lisser le budget. Comprendre ce fonctionnement te permet de parler le même langage qu'un gestionnaire de flotte."}},
+        {text:"Si possible, échanger avec un partenaire financier ou un gestionnaire de flotte pour du vocabulaire terrain", work:{type:"notes",
+          lesson:"Si tu peux échanger avec un partenaire financier ou un gestionnaire de flotte, prépare 3 questions concrètes : comment se décide LOA vs LLD pour un client, quels sont les critères qui font varier un taux, et quelles marques/modèles reviennent le plus souvent en flotte d'entreprise aujourd'hui."}},
+        {text:"Proposer un mode de suivi personnel du CA par marque et par type de client", work:{type:"table", columns:["Marque","Objectif mensuel","Réalisé","Écart"], seed:brandSeedRows("Marque"),
+          lesson:"Un bon reporting commercial suit au minimum : l'objectif mensuel, le réalisé, et l'écart — marque par marque, pour identifier vite où concentrer ses efforts. Ce tableau te sert aussi de trame réutilisable une fois en poste."}}
       ]}
   ]
 };
@@ -924,7 +933,7 @@ function renderPlan(pageKey, planItems){
   const container = document.getElementById('plan-'+pageKey);
   let html = '';
   planItems.forEach((wk, wi) => {
-    html += `<div class="week"><div class="wk-head"><div class="wk-num">S${wi+1}</div><div class="wk-title">${esc(wk.titre)}</div></div><div class="wk-goal">🎯 ${esc(wk.goal)}</div><ul class="checklist">`;
+    html += `<div class="week"><div class="wk-head"><div class="wk-num">${esc(wk.label || 'S'+(wi+1))}</div><div class="wk-title">${esc(wk.titre)}</div></div><div class="wk-goal">🎯 ${esc(wk.goal)}</div><ul class="checklist">`;
     wk.items.forEach((it, ii) => {
       const workId = `${pageKey}-${wi}-${ii}`;
       const checkboxId = `chk-${workId}`;
@@ -1286,7 +1295,7 @@ function downloadText(text, filename){
 function planToMarkdown(pageKey, planItems){
   let md = `# Plan d'action — ${PAGE_TITLES[pageKey]}\n\n`;
   planItems.forEach((wk, wi) => {
-    md += `## Semaine ${wi+1} — ${wk.titre}\n_Objectif : ${wk.goal}_\n\n`;
+    md += `## ${wk.titre}\n_Objectif : ${wk.goal}_\n\n`;
     wk.items.forEach((it, ii) => {
       const workId = `${pageKey}-${wi}-${ii}`;
       md += `### ${it.text}\n`;
