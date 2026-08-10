@@ -152,6 +152,8 @@ table.worktable input{width:100%;background:var(--panel2);border:1px solid var(-
 .flash-card .fc-sub{font-size:13px;color:var(--muted);margin-top:8px}
 .flash-controls{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px}
 .flash-progress{font-size:12px;color:var(--muted)}
+.brand-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:middle}
+.brand-badge{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;font-weight:800;font-size:12px;letter-spacing:.2px;color:#fff;border:1px solid rgba(255,255,255,.15)}
 
 footer{max-width:1180px;margin:20px auto 60px;padding:0 24px;color:var(--muted);font-size:12px}
 footer .src{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 14px}
@@ -203,18 +205,10 @@ table.gamme,table.worktable{min-width:560px}
       <div class="t1">Louis — Prépa entretiens vendeur automobile</div>
       <div class="t2">Citroën · Kia · Valauto</div>
     </div>
-    <nav class="tabs" id="tabs" style="gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap;">
-      <button data-page="citroen" class="active" style="background: transparent; border: none; padding: 0; height: 50px; cursor: pointer; border-radius: 6px; transition: all .15s; display: flex; align-items: center;" title="Citroën SOFIDA">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Citro%C3%ABn_logo_2009.svg/200px-Citro%C3%ABn_logo_2009.svg.png" style="height: 50px; width: auto;" alt="Citroën">
-      </button>
-      
-      <button data-page="kia" style="background: transparent; border: none; padding: 0; height: 50px; cursor: pointer; border-radius: 6px; transition: all .15s; display: flex; align-items: center;" title="Kia SERVA">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Kia_2021.svg/200px-Kia_2021.svg.png" style="height: 50px; width: auto;" alt="Kia">
-      </button>
-      
-      <button data-page="valauto" style="background: transparent; border: none; padding: 0; height: 50px; cursor: pointer; border-radius: 6px; transition: all .15s; display: flex; align-items: center;" title="Valauto">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Volkswagen_logo_2019.svg/200px-Volkswagen_logo_2019.svg.png" style="height: 50px; width: auto; opacity: 0.8;" alt="Valauto">
-      </button>
+    <nav class="tabs" id="tabs">
+      <button data-page="citroen" class="active" title="Citroën SOFIDA"><span class="brand-dot" style="background:#c4131a"></span>Citroën</button>
+      <button data-page="kia" title="Kia SERVA"><span class="brand-dot" style="background:#bb162b"></span>Kia</button>
+      <button data-page="valauto" title="Valauto"><span class="brand-dot" style="background:#001e50"></span>Valauto</button>
     </nav>
   </div>
 </header>
@@ -353,33 +347,33 @@ table.gamme,table.worktable{min-width:560px}
   <p style="margin:0 0 16px; font-size:14px; font-weight:700; color:var(--accent);">Sélectionne la marque à étudier chez Valauto:</p>
   <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(100px, 1fr)); gap:12px;">
     
-    <button data-brand="vw" class="brand-selector active" style="padding:8px; border:2px solid var(--accent); background:transparent; color:var(--text); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; transition:all .15s; display:flex; flex-direction:column; align-items:center; gap:8px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Volkswagen_logo_2019.svg/200px-Volkswagen_logo_2019.svg.png" style="height:40px; width:auto;">
+    <button data-brand="vw" class="brand-selector" style="padding:8px; border:2px solid var(--accent); background:transparent; color:var(--text); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; transition:all .15s; display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <span class="brand-badge" style="background:#001e50">VW</span>
       <span>Volkswagen</span>
     </button>
-    
+
     <button data-brand="audi" class="brand-selector" style="padding:8px; border:2px solid var(--line); background:transparent; color:var(--text); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; transition:all .15s; display:flex; flex-direction:column; align-items:center; gap:8px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Audi_logo.svg/200px-Audi_logo.svg.png" style="height:40px; width:auto;">
+      <span class="brand-badge" style="background:#000000">A</span>
       <span>Audi</span>
     </button>
-    
+
     <button data-brand="skoda" class="brand-selector" style="padding:8px; border:2px solid var(--line); background:transparent; color:var(--text); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; transition:all .15s; display:flex; flex-direction:column; align-items:center; gap:8px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/%C5%A0koda_Auto_2020_logo.svg/200px-%C5%A0koda_Auto_2020_logo.svg.png" style="height:40px; width:auto;">
-      <span>Skoda</span>
+      <span class="brand-badge" style="background:#4ba82e">Š</span>
+      <span>Škoda</span>
     </button>
-    
+
     <button data-brand="cupra" class="brand-selector" style="padding:8px; border:2px solid var(--line); background:transparent; color:var(--text); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; transition:all .15s; display:flex; flex-direction:column; align-items:center; gap:8px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Cupra_logo_2024.svg/200px-Cupra_logo_2024.svg.png" style="height:40px; width:auto;">
+      <span class="brand-badge" style="background:#6a2135">C</span>
       <span>Cupra</span>
     </button>
-    
+
     <button data-brand="seat" class="brand-selector" style="padding:8px; border:2px solid var(--line); background:transparent; color:var(--text); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; transition:all .15s; display:flex; flex-direction:column; align-items:center; gap:8px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/SEAT_logo.svg/200px-SEAT_logo.svg.png" style="height:40px; width:auto;">
+      <span class="brand-badge" style="background:#eb690b">S</span>
       <span>Seat</span>
     </button>
-    
+
     <button data-brand="byd" class="brand-selector" style="padding:8px; border:2px solid var(--line); background:transparent; color:var(--text); border-radius:8px; font-size:12px; font-weight:600; cursor:pointer; transition:all .15s; display:flex; flex-direction:column; align-items:center; gap:8px;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/BYD_logo.svg/200px-BYD_logo.svg.png" style="height:40px; width:auto;">
+      <span class="brand-badge" style="background:#12314f">BYD</span>
       <span>BYD</span>
     </button>
   </div>
@@ -640,139 +634,6 @@ Semaine intensive 7 jours • Trois marques: Citroën (Loyon-sous-Lens), Kia (Ro
 Plan 100-Day inclus par marque • Mise à jour: Août 2026
 </p>
 </footer>
-
-<div class="formation-brand" id="formation-vw" style="display:none;">
-  <div style="background:linear-gradient(135deg, #00264d, #003d7a); border-radius:12px; padding:24px; margin-bottom:24px; border-left:4px solid #0066b2;">
-    <h2 style="margin:0 0 8px; color:#fff; font-size:24px;">🇩🇪 VOLKSWAGEN</h2>
-    <p style="margin:0; color:#b0d4ff; font-size:14px;">Constructeur allemand depuis 1937 • Leader européen en électrique</p>
-  </div>
-  
-  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-bottom:24px;">
-    <div style="background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:16px;">
-      <h3 style="margin:0 0 12px; color:#0066b2; font-size:14px; text-transform:uppercase; font-weight:700;">📊 Stats 2025</h3>
-      <ul style="margin:0; padding-left:20px; font-size:13px; color:var(--muted);">
-        <li>PDM France: 6,2%</li>
-        <li>Ventes: 124 500 véhicules</li>
-        <li>Top modèle: Tiguan (34 200)</li>
-        <li>Électrique: ID.3/ID.4/ID.5</li>
-      </ul>
-    </div>
-    
-    <div style="background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:16px;">
-      <h3 style="margin:0 0 12px; color:#0066b2; font-size:14px; text-transform:uppercase; font-weight:700;">🎯 Arguments clés</h3>
-      <ul style="margin:0; padding-left:20px; font-size:13px; color:var(--muted);">
-        <li><strong>Fiabilité allemande</strong></li>
-        <li><strong>Gamme large</strong> (Polo → Touareg)</li>
-        <li><strong>Tech avancée</strong> (MIB3, IQ.drive)</li>
-        <li><strong>Réseau service</strong> dense</li>
-      </ul>
-    </div>
-  </div>
-  
-  <div style="background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:24px;">
-    <h3 style="margin:0 0 16px; color:var(--text); font-size:15px; font-weight:700;">🚗 Gamme Valauto</h3>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px;">
-      <div style="background:var(--panel); border-radius:6px; padding:12px; text-align:center;">
-        <div style="font-weight:600; font-size:13px; margin-bottom:4px;">Polo</div>
-        <div style="font-size:11px; color:var(--muted);">Citadine • Essence/Électrique</div>
-      </div>
-      <div style="background:var(--panel); border-radius:6px; padding:12px; text-align:center;">
-        <div style="font-weight:600; font-size:13px; margin-bottom:4px;">Golf</div>
-        <div style="font-size:11px; color:var(--muted);">Routière • Essence/Hybride</div>
-      </div>
-      <div style="background:var(--panel); border-radius:6px; padding:12px; text-align:center;">
-        <div style="font-weight:600; font-size:13px; margin-bottom:4px;">Tiguan</div>
-        <div style="font-size:11px; color:var(--muted);">SUV • Best-seller</div>
-      </div>
-      <div style="background:var(--panel); border-radius:6px; padding:12px; text-align:center;">
-        <div style="font-weight:600; font-size:13px; margin-bottom:4px;">ID.3 / ID.4</div>
-        <div style="font-size:11px; color:var(--muted);">100% Électrique</div>
-      </div>
-    </div>
-  </div>
-  
-  <div style="background:linear-gradient(135deg, rgba(0,102,178,.15), rgba(0,102,178,.05)); border:1px solid rgba(0,102,178,.3); border-radius:8px; padding:16px;">
-    <h3 style="margin:0 0 12px; color:var(--text); font-size:15px; font-weight:700;">🎓 Plan 100 jours VW</h3>
-    <p style="margin:0 0 12px; font-size:12px; color:var(--muted);"><strong>PHASE 1 (J1-30):</strong> Maîtrise gamme, avantages VW, tests d'essai</p>
-    <p style="margin:0 0 12px; font-size:12px; color:var(--muted);"><strong>PHASE 2 (J31-60):</strong> Autonomie commercial, fermeture de ventes, KPI 15k€ CA</p>
-    <p style="margin:0; font-size:12px; color:var(--muted);"><strong>PHASE 3 (J61-100):</strong> Leader équipe, expertise électrique, ventes complexes</p>
-  </div>
-</div>
-
-<div class="formation-brand" id="formation-audi" style="display:none;">
-  <div style="background:linear-gradient(135deg, #dc000022, #dc000011); border-radius:12px; padding:24px; margin-bottom:24px; border-left:4px solid #dc0000;">
-    <h2 style="margin:0 0 8px; color:#fff; font-size:24px;">🇩🇪 AUDI</h2>
-    <p style="margin:0; color:#b0d4ff; font-size:14px;">Marque premium du groupe VW</p>
-  </div>
-  
-  <div style="background:var(--warn); color:#000; border-radius:8px; padding:16px; margin-bottom:24px; text-align:center; font-weight:600;">
-    📚 Contenu formation en cours de préparation
-  </div>
-  
-  <div style="background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:16px; text-align:center; color:var(--muted);">
-    • Gamme complète • Avantages clés • Objections • Plan 100 jours
-  </div>
-</div>
-    
-<div class="formation-brand" id="formation-skoda" style="display:none;">
-  <div style="background:linear-gradient(135deg, #006b3f22, #006b3f11); border-radius:12px; padding:24px; margin-bottom:24px; border-left:4px solid #006b3f;">
-    <h2 style="margin:0 0 8px; color:#fff; font-size:24px;">🇨🇿 SKODA</h2>
-    <p style="margin:0; color:#b0d4ff; font-size:14px;">Robustesse et rapport qualité/prix</p>
-  </div>
-  
-  <div style="background:var(--warn); color:#000; border-radius:8px; padding:16px; margin-bottom:24px; text-align:center; font-weight:600;">
-    📚 Contenu formation en cours de préparation
-  </div>
-  
-  <div style="background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:16px; text-align:center; color:var(--muted);">
-    • Gamme complète • Avantages clés • Objections • Plan 100 jours
-  </div>
-</div>
-    
-<div class="formation-brand" id="formation-cupra" style="display:none;">
-  <div style="background:linear-gradient(135deg, #e2000022, #e2000011); border-radius:12px; padding:24px; margin-bottom:24px; border-left:4px solid #e20000;">
-    <h2 style="margin:0 0 8px; color:#fff; font-size:24px;">🇪🇸 CUPRA</h2>
-    <p style="margin:0; color:#b0d4ff; font-size:14px;">Performance et sportivité urbaine</p>
-  </div>
-  
-  <div style="background:var(--warn); color:#000; border-radius:8px; padding:16px; margin-bottom:24px; text-align:center; font-weight:600;">
-    📚 Contenu formation en cours de préparation
-  </div>
-  
-  <div style="background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:16px; text-align:center; color:var(--muted);">
-    • Gamme complète • Avantages clés • Objections • Plan 100 jours
-  </div>
-</div>
-    
-<div class="formation-brand" id="formation-seat" style="display:none;">
-  <div style="background:linear-gradient(135deg, #0066b222, #0066b211); border-radius:12px; padding:24px; margin-bottom:24px; border-left:4px solid #0066b2;">
-    <h2 style="margin:0 0 8px; color:#fff; font-size:24px;">🇪🇸 SEAT</h2>
-    <p style="margin:0; color:#b0d4ff; font-size:14px;">Design méditerranéen et innovation</p>
-  </div>
-  
-  <div style="background:var(--warn); color:#000; border-radius:8px; padding:16px; margin-bottom:24px; text-align:center; font-weight:600;">
-    📚 Contenu formation en cours de préparation
-  </div>
-  
-  <div style="background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:16px; text-align:center; color:var(--muted);">
-    • Gamme complète • Avantages clés • Objections • Plan 100 jours
-  </div>
-</div>
-    
-<div class="formation-brand" id="formation-byd" style="display:none;">
-  <div style="background:linear-gradient(135deg, #e6007e22, #e6007e11); border-radius:12px; padding:24px; margin-bottom:24px; border-left:4px solid #e6007e;">
-    <h2 style="margin:0 0 8px; color:#fff; font-size:24px;">🇨🇳 BYD</h2>
-    <p style="margin:0; color:#b0d4ff; font-size:14px;">Leader électrique asiatique</p>
-  </div>
-  
-  <div style="background:var(--warn); color:#000; border-radius:8px; padding:16px; margin-bottom:24px; text-align:center; font-weight:600;">
-    📚 Contenu formation en cours de préparation
-  </div>
-  
-  <div style="background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:16px; text-align:center; color:var(--muted);">
-    • Gamme complète • Avantages clés • Objections • Plan 100 jours
-  </div>
-</div>
     </main>
 
 
@@ -1680,136 +1541,34 @@ document.getElementById('tabs').addEventListener('click', e=>{
 });
 
 
-// ===== GESTION LOGOS ET SÉLECTEUR VALAUTO =====
+// ===== SÉLECTEUR DE MARQUE VALAUTO =====
 document.addEventListener('DOMContentLoaded', () => {
-    // Au clic sur tab Valauto, afficher le sélecteur
-    const valautoBtn = document.querySelector('[data-page="valauto"]');
-    const valautoSelector = document.getElementById('valauto-selector');
-    
-    if(valautoBtn && valautoSelector) {
-        // Afficher au clic Valauto
-        document.addEventListener('click', (e) => {
-            if(e.target.closest('[data-page="valauto"]')) {
-                valautoSelector.style.display = 'block';
-                localStorage.setItem('valauto-brand', localStorage.getItem('valauto-brand') || 'vw');
-            }
-        });
-        
-        // Au clic sur autre onglet, cacher le sélecteur
-        document.querySelectorAll('[data-page]:not([data-page="valauto"])').forEach(btn => {
-            btn.addEventListener('click', () => {
-                valautoSelector.style.display = 'none';
-            });
-        });
-    }
-    
-    // Sélectionner une marque Valauto
-    document.querySelectorAll('.brand-selector').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.brand-selector').forEach(b => {
-                b.style.borderColor = 'var(--line)';
-            });
-            btn.style.borderColor = 'var(--accent)';
-            const brand = btn.dataset.brand;
-            localStorage.setItem('valauto-brand', brand);
-            alert('📖 Tu dois étudier ' + brand.toUpperCase() + ' chez Valauto (Lomme) ');
-        });
-    });
-    
-    // Restaurer la sélection au chargement
-    const savedBrand = localStorage.getItem('valauto-brand');
-    if(savedBrand) {
-        const btn = document.querySelector('[data-brand="' + savedBrand + '"]');
-        if(btn) btn.click();
-    }
-});
-
-document.querySelectorAll('.brand-selector').forEach(btn => {
-  btn.addEventListener('click', function() {
-    const brand = this.dataset.brand;
-    
-    document.querySelectorAll('.brand-selector').forEach(b => {
-      b.style.borderColor = 'var(--line)';
-    });
-    this.style.borderColor = 'var(--accent)';
-    
-    document.querySelectorAll('.formation-brand').forEach(f => f.style.display = 'none');
-    const formation = document.getElementById('formation-' + brand);
-    if (formation) formation.style.display = 'block';
-  });
-});
-
-// Gestionnaire sélecteur Valauto
-document.querySelectorAll('.brand-selector').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    const brand = this.dataset.brand;
-    
-    // Mettre à jour le style du bouton actif
-    document.querySelectorAll('.brand-selector').forEach(b => {
-      b.style.borderColor = 'var(--line)';
-    });
-    this.style.borderColor = 'var(--accent)';
-    
-    // Afficher/cacher le contenu approprié
-    document.querySelectorAll('.brand-content').forEach(content => {
-      content.style.display = 'none';
-    });
-    const targetContent = document.getElementById('brand-content-' + brand);
-    if (targetContent) {
-      targetContent.style.display = 'block';
-      targetContent.scrollIntoView({behavior: 'smooth', block: 'start'});
-    }
-  });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
+  const valautoSelector = document.getElementById('valauto-selector');
   const brandButtons = document.querySelectorAll('.brand-selector');
   const brandContents = document.querySelectorAll('.brand-content');
-  
-  brandButtons.forEach(btn => {
-    btn.addEventListener('click', function() {
-      const brand = this.dataset.brand;
-      
-      // Désactiver tous les boutons
-      brandButtons.forEach(b => b.style.borderColor = 'var(--line)');
-      // Activer le bouton cliqué
-      this.style.borderColor = 'var(--accent)';
-      
-      // Cacher tous les contenus
-      brandContents.forEach(div => div.style.display = 'none');
-      // Afficher le contenu de la marque
-      const content = document.getElementById('brand-content-' + brand);
-      if (content) content.style.display = 'block';
-      
-      // Sauvegarder en localStorage
-      localStorage.setItem('selectedValaautoBrand', brand);
-    });
-  });
-  
-  // Restaurer la sélection
-  const saved = localStorage.getItem('selectedValaautoBrand');
-  if (saved) {
-    const btn = document.querySelector('[data-brand="' + saved + '"]');
-    if (btn) btn.click();
-  }
-});
 
-document.querySelectorAll('.brand-selector').forEach(btn => {
-  btn.addEventListener('click', function() {
-    const brand = this.dataset.brand;
-    
-    document.querySelectorAll('.brand-selector').forEach(b => {
-      b.style.borderColor = 'var(--line)';
-    });
-    this.style.borderColor = 'var(--accent)';
-    
-    document.querySelectorAll('.formation-brand').forEach(f => f.style.display = 'none');
-    const formation = document.getElementById('formation-' + brand);
-    if (formation) formation.style.display = 'block';
+  document.getElementById('tabs').addEventListener('click', (e) => {
+    if(!valautoSelector) return;
+    const btn = e.target.closest('[data-page]');
+    if(!btn) return;
+    valautoSelector.style.display = btn.dataset.page === 'valauto' ? 'block' : 'none';
   });
+
+  function selectBrand(brand, persist){
+    brandButtons.forEach(b => { b.style.borderColor = b.dataset.brand === brand ? 'var(--accent)' : 'var(--line)'; });
+    brandContents.forEach(c => { c.style.display = 'none'; });
+    const content = document.getElementById('brand-content-' + brand);
+    if(content) content.style.display = 'block';
+    if(persist){ try{ localStorage.setItem('valauto-brand', brand); }catch(e){} }
+  }
+
+  brandButtons.forEach(btn => {
+    btn.addEventListener('click', () => selectBrand(btn.dataset.brand, true));
+  });
+
+  let savedBrand = 'vw';
+  try{ savedBrand = localStorage.getItem('valauto-brand') || 'vw'; }catch(e){}
+  selectBrand(savedBrand, false);
 });
 </script>
 </body>
