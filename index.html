@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prépa entretiens vendeur automobile</title>
+<title>Prépa entretiens — Vendeur automobile</title>
 <style>
 :root{
   --bg:#0f1115;
@@ -59,409 +59,1176 @@ section.page.active{display:block}
 .pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .pill{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12.5px;color:var(--muted)}
 
-.intensive-nav{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
-.intensive-nav button{background:transparent;border:1px solid var(--line);color:var(--text);padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer;transition:all .15s}
-.intensive-nav button:hover{border-color:var(--accent)}
-.intensive-nav button.active{background:var(--accent);border-color:var(--accent);color:#05070a;font-weight:600}
-
-.intensive-sub{display:none}
-.intensive-sub.active{display:block}
-
-.flashcard-container{background:linear-gradient(135deg,var(--panel2),var(--panel));border:2px solid var(--accent);border-radius:14px;padding:40px;text-align:center;min-height:200px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;margin-bottom:16px;transition:transform .3s}
-.flashcard-container:hover{transform:scale(1.01)}
-.flashcard-container.flipped{border-color:var(--good)}
-.fc-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
-.fc-front{font-size:20px;font-weight:700;line-height:1.4}
-.fc-back{font-size:16px;color:var(--good);display:none;line-height:1.5}
-.flashcard-container.flipped .fc-front{display:none}
-.flashcard-container.flipped .fc-back{display:block}
-
-.objection-box{background:var(--panel2);border-left:4px solid var(--warn);border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;transition:all .15s}
-.objection-box:hover{border-left-color:var(--accent)}
-.objection-box .obj-q{font-weight:600;color:var(--warn);margin-bottom:6px;font-size:13px}
-.objection-box .obj-a{color:var(--muted);font-size:12px;display:none;line-height:1.5;margin-top:8px}
-.objection-box.open .obj-a{display:block}
-
-.pitch-box{background:var(--panel2);border:2px dashed var(--accent);border-radius:12px;padding:24px;margin-bottom:16px}
-.btn{background:var(--accent);color:#05070a;border:none;padding:10px 16px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;margin:6px}
-.btn:hover{transform:scale(1.05)}
-.btn-secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
-
-.mock-scenario{background:var(--panel2);border-left:4px solid var(--good);border-radius:8px;padding:16px;margin-bottom:12px}
-.mock-scenario h3{margin:0 0 8px;color:var(--good);font-size:14px}
-.mock-scenario .scenario-text{color:var(--muted);font-size:12px;line-height:1.5;margin-bottom:8px}
-.mock-scenario .expected{background:rgba(61,220,151,.08);padding:10px;border-radius:6px;font-size:11.5px;color:var(--muted)}
-
-.day-item{background:var(--panel2);border-left:4px solid var(--accent);border-radius:8px;padding:14px;margin-bottom:10px}
-.day-item h3{margin:0 0 8px;color:var(--accent);font-size:13px}
-.day-item ul{margin:8px 0 0;padding-left:16px}
-.day-item li{font-size:12px;color:var(--text);margin-bottom:4px}
-
 h2.section-title{font-size:19px;margin:34px 0 14px;padding-top:6px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px}
 h2.section-title .num{width:26px;height:26px;border-radius:8px;background:var(--accent);color:#05070a;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
 
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.brand-card{
+  border:1px solid var(--line);background:var(--panel);border-radius:14px;overflow:hidden;
+  cursor:pointer;transition:transform .15s ease,border-color .15s ease;
+}
+.brand-card:hover{transform:translateY(-2px);border-color:var(--accent-c,var(--accent))}
+.brand-card .head{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  border-bottom:1px solid var(--line);}
+.brand-card .head .name{font-weight:700;font-size:16.5px}
+.brand-card .swatch{width:12px;height:12px;border-radius:4px}
+.brand-card .body{padding:14px 18px 18px}
+.brand-card .stat{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;color:var(--muted)}
+.brand-card .stat b{color:var(--text);font-weight:600}
+.brand-card .tagline{font-size:12.5px;color:var(--muted);margin-top:10px}
+.trend-up{color:var(--good)}
+.trend-down{color:#ff6b6b}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(5,7,10,.72);display:none;align-items:flex-start;justify-content:center;
+  padding:40px 16px;overflow:auto;z-index:100}
+.overlay.show{display:flex}
+.modal{background:var(--panel);border:1px solid var(--line);border-radius:16px;max-width:760px;width:100%;
+  padding:0;overflow:hidden;margin-bottom:40px}
+.modal .mhead{padding:22px 26px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;border-bottom:1px solid var(--line)}
+.modal .mhead h3{margin:0 0 4px;font-size:21px}
+.modal .mhead p{margin:0;color:var(--muted);font-size:13.5px}
+.modal .close{background:var(--panel2);border:1px solid var(--line);color:var(--text);width:32px;height:32px;border-radius:9px;cursor:pointer;font-size:16px;flex:none}
+.modal .mbody{padding:22px 26px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+.stat-box{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat-box .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.stat-box .value{font-size:19px;font-weight:700;margin-top:4px}
+.stat-box .sub{font-size:11.5px;color:var(--muted);margin-top:2px}
+
+table.gamme{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+table.gamme th{text-align:left;color:var(--muted);font-weight:600;padding:8px 8px;border-bottom:1px solid var(--line);font-size:11.5px;text-transform:uppercase;letter-spacing:.3px}
+table.gamme td{padding:8px 8px;border-bottom:1px solid var(--line)}
+table.gamme tr:last-child td{border-bottom:none}
+.tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:11px;color:var(--muted)}
+
+ul.points{margin:8px 0 0;padding-left:18px}
+ul.points li{margin-bottom:7px;font-size:13.5px}
+
+.note-box{background:rgba(79,140,255,.08);border:1px solid rgba(79,140,255,.35);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--muted);margin-top:16px}
+
+/* timeline */
+.timeline{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.week{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:18px 20px;position:relative}
+.week .wk-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.week .wk-num{width:34px;height:34px;border-radius:10px;background:var(--accent);color:#05070a;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+.week .wk-title{font-weight:700;font-size:15.5px}
+.week .wk-goal{font-size:12.5px;color:var(--muted);margin-left:46px;margin-top:-6px;margin-bottom:8px}
+.checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.checklist li{border-radius:8px;background:var(--panel2);padding:8px 10px 10px}
+.item-top{display:flex;gap:9px;align-items:flex-start}
+.item-top input{margin-top:3px;accent-color:var(--good);flex:none}
+.item-top label{flex:1;font-size:13.5px}
+.checklist li.done .item-top label{text-decoration:line-through;color:var(--muted)}
+.work-toggle{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:7px;padding:3px 9px;font-size:11px;cursor:pointer;flex:none;white-space:nowrap}
+.work-toggle:hover{color:var(--text);border-color:var(--accent)}
+.workspace{display:none;margin:10px 0 2px 22px;padding:12px;background:var(--bg);border:1px dashed var(--line);border-radius:10px}
+.workspace.open{display:block}
+.workspace textarea{width:100%;min-height:90px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:10px;font-family:inherit;font-size:13px;resize:vertical;box-sizing:border-box}
+.workspace .counter{font-size:11px;color:var(--muted);margin-top:6px;text-align:right}
+table.worktable{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+table.worktable th{font-size:10.5px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);text-align:left;padding:6px;border-bottom:1px solid var(--line)}
+table.worktable td{padding:4px;border-bottom:1px solid var(--line);vertical-align:top}
+table.worktable input{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:6px;color:var(--text);padding:6px 8px;font-size:12.5px;font-family:inherit;box-sizing:border-box}
+.row-actions{display:flex;align-items:center;gap:12px;margin-top:8px}
+.btn-mini{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:7px;padding:6px 12px;font-size:12px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.btn-mini:hover{border-color:var(--accent)}
+.ext-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.lesson-box{background:rgba(61,220,151,.08);border:1px solid rgba(61,220,151,.3);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.lesson-label{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--good);font-weight:700;margin-bottom:6px}
+.lesson-text{font-size:13px;color:var(--text);line-height:1.55}
+.lesson-text p{margin:0 0 8px}
+.lesson-text p:last-child{margin-bottom:0}
+.resource-links{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.practice-label{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:4px 0 8px}
+.remove-row{background:transparent;border:none;color:#ff6b6b;cursor:pointer;font-size:13px}
+.save-indicator{font-size:10.5px;color:var(--good);opacity:0;transition:opacity .3s}
+.save-indicator.show{opacity:1}
+.export-row{display:flex;justify-content:flex-end;margin-top:14px}
+.flash-card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:30px;text-align:center;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer}
+.flash-card .fc-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.flash-card .fc-content{font-size:19px;font-weight:700}
+.flash-card .fc-sub{font-size:13px;color:var(--muted);margin-top:8px}
+.flash-controls{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px}
+.flash-progress{font-size:12px;color:var(--muted)}
+
 footer{max-width:1180px;margin:20px auto 60px;padding:0 24px;color:var(--muted);font-size:12px}
+footer .src{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 14px}
+footer h4{color:var(--text);font-size:13px;margin-bottom:8px}
+
+.progress-wrap{margin:20px 0 0}
+.progress-bar{height:8px;background:var(--panel2);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));width:0%;transition:width .3s ease}
+.progress-label{font-size:12px;color:var(--muted);margin-top:6px}
+
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -2px;border-radius:8px}
+table.gamme,table.worktable{min-width:560px}
+
+/* ---- responsive / mobile ---- */
+@media (max-width:760px){
+  header.top{padding:10px 14px}
+  .top-inner{gap:8px}
+  .brandmark .t1{font-size:15px}
+  nav.tabs{gap:5px}
+  nav.tabs button{padding:7px 11px;font-size:12.5px}
+  main{padding:16px 14px 60px}
+  .hero{padding:18px;border-radius:12px}
+  .hero h1{font-size:20px}
+  .hero p{font-size:13.5px}
+  .pill{font-size:11.5px}
+  h2.section-title{font-size:16px;margin:26px 0 12px}
+  .card-grid{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .overlay{padding:0;align-items:stretch}
+  .modal{border-radius:0;max-width:100%;min-height:100%;margin-bottom:0}
+  .modal .mhead{padding:16px}
+  .modal .mbody{padding:16px}
+  .week{padding:14px}
+  .week .wk-goal{margin-left:0}
+  .item-top{flex-wrap:wrap}
+  .work-toggle{margin-left:24px}
+  .flash-card{padding:20px;min-height:100px}
+  .flash-controls,.row-actions{flex-wrap:wrap;gap:8px}
+  .export-row{justify-content:stretch}
+  .export-row .btn-mini{flex:1;justify-content:center}
+}
 </style>
 </head>
 <body>
 
 <header class="top">
-<div class="top-inner">
-<div class="brandmark">
-<div class="t1">Louis — Prépa entretiens</div>
-<div class="t2">Vendeur automobile • 7 jours</div>
-</div>
-<nav class="tabs" id="tabs">
-<button class="active" data-page="intensive">🚀 Semaine Intensive</button>
-<button data-page="citroen">Citroën (B2C)</button>
-<button data-page="kia">Kia</button>
-<button data-page="valauto">Valauto (B2B)</button>
-</nav>
-</div>
+  <div class="top-inner">
+    <div class="brandmark">
+      <div class="t1">Louis — Prépa entretiens vendeur automobile</div>
+      <div class="t2">Citroën · Kia · Valauto</div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button data-page="citroen" class="active">Citroën (B2C)</button>
+      <button data-page="kia">Kia</button>
+      <button data-page="valauto">Valauto (B2B multimarques)</button>
+    </nav>
+  </div>
 </header>
 
 <main>
 
-<!-- SEMAINE INTENSIVE -->
-<section class="page active" id="page-intensive">
+  <!-- ACCUEIL -->
+  <!-- CITROEN -->
+  <section class="page active" id="page-citroen">
+    <div class="hero">
+      <h1>Citroën — Vendeur automobile B2C</h1>
+      <p>Poste axé clientèle particuliers : découverte des besoins, essai, financement (LOA/LLD/crédit), reprise, livraison. Citroën est la 3ᵉ marque du marché français et retrouve de la puissance commerciale en 2025.</p>
+    </div>
 
-<div class="hero">
-<h1>🚀 Semaine Intensive — Expert Auto en 7 Jours</h1>
-<p>Maîtriser 3 marques + plan d'action opérationnel</p>
-<div class="pill-row">
-<div class="pill">✅ Expert Citroën</div>
-<div class="pill">✅ Expert Kia EV</div>
-<div class="pill">✅ Expert Valauto B2B</div>
-<div class="pill">📋 Plan 100-Day</div>
-</div>
-</div>
+    <h2 class="section-title"><span class="num">1</span>Fiche marque</h2>
+    <div class="card-grid" id="grid-citroen"></div>
 
-<div class="intensive-nav">
-<button class="active" data-intensive="overview">📋 Overview</button>
-<button data-intensive="timeline">📅 Timeline</button>
-<button data-intensive="flashcards">🎯 Flashcards</button>
-<button data-intensive="objections">⚠️ Objections</button>
-<button data-intensive="pitches">🎤 Pitch Drills</button>
-<button data-intensive="mocks">🎬 Mocks</button>
-<button data-intensive="plan">📊 Plan 100j</button>
-</div>
+    <h2 class="section-title"><span class="num">2</span>Plan d'action — montée en autonomie (4 semaines)</h2>
+    <div class="timeline" id="plan-citroen"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-citroen"></div></div>
+      <div class="progress-label"><span id="progress-label-citroen">0%</span> du plan complété</div>
+      <div class="export-row"></div>
+    </div>
+  
 
-<!-- OVERVIEW -->
-<div class="intensive-sub active" data-int-page="overview">
+<h2 class="section-title"><span class="num">📊</span>Plan 100 jours pour être autonome</h2>
+
 <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
-<h2 style="margin-top:0;color:var(--accent)">⏱️ Timing (20-23h total)</h2>
-<table style="width:100%;font-size:13px;border-collapse:collapse">
-<tr style="border-bottom:1px solid var(--line)">
-<td style="padding:8px;font-weight:600">J1-2</td><td style="padding:8px">Citroën Fondamentaux + Objections</td><td style="padding:8px;text-align:right">6-7h</td>
-</tr>
-<tr style="border-bottom:1px solid var(--line)">
-<td style="padding:8px;font-weight:600">J3</td><td style="padding:8px">Kia Expert EV</td><td style="padding:8px;text-align:right">3-4h</td>
-</tr>
-<tr style="border-bottom:1px solid var(--line)">
-<td style="padding:8px;font-weight:600">J4-5</td><td style="padding:8px">Valauto (6 marques)</td><td style="padding:8px;text-align:right">5-6h</td>
-</tr>
-<tr style="border-bottom:1px solid var(--line)">
-<td style="padding:8px;font-weight:600">J6</td><td style="padding:8px">Simulations (3 mocks)</td><td style="padding:8px;text-align:right">2-3h</td>
-</tr>
-<tr>
-<td style="padding:8px;font-weight:600">J7</td><td style="padding:8px">Plan 100j + Révision</td><td style="padding:8px;text-align:right">2h</td>
-</tr>
-</table>
+<h3 style="margin-top:0;color:var(--accent);font-size:16px">PHASE 1: J1-30 (Maîtrise Produit)</h3>
+<div class="note-box">
+<strong>Objectif:</strong> Expert produit Citroën, capable de vendre seul | <strong>KPI:</strong> 2-3 ventes, 0 callback non résolu, NPS > 6
+</div>
+<ul style="color:var(--text);font-size:13px;line-height:1.6">
+<li><strong>Semaine 1:</strong> Gamme complète (9 modèles) maîtrisée • Autonomie réelle vs WLTP • Tarifs par finition</li>
+<li><strong>Semaine 2:</strong> 10 objections + réponses prêtes • LLD vs crédit vs LOA • TCO vs Peugeot/Renault</li>
+<li><strong>Semaine 3-4:</strong> Premiers essais en showroom • 5 ventes accomplies • Process client maîtrisé (accueil → découverte → essai → devis)</li>
+<li><strong>À demander:</strong> Accès showroom gratuit • CRM formation (2h) • 1 mentor 2x/semaine • 5+ leads qualifiés/semaine</li>
+</ul>
+</div>
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
+<h3 style="margin:0 0 12px;color:var(--good);font-size:16px">PHASE 2: J31-60 (Autonomie Commerciale)</h3>
+<div class="note-box">
+<strong>Objectif:</strong> Vendeur autonome, capable de conclure • <strong>KPI:</strong> CA > 15k€, 6+ ventes, NPS > 7
+</div>
+<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
+<li><strong>Semaine 5-6:</strong> Négociation prix/marges maîtrisée • Financement personnalisé • Objections avancées</li>
+<li><strong>Semaine 7-8:</strong> Cycle vente solo (découverte → conclure) • Suivi client post-vente • Cross-selling</li>
+<li><strong>À day 60:</strong> 6+ ventes accomplies • Récurrence > 0 (clients reviennent) • Feedback manager positif</li>
+</ul>
 </div>
 
 <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px">
-<h2 style="margin-top:0;color:var(--accent)">💡 Stratégie Apprentissage</h2>
-<ul style="padding-left:20px;color:var(--text);margin:0;font-size:13px">
-<li style="margin-bottom:8px"><strong>80/20:</strong> Focus sur 20% du contenu = 80% des Q d'entretien</li>
-<li style="margin-bottom:8px"><strong>Active Learning:</strong> Pitch à voix haute, pas juste lire</li>
-<li style="margin-bottom:8px"><strong>J6 = 50% apprentissage:</strong> Les 3 mocks > 1000h théorie</li>
-<li style="margin-bottom:8px"><strong>Confidence > Perfection:</strong> Tu n'as pas besoin de TOUT, juste assez pour répondre</li>
+<h3 style="margin:0 0 12px;color:var(--warn);font-size:16px">PHASE 3: J61-100 (Scalabilité & Leadership)</h3>
+<div class="note-box">
+<strong>Objectif:</strong> Leader ventes, multi-marques • <strong>KPI:</strong> 30k€+ CA/mois, 8+ ventes/mois, NPS > 8
+</div>
+<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
+<li><strong>Semaine 9-10:</strong> Prospection active (15+ leads/mois) • Événements (1 salon ou event/mois) • Partenariats PME</li>
+<li><strong>Semaine 11-14:</strong> Fidélisation client (newsletter, SAV proactif) • Team leadership si possible • Mentorat nouveaux VRP</li>
+<li><strong>À day 100:</strong> 30k€+ CA/mois • 8+ ventes/mois • Clients ambassadeurs • Proposition CDI/prime</li>
 </ul>
 </div>
+
+</section>
+
+  <!-- KIA -->
+  <section class="page" id="page-kia">
+    <div class="hero">
+      <h1>Kia — Entretien avec la recruteuse</h1>
+      <p>Kia mise sur la garantie 7 ans/150 000 km et la gamme électrique la plus large du marché coréen (EV2 à EV9). Le discours de marque tourne autour du design, de la fiabilité et de la transition électrique accessible.</p>
+    </div>
+<div style="background:linear-gradient(135deg, rgba(187,22,43,.1), rgba(187,22,43,.05)); border:1px solid rgba(187,22,43,.3); border-radius:14px; padding:16px; margin-bottom:16px;">
+<p style="margin:0; font-size:14px"><strong>📍 Entretien:</strong> Kia Roncq</p>
 </div>
 
-<!-- TIMELINE J1-J7 -->
-<div class="intensive-sub" data-int-page="timeline" id="timeline-content"></div>
+    <h2 class="section-title"><span class="num">1</span>Fiche marque</h2>
+    <div class="card-grid" id="grid-kia"></div>
 
-<!-- FLASHCARDS -->
-<div class="intensive-sub" data-int-page="flashcards">
-<div style="margin-bottom:16px">
-<label style="color:var(--muted);font-size:13px">Marque:</label>
-<select id="fc-brand" style="background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:8px;border-radius:6px;margin-left:8px">
-<option value="citroen">Citroën</option>
-<option value="kia">Kia</option>
-<option value="valauto">Valauto</option>
-</select>
+    <h2 class="section-title"><span class="num">2</span>Plan d'action — montée en autonomie (4 semaines)</h2>
+    <div class="timeline" id="plan-kia"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-kia"></div></div>
+      <div class="progress-label"><span id="progress-label-kia">0%</span> du plan complété</div>
+      <div class="export-row"></div>
+    </div>
+
+<h2 class="section-title"><span class="num">📊</span>Plan 100 jours pour être autonome</h2>
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
+<h3 style="margin-top:0;color:var(--accent);font-size:16px">PHASE 1: J1-30 (Expert EV)</h3>
+<div class="note-box">
+<strong>Objectif:</strong> Expert Kia/EV, capable de vendre EV6 vs Tesla • <strong>KPI:</strong> 2-3 ventes EV, 0 callback, NPS > 6
 </div>
-<div id="fc-cards-container"></div>
-<div style="text-align:center;margin-top:16px">
-<button class="btn" onclick="nextFlashcard()">➜ Suivant</button>
-<button class="btn btn-secondary" onclick="shuffleFlashcards()">🔀 Mélanger</button>
+<ul style="color:var(--text);font-size:13px;line-height:1.6">
+<li><strong>Semaine 1-2:</strong> Portfolio complet (Niro, EV6, EV9) • Technologie 800V • vs Tesla Model 3 en détail</li>
+<li><strong>Semaine 3-4:</strong> Garantie 10 ans (avantage clé) • Recharge rapide (18 min) • Premiers ventes EV6</li>
+<li><strong>À demander:</strong> Accès showroom EV6 • Test drives illimités • 1 expert EV (mentor) • 5+ clients premium/semaine</li>
+</ul>
 </div>
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
+<h3 style="margin:0 0 12px;color:var(--good);font-size:16px">PHASE 2: J31-60 (Autonomie Commerciale Kia)</h3>
+<div class="note-box">
+<strong>Objectif:</strong> Vendeur EV leader • <strong>KPI:</strong> CA > 15k€, 6+ ventes, NPS > 7
+</div>
+<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
+<li><strong>Semaine 5-8:</strong> Cycles vente complets • Négociation pricing Kia • Objections EV maîtrisées</li>
+<li><strong>À day 60:</strong> 6+ ventes • Spécialiste EV reconnu en concession • Client satisfaction > 8/10</li>
+</ul>
 </div>
 
-<!-- OBJECTIONS -->
-<div class="intensive-sub" data-int-page="objections" id="objections-content"></div>
-
-<!-- PITCHES -->
-<div class="intensive-sub" data-int-page="pitches" id="pitches-content"></div>
-
-<!-- MOCKS -->
-<div class="intensive-sub" data-int-page="mocks" id="mocks-content"></div>
-
-<!-- PLAN 100J -->
-<div class="intensive-sub" data-int-page="plan">
 <div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px">
-<h2 style="margin-top:0;color:var(--accent)">📊 Plan d'Action 100 Jours</h2>
-<p style="color:var(--muted);margin:0 0 16px">À présenter en entretien = tu seras opérationnel rapide</p>
-
-<div style="background:var(--panel2);border-left:4px solid var(--accent);padding:14px;margin-bottom:14px;border-radius:8px">
-<h3 style="margin:0 0 8px;color:var(--accent)">PHASE 1: J1-30 (Maîtrise Produit)</h3>
-<ul style="margin:0;padding-left:16px;font-size:12px;color:var(--text)">
-<li>Gamme complète chaque marque ✅</li>
-<li>10 objections maîtrisées ✅</li>
-<li>Pitch 30 sec fluide ✅</li>
-<li><strong>KPI J30:</strong> 2-3 ventes, 0 callback</li>
+<h3 style="margin:0 0 12px;color:var(--warn);font-size:16px">PHASE 3: J61-100 (Leader Multi-Marques EV)</h3>
+<div class="note-box">
+<strong>Objectif:</strong> Référent groupe EV, client premium • <strong>KPI:</strong> 30k€+ CA/mois, 8+ ventes, NPS > 8
+</div>
+<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
+<li><strong>Semaine 9-14:</strong> Prospection B2B flottes électriques • Partenariats PME • Leadership EV réseau</li>
+<li><strong>À day 100:</strong> Meilleur vendeur EV Kia • 30k€+ CA/mois • Clients VIP • Proposition évolution</li>
 </ul>
 </div>
 
-<div style="background:var(--panel2);border-left:4px solid var(--good);padding:14px;margin-bottom:14px;border-radius:8px">
-<h3 style="margin:0 0 8px;color:var(--good)">PHASE 2: J31-60 (Autonomie)</h3>
-<ul style="margin:0;padding-left:16px;font-size:12px;color:var(--text)">
-<li>Négociation prix/marges maîtrisée</li>
-<li>Financement LLD/crédit 100%</li>
-<li>Cycle vente solo (3 semaines) ✅</li>
-<li><strong>KPI J60:</strong> CA &gt; 15k€, NPS 7+/10</li>
+  </section>
+
+  <!-- VALAUTO -->
+  <section class="page" id="page-valauto">
+    <div class="hero">
+      <h1>Valauto — Vendeur véhicules pour professionnels</h1>
+      <p>Poste multimarques (Seat, Cupra, Skoda, BYD, Volkswagen, Audi) orienté clientèle B2B : artisans, TPE/PME, flottes d'entreprise, loueurs. Enjeux clés : TCO, fiscalité entreprise (TVA, avantage en nature, amortissement), LOA/LLD pro, disponibilité et SAV.</p>
+    </div>
+<div style="background:linear-gradient(135deg, rgba(0,102,178,.1), rgba(0,102,178,.05)); border:1px solid rgba(0,102,178,.3); border-radius:14px; padding:16px; margin-bottom:16px;">
+<p style="margin:0; font-size:14px"><strong>📍 Entretien:</strong> Valauto Lomme</p>
+</div>
+
+    <h2 class="section-title"><span class="num">1</span>Fiches marques (6)</h2>
+    <div class="card-grid" id="grid-valauto"></div>
+
+    <h2 class="section-title"><span class="num">2</span>Plan d'action — montée en autonomie (4 semaines)</h2>
+    <div class="timeline" id="plan-valauto"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-valauto"></div></div>
+      <div class="progress-label"><span id="progress-label-valauto">0%</span> du plan complété</div>
+      <div class="export-row"></div>
+    </div>
+
+<h2 class="section-title"><span class="num">📊</span>Plan 100 jours pour être autonome</h2>
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
+<h3 style="margin-top:0;color:var(--accent);font-size:16px">PHASE 1: J1-30 (Expert B2B Multi-Marques)</h3>
+<div class="note-box">
+<strong>Objectif:</strong> Comprendre 6 marques (VW, Audi, Skoda, Cupra, Seat, BYD), TCO PME • <strong>KPI:</strong> 2-3 ventes pro, 0 callback, NPS > 6
+</div>
+<ul style="color:var(--text);font-size:13px;line-height:1.6">
+<li><strong>Semaine 1-2:</strong> 6 marques maîtrisées (1-liner chaque) • Stratégie "pas 1 réponse, 6 solutions" • TCO comparatif</li>
+<li><strong>Semaine 3-4:</strong> Arguments B2B: -30% coûts énergie, -60% maintenance, recharge nuit • Premiers deals PME</li>
+<li><strong>À demander:</strong> Accès CRM pro • Liste 20 PME/flottes • 1 mentor B2B (2x/semaine) • Pricing pro document</li>
 </ul>
 </div>
 
-<div style="background:var(--panel2);border-left:4px solid var(--warn);padding:14px;border-radius:8px">
-<h3 style="margin:0 0 8px;color:var(--warn)">PHASE 3: J61-100 (Scalabilité)</h3>
-<ul style="margin:0;padding-left:16px;font-size:12px;color:var(--text)">
-<li>15 leads/mois sourcing systématique</li>
-<li>Participation événements/salons</li>
-<li>Partenariats PME (1/semaine)</li>
-<li><strong>KPI J100:</strong> 30k€+ CA/mois, 8+ ventes</li>
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px">
+<h3 style="margin:0 0 12px;color:var(--good);font-size:16px">PHASE 2: J31-60 (Commercial B2B Autonome)</h3>
+<div class="note-box">
+<strong>Objectif:</strong> Conclure deals PME/flottes • <strong>KPI:</strong> CA > 15k€, 3+ deals B2B, NPS > 7
+</div>
+<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
+<li><strong>Semaine 5-8:</strong> Prospection téléphonique (5 PME/jour) • Présentation TCO • Négociation financing pro</li>
+<li><strong>À day 60:</strong> 3+ deals PME • Portefeuille 10+ prospects chauds • Process vente B2B maîtrisé</li>
 </ul>
 </div>
+
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px">
+<h3 style="margin:0 0 12px;color:var(--warn);font-size:16px">PHASE 3: J61-100 (Leader Flottes France)</h3>
+<div class="note-box">
+<strong>Objectif:</strong> Contrats flottes, multi-sites • <strong>KPI:</strong> 30k€+ CA/mois, 8+ ventes pro/mois, NPS > 8
 </div>
+<ul style="color:var(--text);font-size:13px;line-height:1.6;margin:0;padding-left:18px">
+<li><strong>Semaine 9-14:</strong> Salons flottes • Partenariats gestionnaires de flottes • Contrats multi-véhicules</li>
+<li><strong>À day 100:</strong> 30k€+ CA/mois • Leader flottes régional • 8+ ventes/mois • Clients stratégiques fidèles</li>
+</ul>
 </div>
 
-</section>
+  </section>
 
-<!-- CITROËN -->
-<section class="page" id="page-citroen">
-<div class="hero">
-<h1>Citroën — B2C Électrique</h1>
-<p>Confort français, batterie 8 ans, service 24/7 France</p>
-<div class="pill-row">
-<div class="pill">💵 C5 Aircross — 38k€</div>
-<div class="pill">🔋 550km WLTP</div>
-<div class="pill">⚡ Recharge 45min DC</div>
-</div>
-</div>
-<div style="background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:26px">
-<h2 style="margin:0 0 16px">Focus J1-J2</h2>
-<p style="margin:0;color:var(--muted);font-size:13px">Gamme | Tarif | 10 objections | Pitch 30 sec</p>
-</div>
-</section>
-
-<!-- KIA -->
-<section class="page" id="page-kia">
-<div class="hero">
-<h1>Kia — EV Leader</h1>
-<p>EV6 = 600km autonomie, recharge 18 min DC, 10 ans garantie</p>
-<div class="pill-row">
-<div class="pill">⚡ EV6 — 52k€</div>
-<div class="pill">🔋 600km</div>
-<div class="pill">🚀 18min recharge</div>
-<div class="pill">🏆 10 ans garantie</div>
-</div>
-</div>
-<div style="background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:26px">
-<h2 style="margin:0 0 16px">Focus J3</h2>
-<p style="margin:0;color:var(--muted);font-size:13px">EV6 vs Tesla Model 3 | Avantages | Pitch direct</p>
-</div>
-</section>
-
-<!-- VALAUTO -->
-<section class="page" id="page-valauto">
-<div class="hero">
-<h1>Valauto — B2B Multi-Marques</h1>
-<p>6 marques (VW, Audi, Skoda, Cupra, Seat, BYD) = 1 stratégie</p>
-<div class="pill-row">
-<div class="pill">🌍 6 marques</div>
-<div class="pill">💼 B2B solutions</div>
-<div class="pill">📊 TCO optimisé</div>
-</div>
-</div>
-<div style="background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:26px">
-<h2 style="margin:0 0 16px">Focus J4-J5</h2>
-<p style="margin:0;color:var(--muted);font-size:13px">6 marques (1-liner chaque) | TCO B2B | Objections entreprise</p>
-</div>
-</section>
-
-</main>
 
 <footer>
-<p><strong>Prépa entretiens vendeur automobile</strong> • 7 jours de maîtrise intensive 🚀</p>
+<p style="margin:0;font-size:12px">
+<strong>Préparation entretiens — Vendeur automobile</strong><br>
+Semaine intensive 7 jours • Trois marques: Citroën (Loyon-sous-Lens), Kia (Roncq), Valauto (Lomme)<br>
+Plan 100-Day inclus par marque • Mise à jour: Août 2026
+</p>
 </footer>
+</main>
+
+
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
 
 <script>
-const FLASHCARDS = {
-  citroen: [
-    { q: "Prix C5 Aircross 100kWh?", a: "~38k€ TTC" },
-    { q: "Autonomie réelle C5?", a: "550km WLTP, ~480km réel autoroute" },
-    { q: "Recharge DC C5 (20→80%)?", a: "45 minutes" },
-    { q: "vs Peugeot différence?", a: "Citroën = +confort, Peugeot = +jeune" },
-    { q: "Garantie batterie?", a: "8 ans ou 160k km" },
-    { q: "vs Tesla avantage clé?", a: "Confort français, service 24/7 France, -2k€" },
+/* ---------------- DATA ---------------- */
+const BRANDS = {
+  citroen: {
+    name:"Citroën", color:"#c4131a",
+    tagline:"3ᵉ marque du marché français, en reconquête en 2025.",
+    links:[{label:"Configurateur officiel Citroën", url:"https://store.citroen.fr/"}],
+    stats:[
+      {label:"Immatriculations VP 2025", value:"158 763", sub:"3ᵉ marque de France"},
+      {label:"Part de marché VP", value:"7,1 %", sub:"contre 6,5 % en 2024", trend:"up"},
+      {label:"Ventes utilitaires (VUL) 2025", value:"43 143", sub:"12 % de part de marché VUL"},
+      {label:"Modèle vedette", value:"C3", sub:"61 941 unités — 4ᵉ voiture la plus vendue en France"},
+      {label:"Meilleure vente électrique", value:"ë-C3", sub:"16 223 unités — top 4 des VE en France"},
+      {label:"CA indicatif 2025 (estimation)", value:"≈ 3,2 Md€", sub:"158 763 VP × ~20 000 € prix moyen indicatif"}
+    ],
+    gamme:[
+      {modele:"Ami", segment:"Quadricycle urbain", energie:"100% électrique", note:"Sans permis, cible jeunes / urbains"},
+      {modele:"C3", segment:"Citadine polyvalente", energie:"Essence / ë-C3 électrique", note:"Best-seller Citroën, argument prix d'accès"},
+      {modele:"C3 Aircross", segment:"SUV compact", energie:"Essence / hybride / ë-C3 Aircross électrique", note:"Version électrique renforcée annoncée (~400 km)"},
+      {modele:"C4 / C4 X", segment:"Compacte / berline coupé", energie:"Essence / électrique", note:"Positionnement design, silhouette différenciante"},
+      {modele:"C5 Aircross", segment:"SUV familial", energie:"Hybride / hybride rechargeable", note:"Cœur de gamme familiale"},
+      {modele:"C5 X", segment:"Berline haute", energie:"Hybride", note:"Alternative premium, confort Citroën Advanced Comfort"},
+      {modele:"Berlingo / ë-Berlingo", segment:"Ludospace", energie:"Diesel / électrique", note:"Familles nombreuses + usage mixte pro"},
+      {modele:"SpaceTourer / ë-SpaceTourer", segment:"Monospace / VASP", energie:"Diesel / électrique", note:"Grandes familles, transport de personnes"},
+      {modele:"Jumpy / Jumper", segment:"Utilitaires", energie:"Diesel / électrique", note:"Gamme pro, utile même en poste B2C pour clients artisans"}
+    ],
+    points:[
+      "Citroën progresse en 2025 (7,1 % de part de marché contre 6,5 % en 2024) : un discours de « marque en reconquête » est crédible et vérifiable.",
+      "La C3 est un pilier : rester à l'aise sur son argumentaire prix/équipement face à Peugeot 208, Renault Clio, Dacia Sandero.",
+      "L'ë-C3 est le porte-étendard électrique accessible : connaître son autonomie, son prix d'entrée et la future version petite batterie encore plus abordable.",
+      "Le confort « Advanced Comfort » (suspensions, sièges) est l'ADN produit à mettre en avant en essai.",
+      "Savoir situer Citroën dans Stellantis (aux côtés de Peugeot, DS, Opel) sans jamais dénigrer les marques sœurs en entretien."
+    ]
+  },
+
+  kia:{
+    name:"Kia", color:"#bb162b",
+    tagline:"Gamme électrique la plus large du marché coréen, garantie 7 ans.",
+    links:[{label:"Configurateur officiel Kia", url:"https://www.kia.com/fr/achat-location/configurateur/"},{label:"Grille tarifaire Kia France (PDF)", url:"https://www.kia.com/content/dam/kwcms/kme/fr/fr/assets/contents/utility/pricelist/Kia-France-Tarif-gamme-janvier-2026.pdf"}],
+    stats:[
+      {label:"Immatriculations VP 2025", value:"33 988", sub:"-22,5 % vs 2024 (marché -5 %)", trend:"down"},
+      {label:"Part de marché VP", value:"2,1 %", sub:"contre 2,6 % en 2024", trend:"down"},
+      {label:"Modèle le plus vendu", value:"Sportage", sub:"9 570 unités en 2025"},
+      {label:"Record historique", value:"Picanto", sub:"7 472 unités, +15,2 % — relance du segment citadine"},
+      {label:"Mix électrifié", value:"57 %", sub:"vs 45 % en moyenne sur le marché français"},
+      {label:"CA indicatif 2025 (estimation)", value:"≈ 1,0 Md€", sub:"33 988 VP × ~30 000 € prix moyen indicatif (gamme tirée vers l'EV)"}
+    ],
+    gamme:[
+      {modele:"Picanto", segment:"Citadine", energie:"Essence", note:"Relance forte en 2025, argument prix d'entrée"},
+      {modele:"Stonic", segment:"SUV urbain", energie:"Essence / hybride léger", note:"Alternative à la Picanto en SUV"},
+      {modele:"EV2 / EV3", segment:"SUV compacts électriques", energie:"100% électrique", note:"Offensive sur l'électrique accessible, EV3 très remarqué"},
+      {modele:"EV4 / EV4 Fastback / EV4 GT", segment:"Berline/compacte électrique", energie:"100% électrique", note:"Nouveauté 2025-2026, décline aussi une version sportive GT"},
+      {modele:"Ceed / Ceed SW", segment:"Compacte / break", energie:"Essence / hybride léger", note:"Gamme thermique encore présente pour les réfractaires à l'EV"},
+      {modele:"Niro", segment:"SUV compact", energie:"Hybride / hybride rechargeable / électrique", note:"Modèle « toutes énergies », bon argument pédagogique en vente"},
+      {modele:"Sportage", segment:"SUV familial", energie:"Essence / hybride / hybride rechargeable", note:"Best-seller Kia, cœur de gamme"},
+      {modele:"EV5 / EV5 GT", segment:"SUV familial électrique", energie:"100% électrique", note:"Équivalent électrique du Sportage"},
+      {modele:"EV6 / EV6 GT", segment:"Crossover électrique premium", energie:"100% électrique", note:"Vitrine technologique (charge ultra-rapide 800V)"},
+      {modele:"Sorento", segment:"SUV 7 places", energie:"Hybride / hybride rechargeable", note:"Familles nombreuses"},
+      {modele:"EV9 / EV9 GT", segment:"Grand SUV électrique 7 places", energie:"100% électrique", note:"Haut de gamme Kia, image techno"},
+      {modele:"PV5 (Cargo / Chassis-Cab / Passenger)", segment:"Utilitaire électrique", energie:"100% électrique", note:"Nouvelle offensive pro électrique 2025-2026"}
+    ],
+    points:[
+      "Kia recule en 2025 (-22,5 %) : anticiper une question sur les raisons (fin de cycle Sportage, pression concurrentielle chinoise/coréenne) et proposer une posture commerciale volontariste plutôt que de subir la baisse.",
+      "La garantie 7 ans / 150 000 km est l'argument de réassurance n°1, notamment face à l'objection « marque coréenne, valeur de revente ? ».",
+      "Le mix électrifié à 57 % (vs 45 % marché) positionne Kia en avance sur la transition — bon fil rouge pour parler conseil client et TCO.",
+      "Connaître la logique de nommage EV2 à EV9 (taille croissante) pour orienter rapidement un client vers le bon modèle.",
+      "La Picanto redémarre fort : savoir vendre l'entrée de gamme est aussi valorisé que vendre un Sportage."
+    ]
+  },
+
+  seat:{
+    name:"Seat", color:"#eb690b",
+    tagline:"Marque volume du groupe Volkswagen, positionnement jeune et abordable.",
+    links:[{label:"Site officiel Seat", url:"https://www.seat.fr/"}],
+    stats:[
+      {label:"Immatriculations VP 2025", value:"15 860", sub:"-0,3 pt de part de marché"},
+      {label:"Part de marché VP", value:"1,0 %", sub:"contre 1,3 % en 2024", trend:"down"},
+      {label:"Rôle dans le groupe VW", value:"Entrée de gamme", sub:"Complémentaire de Cupra (sportif) et VW (mainstream)"},
+      {label:"CA indicatif 2025 (estimation)", value:"≈ 0,32 Md€", sub:"15 860 VP × ~20 000 € prix moyen indicatif"}
+    ],
+    gamme:[
+      {modele:"Ibiza", segment:"Citadine", energie:"Essence", note:"Best-seller historique Seat"},
+      {modele:"Arona", segment:"SUV urbain", energie:"Essence", note:"Version SUV de l'Ibiza"},
+      {modele:"Leon", segment:"Compacte / break", energie:"Essence / hybride rechargeable", note:"Partage la plateforme MQB avec Golf"},
+      {modele:"Ateca", segment:"SUV compact", energie:"Essence", note:"Cœur de gamme SUV Seat"},
+      {modele:"Tarraco", segment:"SUV familial 7 places", energie:"Essence", note:"Haut de gamme Seat, alternative Tiguan/Kodiaq"}
+    ],
+    points:[
+      "Seat n'a pas (encore) de modèle 100% électrique propre : c'est Cupra qui porte l'électrification du côté espagnol du groupe — bien distinguer les deux marques en clientèle pro.",
+      "Positionnement : prix d'accès au groupe Volkswagen, cible jeune/urbaine, bon produit d'appel en flotte pour petits budgets.",
+      "En repli en 2025 (1,0 % vs 1,3 %) : cohérent avec une gamme vieillissante en attendant le renouvellement produit."
+    ]
+  },
+
+  cupra:{
+    name:"Cupra", color:"#6a2135",
+    tagline:"Marque sportive/premium du groupe VW, record historique en France en 2025.",
+    links:[{label:"Site officiel Cupra", url:"https://www.cupraofficial.fr/"}],
+    stats:[
+      {label:"Immatriculations VP 2025", value:"22 695", sub:"+29,3 % vs 2024", trend:"up"},
+      {label:"Part de marché VP", value:"1,4 %", sub:"contre 1,0 % en 2024", trend:"up"},
+      {label:"Dynamique", value:"Record historique", sub:"la plus forte progression du groupe VW en France"},
+      {label:"CA indicatif 2025 (estimation)", value:"≈ 0,85 Md€", sub:"22 695 VP × ~37 500 € prix moyen indicatif"}
+    ],
+    gamme:[
+      {modele:"Formentor", segment:"SUV coupé compact", energie:"Essence / hybride rechargeable", note:"Modèle fondateur de la marque, meilleure vente Cupra"},
+      {modele:"Leon", segment:"Compacte sportive", energie:"Essence / hybride rechargeable", note:"Version sportive de la Leon Seat"},
+      {modele:"Born", segment:"Compacte électrique", energie:"100% électrique", note:"Équivalent sportif de l'ID.3"},
+      {modele:"Terramar", segment:"SUV compact/familial", energie:"Essence / hybride rechargeable", note:"Nouveauté récente, agrandit la gamme SUV"},
+      {modele:"Tavascan", segment:"SUV coupé électrique", energie:"100% électrique", note:"Vitrine design et technologique de la marque"},
+      {modele:"Ateca", segment:"SUV compact", energie:"Essence", note:"Version Cupra du Seat Ateca"},
+      {modele:"Raval", segment:"Citadine électrique", energie:"100% électrique", note:"Lancement 2026, ouvre l'électrique accessible chez Cupra"}
+    ],
+    points:[
+      "Cupra est la martingale du groupe VW en France : +29,3 % en 2025, à mettre en avant en entretien comme preuve de dynamisme du portefeuille Valauto.",
+      "Positionnement clair : design, sportivité, image jeune premium — utile pour convaincre des dirigeants de PME en quête d'image de marque.",
+      "La gamme mixe thermique/hybride rechargeable et 100% électrique (Born, Tavascan, Raval) : bon produit pour un discours de transition progressive en flotte."
+    ]
+  },
+
+  skoda:{
+    name:"Škoda", color:"#4ba82e",
+    tagline:"Rapport prix/habitabilité, a franchi les 50 000 ventes en France en 2025.",
+    links:[{label:"Site officiel Škoda", url:"https://www.skoda.fr/"}],
+    stats:[
+      {label:"Part de marché VP 2025", value:"3,1 %", sub:"contre 2,6 % en 2024", trend:"up"},
+      {label:"Seuil franchi", value:"50 000+ ventes", sub:"symbolique pour la marque en France"},
+      {label:"Stratégie moteur", value:"Thermique efficient + 100% électrique", sub:"plus d'hybride rechargeable sur le marché français depuis 2026"},
+      {label:"CA indicatif 2025 (estimation)", value:"≈ 1,3 Md€", sub:"≈ 51 000 VP × ~25 500 € prix moyen indicatif"}
+    ],
+    gamme:[
+      {modele:"Fabia", segment:"Citadine", energie:"Essence", note:"Entrée de gamme, très bon rapport habitabilité"},
+      {modele:"Scala", segment:"Compacte", energie:"Essence", note:"Alternative à la Golf, plus spacieuse"},
+      {modele:"Kamiq", segment:"SUV urbain", energie:"Essence", note:"Bon volume de coffre pour la catégorie"},
+      {modele:"Karoq", segment:"SUV compact", energie:"Essence", note:"Cœur de gamme SUV Škoda"},
+      {modele:"Kodiaq", segment:"SUV familial 7 places", energie:"Essence / hybride", note:"À partir de 44 110 €, référence familiale du groupe"},
+      {modele:"Octavia", segment:"Compacte / break", energie:"Essence", note:"À partir de 29 990 €, réputée pour son coffre et sa fiabilité"},
+      {modele:"Superb", segment:"Grande berline / break", energie:"Essence / hybride", note:"Haut de gamme Škoda, alternative Passat/Superb"},
+      {modele:"Elroq", segment:"SUV compact électrique", energie:"100% électrique", note:"À partir de 44 600 €, concurrent direct du Cupra Ateca"},
+      {modele:"Enyaq", segment:"SUV familial électrique", energie:"100% électrique", note:"Jusqu'à 581 km d'autonomie WLTP"}
+    ],
+    points:[
+      "Argument massue Škoda : le rapport habitabilité/prix, souvent supérieur à Volkswagen à équipement comparable — très efficace face à un client pro qui compare les marques du groupe.",
+      "Progression continue (2,6 % → 3,1 % de part de marché) : Škoda monte en gamme et en volume simultanément, bon signal de robustesse business.",
+      "Depuis 2026, plus d'hybride rechargeable en France : la marque simplifie son offre autour du thermique efficient et du 100% électrique (Elroq, Enyaq) — anticiper les questions sur ce choix stratégique."
+    ]
+  },
+
+  byd:{
+    name:"BYD", color:"#12314f",
+    tagline:"Marque chinoise en très forte croissance, +150 % en France en 2025.",
+    links:[{label:"Site officiel BYD France", url:"https://www.byd.com/fr"}],
+    stats:[
+      {label:"Immatriculations VP 2025", value:"13 533", sub:"+149,9 % vs 2024", trend:"up"},
+      {label:"Part de marché VP", value:"0,8 %", sub:"contre 0,3 % en 2024", trend:"up"},
+      {label:"Best-seller France", value:"Atto 3", sub:"SUV compact, dès 36 990 €"},
+      {label:"CA indicatif 2025 (estimation)", value:"≈ 0,42 Md€", sub:"13 533 VP × ~31 000 € prix moyen indicatif"}
+    ],
+    gamme:[
+      {modele:"Dolphin Surf", segment:"Citadine électrique", energie:"100% électrique", note:"Dès 19 990 €, cible Dacia Spring / ë-C3"},
+      {modele:"Dolphin", segment:"Compacte électrique", energie:"100% électrique", note:"Bon rapport prix/équipement"},
+      {modele:"Atto 2 / Atto 2 DM-i", segment:"SUV urbain", energie:"Électrique / hybride rechargeable DM-i", note:"Décline la technologie hybride DM-i de BYD"},
+      {modele:"Atto 3", segment:"SUV compact", energie:"100% électrique", note:"Best-seller BYD en France, dès 36 990 € (420 km WLTP)"},
+      {modele:"Seal", segment:"Berline électrique", energie:"100% électrique", note:"Positionnée face à la Tesla Model 3"},
+      {modele:"Seal 6 DM-i / Seal 6 DM-i Touring", segment:"Berline / break hybride", energie:"Hybride rechargeable DM-i", note:"Alternative pour clients pas encore prêts au 100% électrique"},
+      {modele:"Seal U / Seal U DM-i", segment:"SUV familial", energie:"Électrique / hybride rechargeable", note:"Très pertinent en flotte familiale"},
+      {modele:"Sealion 5 DM-i / Sealion 7", segment:"SUV", energie:"Hybride rechargeable / électrique", note:"Sealion 7 pensé pour la charge ultra-rapide (longs trajets)"},
+      {modele:"Han", segment:"Grande berline électrique", energie:"100% électrique", note:"662 km d'autonomie urbaine annoncée, image techno"},
+      {modele:"Tang", segment:"SUV 7 places", energie:"100% électrique", note:"Haut de gamme BYD, environ 72 000 €"}
+    ],
+    points:[
+      "BYD est le dossier « disruption » de l'entretien Valauto : +150 % en un an, c'est la marque qui bouge le plus vite dans le portefeuille — à mettre en avant comme opportunité de développement.",
+      "La technologie hybride rechargeable maison DM-i est un bon argument face aux clients pro pas encore prêts au tout électrique (autonomie confort + TVA récupérable selon usage).",
+      "BYD reste une marque jeune sur le marché français : anticiper les objections sur le réseau SAV, la revente et l'image — s'appuyer sur la garantie constructeur et la croissance rapide du réseau.",
+      "Bonne diversité de segments (citadine à SUV 7 places) : possibilité de couvrir une flotte pro complète avec une seule marque."
+    ]
+  },
+
+  vw:{
+    name:"Volkswagen", color:"#001e50",
+    tagline:"Marque cœur de gamme du groupe, part de marché historique en France en 2025.",
+    links:[{label:"Site officiel Volkswagen", url:"https://www.volkswagen.fr/"}],
+    stats:[
+      {label:"Immatriculations VP 2025", value:"110 960", sub:"6,8 % de part de marché"},
+      {label:"Part de marché groupe VW", value:"15,3 %", sub:"record historique en France (VP + VUL)"},
+      {label:"Segment fort", value:"SUV (T-Cross, Taigo, T-Roc, Tiguan, Tayron)", sub:"cœur de la gamme actuelle"},
+      {label:"CA indicatif 2025 (estimation)", value:"≈ 3,5 Md€", sub:"110 960 VP × ~31 500 € prix moyen indicatif"}
+    ],
+    gamme:[
+      {modele:"Polo", segment:"Citadine", energie:"Essence / mild-hybrid", note:"Pilier historique, version thermique optimisée"},
+      {modele:"ID.Polo", segment:"Citadine électrique", energie:"100% électrique", note:"Lancement printemps 2026, dès ~25 000 €, ouvre l'EV accessible chez VW"},
+      {modele:"Golf", segment:"Compacte", energie:"Essence / hybride rechargeable eHybrid", note:"Jusqu'à 140 km d'autonomie électrique en eHybrid"},
+      {modele:"T-Cross / Taigo", segment:"SUV urbains", energie:"Essence", note:"Couvrent l'entrée de gamme SUV"},
+      {modele:"T-Roc", segment:"SUV compact", energie:"Essence / hybride (nouvelle génération)", note:"Nouvelle génération 1.5 eTSI micro-hybride, arrivée du full hybrid"},
+      {modele:"Tiguan", segment:"SUV familial", energie:"Essence / hybride rechargeable", note:"Best-seller SUV du groupe, récemment renouvelé"},
+      {modele:"Tayron", segment:"SUV familial 7 places", energie:"Essence / hybride rechargeable", note:"Nouveauté, complète le haut de gamme SUV"},
+      {modele:"ID.3 (Neo)", segment:"Compacte électrique", energie:"100% électrique", note:"Restylage mi-cycle, retour de boutons physiques"},
+      {modele:"ID.4 / ID.7", segment:"SUV / berline électriques", energie:"100% électrique", note:"ID.4 en restylage mi-cycle à venir"},
+      {modele:"Passat / Touareg", segment:"Break / SUV haut de gamme", energie:"Essence / hybride", note:"Segment supérieur, clientèle pro/flotte premium"}
+    ],
+    points:[
+      "Volkswagen tient sa part de marché quasi stable (6,9 % → 6,8 %) dans un marché en recul de 5 % : un argument de résilience à valoriser.",
+      "Le groupe VW France (VW+Audi+Skoda+Seat+Cupra) affiche 15,3 % de part de marché, un record historique — c'est le bon niveau d'analyse à citer en entretien Valauto puisque le poste couvre plusieurs marques du groupe.",
+      "L'arrivée de l'ID.Polo (dès ~25 000 €) change la donne sur l'électrique accessible : bon sujet d'actualité à maîtriser pour l'entretien.",
+      "Gamme SUV très large (T-Cross à Tayron) : savoir orienter rapidement un client pro selon la taille de flotte et l'usage (utilitaire léger vs véhicule de fonction)."
+    ]
+  },
+
+  audi:{
+    name:"Audi", color:"#000000",
+    tagline:"Marque premium du groupe VW, en progression en France en 2025.",
+    links:[{label:"Site officiel Audi", url:"https://www.audi.fr/"}],
+    stats:[
+      {label:"Immatriculations VP 2025", value:"48 756", sub:"+1,8 % vs 2024", trend:"up"},
+      {label:"Part de marché VP", value:"3,0 %", sub:"contre 2,8 % en 2024", trend:"up"},
+      {label:"Virage stratégique", value:"Fin de la conception thermique dès 2026", sub:"bascule complète vers l'électrification"},
+      {label:"CA indicatif 2025 (estimation)", value:"≈ 2,6 Md€", sub:"48 756 VP × ~53 000 € prix moyen indicatif"}
+    ],
+    gamme:[
+      {modele:"A1", segment:"Citadine premium", energie:"Essence", note:"Entrée de gamme Audi"},
+      {modele:"A3", segment:"Compacte premium", energie:"Essence / hybride rechargeable", note:"Volume important en flotte premium"},
+      {modele:"A5", segment:"Berline intermédiaire", energie:"Essence / hybride", note:"Remplace l'A4 dans la gamme, option pour clients pas encore prêts à l'électrique"},
+      {modele:"A6", segment:"Grande berline / Avant", energie:"Essence / hybride / électrique (e-tron)", note:"Référence pour cadres et directions d'entreprise"},
+      {modele:"Q2 / Q3", segment:"SUV compacts premium", energie:"Essence", note:"Cœur de gamme SUV Audi"},
+      {modele:"Q4 e-tron", segment:"SUV compact électrique", energie:"100% électrique", note:"Restylage à venir : batteries allongées, autonomie renforcée"},
+      {modele:"Q5", segment:"SUV premium", energie:"Essence / hybride", note:"Nouvelle génération : intérieur repensé, motorisations micro-hybrides"},
+      {modele:"Q6 e-tron", segment:"SUV premium électrique", energie:"100% électrique", note:"Plateforme électrique la plus récente du groupe (PPE)"},
+      {modele:"Q7 / Q8", segment:"Grands SUV premium", energie:"Essence / hybride", note:"Haut de gamme, flottes direction"},
+      {modele:"Q8 e-tron / e-tron GT", segment:"SUV et GT électriques", energie:"100% électrique", note:"Vitrine technologique et performance"}
+    ],
+    points:[
+      "Audi est en croissance en 2025 (+1,8 %, part de marché 2,8 % → 3,0 %) alors que d'autres marques premium (BMW, Mercedes) reculent légèrement : bon argument de dynamique positive.",
+      "Virage stratégique majeur : fin de la conception de nouveaux modèles thermiques annoncée pour 2026 — savoir en parler avec des clients pro qui anticipent leurs futurs achats de flotte.",
+      "La gamme électrique s'étoffe autour de la plateforme PPE (Q6 e-tron) : argument technique fort pour les flottes orientées TCO et image RSE.",
+      "Positionnement premium : pertinent pour des dirigeants et cadres, avec un discours orienté véhicule de fonction et avantage en nature plutôt que pur TCO utilitaire."
+    ]
+  }
+};
+
+/* ---------------- ACTION PLANS ---------------- */
+const PLANS = {
+  citroen:[
+    {titre:"Semaine 1 — Fondamentaux produit", goal:"Connaître la gamme et les techno sur le bout des doigts",
+      items:[
+        {text:"Étudier toute la gamme Citroën (fiches techniques, motorisations, tarifs) et refaire les fiches de ce site de mémoire", work:{type:"notes",
+          lesson:"Toute la gamme Citroën est déjà résumée dans la fiche marque de ce site (segment, énergie, positionnement pour chaque modèle). Ouvre-la, puis lance le mode flashcards pour la retenir modèle par modèle : Ami, C3/ë-C3, C3 Aircross, C4/C4 X, C5 Aircross, C5 X, Berlingo, SpaceTourer, Jumpy/Jumper.\n\nVa ensuite vérifier les tout derniers tarifs et finitions sur le configurateur officiel, ils changent régulièrement.",
+          resources:[{label:"Ouvrir la fiche marque Citroën", brand:"citroen"},{label:"Configurateur officiel Citroën", url:"https://store.citroen.fr/"}]}},
+        {text:"Faire un essai ou une visite concession sur C3, C3 Aircross et C5 Aircross", work:{type:"notes",
+          lesson:"Avant de t'y rendre, configure les 3 modèles sur le site officiel pour connaître tarifs et finitions disponibles. En showroom ou pendant l'essai, concentre-toi sur 4 points que les clients remarquent en premier : le confort des sièges Advanced Comfort, l'ergonomie de l'écran tactile central, le volume de coffre, et le silence de roulage.",
+          resources:[{label:"Configurateur officiel Citroën", url:"https://store.citroen.fr/"}]}},
+        {text:"Maîtriser l'argumentaire ë-C3 (autonomie, prix, recharge) et Advanced Comfort", work:{type:"notes", counter:true,
+          lesson:"L'ë-C3 est l'électrique la plus abordable du marché européen, avec une autonomie WLTP d'environ 320 km (une version à petite batterie encore moins chère est arrivée fin 2025). Elle a fini sur le podium des ventes de véhicules électriques en France en 2025 avec 16 223 immatriculations.\n\nConstruis ton argumentaire autour de 3 points : prix d'accès imbattable pour une électrique, confort Advanced Comfort unique sur ce segment, coût d'usage très inférieur à l'essence sur la durée — puis prépare une réponse chiffrée à « c'est cher » et à « l'autonomie ne me suffit pas ».",
+          resources:[{label:"Configurateur ë-C3", url:"https://store.citroen.fr/"}]}},
+        {text:"Identifier les 3 principaux concurrents de chaque modèle phare (Clio, 208, Sandero…)", work:{type:"table", columns:["Modèle Citroën","Concurrent 1","Concurrent 2","Concurrent 3","Différenciateur Citroën"], seed:[{"Modèle Citroën":"C3"},{"Modèle Citroën":"C3 Aircross"},{"Modèle Citroën":"C5 Aircross"}],
+          lesson:"Avant de remplir le tableau, regarde où se situent tes concurrents directs dans le classement des ventes françaises 2025 : Clio, 208 et Sandero pour la C3 ; Captur et 2008 pour la C3 Aircross ; Qashqai et Tiguan pour la C5 Aircross.",
+          resources:[{label:"Classement des ventes France 2025", url:"https://www.capcar.fr/blog/bilan-des-voitures-les-plus-vendues-en-france"}]}}
+      ]},
+    {titre:"Semaine 2 — Process de vente & outils", goal:"Comprendre le parcours client et les outils concession",
+      items:[
+        {text:"Découvrir le CRM et l'outil de configuration/devis utilisés en concession", work:{type:"notes",
+          lesson:"Le configurateur grand public (store.citroen.fr) est une bonne base pour comprendre ce que voit un client en ligne avant de venir en concession : prix, finitions, délais de livraison y sont affichés. En interne, chaque concession utilise un CRM et un outil de devis dédiés au réseau Stellantis.\n\nC'est une excellente question à poser en entretien : « quel CRM utilise la concession et comment se passe la formation dessus ? ».",
+          resources:[{label:"Voir le configurateur grand public", url:"https://store.citroen.fr/"}]}},
+        {text:"Comprendre les offres de financement (LOA, LLD, crédit classique) et leurs cas d'usage", work:{type:"table", columns:["Type de financement","Avantages","Inconvénients","Profil client adapté"], seed:[{"Type de financement":"LOA"},{"Type de financement":"LLD"},{"Type de financement":"Crédit classique"}],
+          lesson:"LOA (Location avec Option d'Achat) : le client peut devenir propriétaire à la fin du contrat. LLD (Location Longue Durée) : le véhicule est toujours restitué, les loyers incluent souvent entretien et assurance, pratique pour un budget lisible. Crédit classique : le client est propriétaire immédiatement mais immobilise plus de trésorerie.\n\nRemplis le tableau avec ces bases, puis complète-le avec ce que t'explique la concession sur les offres Citroën Financement."}},
+        {text:"Cartographier le parcours client B2C : accueil → découverte → essai → financement → reprise → livraison", work:{type:"notes",
+          lesson:"Un parcours B2C classique en concession suit 6 étapes : accueil et mise en confiance, découverte des besoins (usage, budget, famille, kilométrage), présentation/essai du véhicule adapté, traitement des objections, proposition de financement et reprise, puis livraison et prise en main.\n\nChaque étape a un objectif précis : ne saute jamais la découverte des besoins pour aller directement au prix."}},
+        {text:"Observer un vendeur senior en situation (shadowing) si possible avant l'entretien", work:{type:"notes",
+          lesson:"Pendant le shadowing, note surtout : comment le vendeur ouvre la conversation, les questions qu'il pose pour cerner le budget et l'usage réel, comment il enchaîne sur l'essai, et comment il amène le sujet du financement sans braquer le client. Ce sont des réflexes qui s'observent mieux qu'ils ne s'expliquent."}}
+      ]},
+    {titre:"Semaine 3 — Techniques de vente & objections", goal:"Passer de la connaissance produit à la vente active",
+      items:[
+        {text:"Travailler une méthode de découverte des besoins (type SPANCO ou CAB) et s'entraîner à la reformuler à l'oral", work:{type:"notes", counter:true,
+          lesson:"La méthode SPANCO découpe la vente en 6 étapes : Suspect (cible potentielle) → Prospect (premier contact qualifié) → Analyse (découverte des besoins) → Négociation → Conclusion (closing) → Ordre (suivi et fidélisation). En concession, la phase « Analyse » est la plus décisive : pose des questions ouvertes sur l'usage avant de proposer un modèle.\n\nLa méthode CAB (Caractéristique → Avantage → Bénéfice) t'aide ensuite à transformer chaque caractéristique technique en bénéfice concret pour ce client précis.",
+          resources:[{label:"La méthode SPANCO expliquée", url:"https://go.sellsy.com/blog/methode-spanco"}]}},
+        {text:"Lister les objections fréquentes (prix, image de marque, délai de livraison) et préparer une réponse pour chacune", work:{type:"table", columns:["Objection","Réponse préparée"], seed:[{},{},{}],
+          lesson:"Structure chaque réponse en 4 temps : Reformuler l'objection pour montrer que tu as compris, Valider qu'elle est légitime, Répondre avec un fait ou un chiffre concret, puis Vérifier que la réponse convient avant d'avancer. Évite de te justifier ou de contre-attaquer : une objection est une demande d'information, pas une attaque."}},
+        {text:"Se former aux bases de la reprise véhicule d'occasion (cote Argus, points de contrôle)", work:{type:"notes",
+          lesson:"La cote Argus sert de référence de dépréciation pour chaque véhicule. Une offre de reprise en concession se situe généralement 10 à 15 % sous cette cote (marge de revente, remise en état, risques).\n\n4 critères font varier une cote : le kilométrage réel, l'état carrosserie/intérieur, le carnet d'entretien, et le niveau d'équipement d'origine.",
+          resources:[{label:"Cote Argus officielle", url:"https://www.largus.fr/cote/"},{label:"Comprendre l'écart cote / reprise", url:"https://www.capcar.fr/blog/cote-reprise-voiture-argus"}]}},
+        {text:"Faire un entretien blanc avec un proche en jouant un client difficile", work:{type:"notes",
+          lesson:"Demande à ton proche de jouer un client qui compare 3 devis concurrents et qui doute du prix. Ton objectif n'est pas de « gagner » la discussion mais de rester calme, de reformuler ses doutes et de répondre avec des faits — c'est exactement ce qu'un recruteur veut voir en situation."}}
+      ]},
+    {titre:"Semaine 4 — Vers l'autonomie", goal:"Se projeter concrètement dans le poste",
+      items:[
+        {text:"Préparer un plan de montée en compétence à présenter en entretien (ce que je sais déjà / ce que je vais apprendre / comment)", work:{type:"notes",
+          lesson:"Structure ton plan en 3 colonnes : ce que je maîtrise déjà (relationnel, motivation, culture générale auto), ce qu'il me manque (process interne, outils, techniques de closing), et comment je vais combler cet écart (formation interne, shadowing, auto-formation). C'est exactement la structure de ce site : utilise-la telle quelle en entretien."}},
+        {text:"Définir des indicateurs personnels de suivi (taux de transformation, satisfaction client)", work:{type:"table", columns:["Indicateur","Objectif visé"], seed:[{},{}],
+          lesson:"Deux indicateurs reviennent presque toujours en concession : le taux de transformation (nombre de ventes ÷ nombre de visites ou d'essais) et la satisfaction client (souvent mesurée par NPS ou avis Google). Propose-toi un objectif réaliste de progression sur les 90 premiers jours plutôt qu'un chiffre au hasard."}},
+        {text:"Lister 3 questions à poser au recruteur sur l'accompagnement et la formation interne", work:{type:"table", columns:["Question à poser"], seed:[{},{},{}],
+          lesson:"Les meilleures questions montrent que tu projettes déjà dans le poste : sur la formation initiale, sur le mode de rémunération (fixe + commissions), sur les objectifs des 3 premiers mois, ou sur l'accompagnement par un vendeur senior. Évite les questions dont la réponse est déjà sur le site Citroën."}},
+        {text:"Préparer un pitch de 2 minutes : pourquoi Citroën, pourquoi moi, pourquoi maintenant", work:{type:"notes", counter:true,
+          lesson:"Structure ton pitch en 3 temps : pourquoi Citroën (une raison concrète et vérifiable, comme la reconquête de parts de marché en 2025), pourquoi toi (2-3 qualités ou expériences transférables), pourquoi maintenant (ta disponibilité et ta motivation immédiate). Vise 220 à 260 mots pour tenir dans 2 minutes à l'oral."}}
+      ]}
   ],
-  kia: [
-    { q: "Prix EV6?", a: "~52k€ TTC" },
-    { q: "Autonomie EV6?", a: "600km WLTP" },
-    { q: "Recharge DC EV6 (10→80%)?", a: "18 minutes (3x plus rapide Tesla)" },
-    { q: "vs Model 3 différence?", a: "EV6 -2k€, +confort, 10 ans garantie vs 8" },
-    { q: "Garantie batterie Kia?", a: "10 ans (meilleure marché)" },
-    { q: "Avantage confort clé?", a: "Sièges chauffants/ventilés, Nappa, boutons physiques" },
+  kia:[
+    {titre:"Semaine 1 — Gamme & différenciateurs", goal:"Maîtriser ce qui distingue Kia de ses concurrents",
+      items:[
+        {text:"Apprendre la gamme complète (thermique, hybride, 100% électrique) et la logique de nommage EV2 à EV9", work:{type:"notes",
+          lesson:"La logique de nommage Kia est simple une fois comprise : plus le chiffre après « EV » est élevé, plus le véhicule est grand (EV2/EV3 compacts, EV4/EV5 intermédiaires, EV6 premium, EV9 grand SUV 7 places). La fiche marque Kia de ce site liste toute la gamme (thermique, hybride, électrique) — utilise le mode flashcards pour la retenir, puis va vérifier les tarifs à jour sur le configurateur officiel.",
+          resources:[{label:"Ouvrir la fiche marque Kia", brand:"kia"},{label:"Configurateur officiel Kia", url:"https://www.kia.com/fr/achat-location/configurateur/"}]}},
+        {text:"Maîtriser l'argument garantie 7 ans / 150 000 km et savoir pourquoi elle rassure", work:{type:"notes", counter:true,
+          lesson:"La garantie Kia de 7 ans ou 150 000 km est l'une des plus longues du marché généraliste (largement au-dessus des 2-3 ans habituels). C'est l'argument n°1 pour rassurer un client qui hésite sur la fiabilité ou la valeur de revente d'une marque coréenne : le véhicule reste couvert bien après la fin d'un crédit classique de 5 ans."}},
+        {text:"Comprendre l'écosystème recharge électrique (types de bornes, temps de charge, réseaux partenaires)", work:{type:"notes",
+          lesson:"Deux types de recharge à savoir expliquer : la recharge AC (à domicile ou au travail, plusieurs heures, pour un usage quotidien) et la recharge DC rapide (30 à 80 % en moins de 30 minutes sur les modèles récents grâce à l'architecture 800V des EV6 et EV9, utile en trajet longue distance). Kia propose son propre service Kia Charge donnant accès à un large réseau de bornes publiques."}},
+        {text:"Comparer Kia à Hyundai et aux marques généralistes sur 2-3 points clés", work:{type:"table", columns:["Critère","Kia","Hyundai / généraliste"], seed:[{"Critère":"Garantie"},{"Critère":"Prix"},{"Critère":"Image de marque"}],
+          lesson:"Kia et Hyundai partagent des plateformes techniques (même groupe) mais se différencient par le design et le positionnement tarifaire : Kia mise sur un style plus affirmé et une garantie plus longue (7 ans vs généralement 5 ans chez Hyundai). Remplis le tableau avec ces bases avant de le préciser avec les fiches produits."}}
+      ]},
+    {titre:"Semaine 2 — Outils & process concession", goal:"Se familiariser avec le fonctionnement commercial",
+      items:[
+        {text:"Découvrir le configurateur Kia et les grilles tarifaires par finition", work:{type:"notes",
+          lesson:"Le configurateur officiel te permet de simuler n'importe quelle finition avec le tarif exact du mois. La grille tarifaire complète (PDF) liste tous les modèles et finitions sur une seule page : c'est le document à avoir toujours sous la main en rendez-vous client.",
+          resources:[{label:"Configurateur officiel Kia", url:"https://www.kia.com/fr/achat-location/configurateur/"},{label:"Grille tarifaire Kia France (PDF)", url:"https://www.kia.com/content/dam/kwcms/kme/fr/fr/assets/contents/utility/pricelist/Kia-France-Tarif-gamme-janvier-2026.pdf"}]}},
+        {text:"Comprendre les offres Kia Finance (LOA, LLD, crédit) et leurs avantages", work:{type:"table", columns:["Offre Kia Finance","Avantages","Cas d'usage"], seed:[{},{},{}],
+          lesson:"Kia Finance propose les mêmes grandes familles que le marché : LOA (option d'achat en fin de contrat), LLD (restitution systématique, loyers tout compris) et crédit classique. L'avantage de passer par la marque plutôt qu'une banque généraliste : des taux souvent négociés et des offres promotionnelles ponctuelles par modèle, à vérifier sur le configurateur.",
+          resources:[{label:"Simuler un financement", url:"https://www.kia.com/fr/achat-location/configurateur/"}]}},
+        {text:"Identifier le parcours lead digital → prise de rendez-vous → vente en concession", work:{type:"notes",
+          lesson:"La majorité des acheteurs commencent leur recherche en ligne (configurateur, avis, comparateurs) avant de prendre rendez-vous en concession. Le rôle du vendeur est alors de reprendre ce parcours là où le client l'a laissé — ne rabâche pas des infos qu'il a déjà vues en ligne, concentre-toi sur ce que le digital ne peut pas donner : l'essai et le conseil personnalisé."}},
+        {text:"Lister les points de contact du service client Kia (garantie, SAV, assistance)", work:{type:"table", columns:["Point de contact","Rôle / quand l'utiliser"], seed:[{},{},{}],
+          lesson:"La garantie 7 ans est gérée par tout le réseau Kia France, pas seulement la concession de vente : un client peut faire réparer son véhicule ailleurs sans perdre sa garantie. L'assistance routière est généralement incluse les premières années. Ce sont des réassurances fortes à connaître par cœur."}}
+      ]},
+    {titre:"Semaine 3 — Vente consultative & digital", goal:"Savoir vendre une transition vers l'électrique",
+      items:[
+        {text:"Préparer un argumentaire TCO simple pour convaincre un client hésitant sur l'électrique", work:{type:"notes", counter:true,
+          lesson:"Le TCO (coût total de possession) additionne : prix d'achat net de reprise, financement, énergie, entretien, assurance et décote — sur toute la durée de détention. Une électrique coûte souvent plus cher à l'achat mais moins cher à l'usage (énergie, entretien réduit car moins de pièces d'usure) : c'est cette addition complète qu'il faut montrer à un client qui ne regarde que le prix catalogue."}},
+        {text:"Travailler le traitement d'objections spécifiques (autonomie, revente, image de marque coréenne)", work:{type:"table", columns:["Objection","Réponse préparée"], seed:[{},{},{}],
+          lesson:"Les objections les plus fréquentes sur l'électrique portent sur l'autonomie réelle, la revente et la recharge à domicile. Réponds toujours avec un chiffre vérifiable (autonomie WLTP, garantie batterie) plutôt qu'une opinion générale."}},
+        {text:"Comprendre le rôle des avis clients et de la présence digitale dans la décision d'achat", work:{type:"notes",
+          lesson:"Avant de se déplacer en concession, la majorité des clients consultent les avis Google et les comparatifs en ligne. Une concession avec de bons avis convertit mieux : sache où trouver et comment présenter les avis de la concession si un client hésite encore."}},
+        {text:"Simuler une vente complète du premier contact à la signature", work:{type:"notes",
+          lesson:"Simule les 6 étapes d'une vente complète en une seule session : accueil, découverte des besoins, présentation/essai, traitement d'une objection, financement, signature. Chronomètre-toi : un rendez-vous de vente automobile dure rarement plus de 45-60 minutes en une seule fois."}}
+      ]},
+    {titre:"Semaine 4 — Vers l'autonomie", goal:"Démontrer une trajectoire de progression claire",
+      items:[
+        {text:"Formaliser un plan de montée en compétence sur 3 mois à présenter à la recruteuse", work:{type:"notes",
+          lesson:"Découpe ton plan en jalons mensuels : mois 1 = maîtrise produit et outils, mois 2 = autonomie encadrée sur les rendez-vous simples, mois 3 = portefeuille propre avec objectifs chiffrés. Présente-le comme une feuille de route, pas une liste de vœux."}},
+        {text:"Définir des objectifs personnels mesurables pour les 90 premiers jours", work:{type:"table", columns:["Objectif","Échéance","Indicateur de succès"], seed:[{},{},{}],
+          lesson:"Fixe des objectifs mesurables et progressifs : par exemple un nombre de rendez-vous tenus, un taux de transformation cible, un nombre de ventes. Évite les objectifs flous du type « bien connaître la gamme » — préfère « connaître les 20 modèles et leurs prix sans notes »."}},
+        {text:"Préparer des exemples concrets (expériences passées) transférables à la vente automobile", work:{type:"notes",
+          lesson:"Même sans expérience automobile, des expériences en relation client, vente, ou négociation sont transférables : identifie 2-3 situations concrètes où tu as convaincu, rassuré ou géré une objection, et prépare-les sous forme d'anecdotes courtes (contexte → action → résultat)."}},
+        {text:"Préparer 3 questions sur la formation interne Kia et l'accompagnement des nouveaux vendeurs", work:{type:"table", columns:["Question à poser"], seed:[{},{},{}],
+          lesson:"Demande des précisions sur le tutorat (qui t'accompagne les premières semaines), le rythme de formation produit, et la façon dont la progression est évaluée. Ce sont des questions qui montrent que tu penses déjà à ta montée en compétence, pas juste à décrocher le poste."}}
+      ]}
   ],
-  valauto: [
-    { q: "Positionnement VW?", a: "Fiabilité allemande, ID.4 leader EU" },
-    { q: "Positionnement Skoda?", a: "Meilleur TCO, Enyaq grand coffre" },
-    { q: "Positionnement Audi?", a: "Premium électrique, e-tron GT" },
-    { q: "Positionnement BYD?", a: "Batterie asiatique, meilleur prix EU" },
-    { q: "Prix Skoda Enyaq?", a: "~42k€" },
-    { q: "Stratégie Valauto core?", a: "6 solutions = chaque budget/segment couvert" },
+  valauto:[
+    {titre:"Semaine 1 — Fondamentaux multimarques & univers pro", goal:"Cartographier l'offre des 6 marques et le client professionnel",
+      items:[
+        {text:"Construire un tableau comparatif des gammes utilitaires/pro des 6 marques (Seat, Cupra, Skoda, BYD, VW, Audi)", work:{type:"table", columns:["Marque","Modèle utilitaire / pro clé","Segment","Énergie","Argument clé"], seed:brandSeedRows("Marque"),
+          lesson:"Chaque marque a un rôle précis dans le portefeuille Valauto : Seat (entrée de gamme accessible), Cupra (sportif/premium, en forte croissance +29,3 % en 2025), Škoda (habitabilité/prix imbattable), BYD (électrique en explosion, +150 % en 2025), Volkswagen (cœur de gamme généraliste) et Audi (premium, en croissance +1,8 %).\n\nOuvre chaque fiche marque de ce site pour ses chiffres et sa gamme complète, puis va vérifier les tout derniers modèles sur les configurateurs officiels avant de remplir le tableau.",
+          resources:[{label:"Seat", url:"https://www.seat.fr/"},{label:"Cupra", url:"https://www.cupraofficial.fr/"},{label:"Škoda", url:"https://www.skoda.fr/"},{label:"BYD", url:"https://www.byd.com/fr"},{label:"Volkswagen", url:"https://www.volkswagen.fr/"},{label:"Audi", url:"https://www.audi.fr/"}]}},
+        {text:"Identifier les profils clients pro types : artisan, TPE/PME, flotte d'entreprise, loueur longue durée", work:{type:"table", columns:["Profil client","Besoins clés","Marque / modèle recommandé"], seed:[{"Profil client":"Artisan"},{"Profil client":"TPE / PME"},{"Profil client":"Flotte d'entreprise"},{"Profil client":"Loueur longue durée"}],
+          lesson:"4 profils reviennent le plus souvent chez un concessionnaire multimarque : l'artisan (véhicule utilitaire, priorité fiabilité et TVA récupérable), la TPE/PME (2 à 10 véhicules, arbitrage LOA/LLD), la grande flotte d'entreprise (appel d'offres, gestionnaire de flotte dédié, négociation sur volume), et le loueur longue durée (achat en gros volume, exigences de revente/valeur résiduelle)."}},
+        {text:"Réviser les bases de la fiscalité entreprise : TVA récupérable sur VUL, avantage en nature, amortissement, malus", work:{type:"notes", counter:true,
+          lesson:"TVA : elle est récupérable à 100 % sur les véhicules utilitaires (carte grise mention CTTE ou VU, 2 places sans banquette arrière) mais non récupérable sur un véhicule particulier classique, sauf exceptions.\n\nAvantage en nature (2026) : sur un véhicule électrique mis à disposition, l'abattement atteint 70 % (plafonné à 4 641,60 €/an) contre 50 % pour les autres motorisations (plafonné à 2 026,30 €/an) — un argument fort pour orienter une flotte vers l'électrique.\n\nAmortissement et malus écologique varient selon les émissions de CO2 du véhicule : plus il est lourd et polluant, plus la fiscalité est défavorable à l'entreprise.",
+          resources:[{label:"TVA récupérable sur véhicule", url:"https://www.legalplace.fr/guides/recuperation-tva-vehicule/"},{label:"Avantage en nature véhicule 2026", url:"https://www.legisocial.fr/reperes-sociaux/avantage-en-nature-vehicule-2026.html"}]}},
+        {text:"Repérer pour chaque marque un modèle « produit d'appel » et un modèle « premium » côté pro", work:{type:"table", columns:["Marque","Produit d'appel","Produit premium"], seed:brandSeedRows("Marque"),
+          lesson:"Repère pour chaque marque un modèle d'entrée qui fait venir le client (prix, praticité) et un modèle qui fait monter le panier (finition, motorisation, image). Utilise les fiches marques de ce site : chaque gamme y est déjà classée par segment.",
+          resources:[{label:"Ouvrir la fiche marque Seat", brand:"seat"},{label:"Ouvrir la fiche marque Cupra", brand:"cupra"},{label:"Ouvrir la fiche marque Škoda", brand:"skoda"},{label:"Ouvrir la fiche marque BYD", brand:"byd"},{label:"Ouvrir la fiche marque Volkswagen", brand:"vw"},{label:"Ouvrir la fiche marque Audi", brand:"audi"}]}}
+      ]},
+    {titre:"Semaine 2 — Financement & gestion de flotte", goal:"Maîtriser les outils financiers spécifiques au B2B",
+      items:[
+        {text:"Comprendre en détail LOA et LLD professionnelles : différences, avantages comptables, cas d'usage", work:{type:"table", columns:["Critère","LOA","LLD"], seed:[{"Critère":"Propriété du véhicule"},{"Critère":"TVA récupérable"},{"Critère":"Traitement comptable"},{"Critère":"Kilométrage"},{"Critère":"Cas d'usage typique"}],
+          lesson:"LOA (Location avec Option d'Achat) : le client peut racheter le véhicule en fin de contrat, une partie de la TVA peut être récupérable selon l'usage. LLD (Location Longue Durée) : restitution systématique, loyers tout compris (entretien, assurance parfois), très prisée des flottes pour sa lisibilité budgétaire et l'absence de risque de revente. Le crédit classique reste possible pour une entreprise qui préfère être propriétaire immédiatement.",
+          resources:[{label:"TVA récupérable sur véhicule", url:"https://www.legalplace.fr/guides/recuperation-tva-vehicule/"}]}},
+        {text:"Étudier les offres de financement propres à chaque marque (VW Leasing, offres captives du groupe)", work:{type:"table", columns:["Marque","Offre de financement","Particularité"], seed:brandSeedRows("Marque"),
+          lesson:"Volkswagen, Audi, Škoda, Seat et Cupra partagent souvent la même structure de financement captif (Volkswagen Financial Services) avec des offres qui peuvent différer par marque. BYD travaille avec des partenaires financiers locaux en France. Vérifie sur chaque site officiel les offres et taux du moment, ils changent régulièrement.",
+          resources:[{label:"Volkswagen", url:"https://www.volkswagen.fr/"},{label:"Audi", url:"https://www.audi.fr/"},{label:"Škoda", url:"https://www.skoda.fr/"},{label:"Seat", url:"https://www.seat.fr/"},{label:"Cupra", url:"https://www.cupraofficial.fr/"},{label:"BYD", url:"https://www.byd.com/fr"}]}},
+        {text:"Comprendre les bases de la gestion de flotte (carte grise société, entretien mutualisé, renouvellement)", work:{type:"notes",
+          lesson:"Une entreprise avec plusieurs véhicules centralise souvent la carte grise au nom de la société, mutualise l'entretien via des cartes carburant/entretien multimarques, et planifie le renouvellement par vagues pour lisser le budget. Comprendre ce fonctionnement te permet de parler le même langage qu'un gestionnaire de flotte."}},
+        {text:"Si possible, échanger avec un partenaire financier ou un gestionnaire de flotte pour du vocabulaire terrain", work:{type:"notes",
+          lesson:"Si tu peux échanger avec un partenaire financier ou un gestionnaire de flotte, prépare 3 questions concrètes : comment se décide LOA vs LLD pour un client, quels sont les critères qui font varier un taux, et quelles marques/modèles reviennent le plus souvent en flotte d'entreprise aujourd'hui."}}
+      ]},
+    {titre:"Semaine 3 — Techniques de vente B2B & argumentaires", goal:"Passer d'une logique produit à une logique de solution d'entreprise",
+      items:[
+        {text:"Se former aux spécificités de la vente B2B (cycle plus long, multi-décideurs, appels d'offres)", work:{type:"notes",
+          lesson:"La vente B2B se distingue par un cycle plus long (semaines à mois), plusieurs décideurs (dirigeant, comptable, parfois gestionnaire de flotte), et une décision basée sur le TCO plutôt que le prix affiché. Pour une grande flotte, la vente peut même passer par un appel d'offres formel avec cahier des charges."}},
+        {text:"Construire un argumentaire comparatif TCO par marque et par segment (ex : BYD électrique vs Volkswagen thermique)", work:{type:"table", columns:["Marque","Modèle","Prix catalogue","Conso / Autonomie","Entretien estimé","Avantage TCO"], seed:brandSeedRows("Marque"),
+          lesson:"Le TCO complet = prix catalogue net de remise + coût de financement + énergie/carburant sur la durée + entretien + assurance − valeur de revente estimée. Une BYD électrique a un prix catalogue plus élevé qu'une Volkswagen thermique équivalente mais un coût d'énergie et d'entretien nettement inférieur : c'est cette addition qui doit trancher, pas le prix affiché seul."}},
+        {text:"Préparer 3 scénarios clients types (artisan, PME 10 véhicules, grande flotte) avec une recommandation par marque", work:{type:"table", columns:["Profil client","Besoin principal","Contraintes","Marque / modèle recommandé"], seed:[{"Profil client":"Artisan"},{"Profil client":"PME (10 véhicules)"},{"Profil client":"Grande flotte"}],
+          lesson:"Pour chaque profil, identifie le vrai enjeu business du client (pas seulement son budget) : un artisan cherche la fiabilité et la récupération de TVA, une PME de 10 véhicules cherche à lisser son budget (LLD), une grande flotte cherche le meilleur TCO sur le volume. Adapte ta recommandation de marque à cet enjeu, pas seulement au prix."}},
+        {text:"Simuler un rendez-vous de vente B2B avec un proche jouant le rôle du dirigeant d'entreprise", work:{type:"notes",
+          lesson:"Structure le rendez-vous B2B en 4 temps : découverte des enjeux de l'entreprise (pas seulement du véhicule), présentation comparative multimarque chiffrée, réponse aux objections (souvent budgétaires ou sur la nouveauté d'une marque comme BYD), puis proposition concrète avec chiffrage TCO à l'appui."}}
+      ]},
+    {titre:"Semaine 4 — Vers l'autonomie sur un portefeuille", goal:"Montrer qu'on est prêt à gérer un portefeuille clients pro",
+      items:[
+        {text:"Formaliser un plan de montée en compétence sur 90 jours à présenter au directeur commercial", work:{type:"notes", counter:true,
+          lesson:"Découpe ton plan en 3 paliers : jour 1-30 = maîtrise des 6 gammes et des bases fiscales/financement, jour 31-60 = autonomie encadrée sur des rendez-vous simples, jour 61-90 = portefeuille propre avec objectifs de CA par marque. C'est un plan concret que le directeur commercial peut valider immédiatement."}},
+        {text:"Proposer un mode de suivi personnel du CA par marque et par type de client", work:{type:"table", columns:["Marque","Objectif mensuel","Réalisé","Écart"], seed:brandSeedRows("Marque"),
+          lesson:"Un bon reporting commercial suit au minimum : l'objectif mensuel, le réalisé, et l'écart — marque par marque, pour identifier vite où concentrer ses efforts. Ce tableau te sert aussi de trame réutilisable une fois en poste."}},
+        {text:"Lister les points de vigilance à clarifier avec le directeur commercial (répartition du portefeuille, objectifs, accompagnement terrain)", work:{type:"table", columns:["Point à clarifier","Question précise à poser"], seed:[{},{},{}],
+          lesson:"Avant de démarrer, clarifie avec le directeur commercial : comment est réparti le portefeuille clients entre vendeurs, quels sont les objectifs des 90 premiers jours, et quel accompagnement terrain est prévu (binôme, shadowing, formation constructeur)."}},
+        {text:"Préparer un pitch centré sur la valeur ajoutée d'un vendeur multimarques face à un client pro : conseil neutre et comparatif", work:{type:"notes", counter:true,
+          lesson:"Ton pitch doit positionner la valeur d'un vendeur multimarque : contrairement à un vendeur mono-marque, tu peux recommander objectivement la meilleure solution parmi 6 marques selon le vrai besoin du client — un argument de confiance fort en B2B.\n\nAppuie-toi sur des faits récents : le groupe Volkswagen a atteint 15,3 % de part de marché historique en France en 2025, Cupra progresse de +29,3 % et BYD explose de +150 % — Valauto vend certaines des gammes les plus dynamiques du marché actuel."}}
+      ]}
   ]
 };
 
-const OBJECTIONS = [
-  { q: "C'est combien vraiment?", a: "C5 Aircross = 38k€, finançable 350€/mois LLD. Moins qu'une thermique avec essence." },
-  { q: "Autonomie réelle?", a: "Annoncé 550km WLTP, réel ~480km autoroute (-20% normal). Excellent pour quotidien." },
-  { q: "Pourquoi pas Tesla?", a: "Tesla = rapide mais basique. Citroën = confort français, batterie 8 ans, service 24/7." },
-  { q: "Ça tombe en panne?", a: "Électrique = 10x moins de pièces que thermique. 2 ans/40k warranty. Très fiable." },
-  { q: "Écolo vraiment?", a: "Batterie recyclée 90%, usine CO2 neutre. vs Thermique = 180g CO2/km." },
-  { q: "Recharge chez moi impossible?", a: "Wallbox 6h charge nuit = résolu. 80% trajets < 80km. Charging publique partout." },
-  { q: "Occasion = batterie pourrie?", a: "Batterie <100k km c'est fiable. Prix -30%. Garantie 8 ans même occas." },
-  { q: "Je peux pas me permettre?", a: "LLD 350€/mois moins qu'essence. 0€ versement. -30% coûts énergie." },
-  { q: "EV ou Hybrid meilleur?", a: "EV = 0 émission locale, 80% trajets sédentaires. Hybrid = compromis." },
-  { q: "Recharge = trop long?", a: "DC autoroute 45 min. AC chez toi overnight 6h. Excellent quotidien." },
-];
+/* ---------------- HELPERS ---------------- */
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function formatLesson(text){
+  return esc(text).split('\n\n').map(p => `<p>${p.replace(/\n/g,'<br>')}</p>`).join('');
+}
+function renderResourceLink(r){
+  return r.url
+    ? `<a class="btn-mini" href="${esc(r.url)}" target="_blank" rel="noopener">🔗 ${esc(r.label)}</a>`
+    : `<button class="btn-mini" type="button" data-open-brand="${esc(r.brand)}">📇 ${esc(r.label)}</button>`;
+}
+function trendArrow(t){
+  if(t==="up") return '<span class="trend-up">▲</span>';
+  if(t==="down") return '<span class="trend-down">▼</span>';
+  return '';
+}
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+function brandSeedRows(col){
+  return ["Seat","Cupra","Skoda","BYD","Volkswagen","Audi"].map(m => ({[col]: m}));
+}
+const PAGE_TITLES = {
+  citroen:"Citroën — Vendeur automobile B2C",
+  kia:"Kia — Entretien avec la recruteuse",
+  valauto:"Valauto — Vendeur véhicules pour professionnels"
+};
+const WORKMETA = {};
 
-const PITCHES = [
-  { title: "C5 Aircross (30 sec)", content: "Je pense que beaucoup confondent performance et confort. C5 Aircross: batterie 100kWh (550km WLTP), recharge 45min DC, plus grand coffre segment, prix 38k€. Meilleur pour famille qui fait Lille-Paris régulièrement. Vous cherchez quoi en électrique?" },
-  { title: "EV6 (30 sec)", content: "Tesla c'est rapide, oui. Mais EV6 c'est pour quelqu'un qui veut confort + tech. 52k€ (2k moins cher Tesla), confort Mercedes-level, recharge 18 min DC (3x plus rapide), garantie 10 ans. Performance identique 0-100 en 5.2s. Avantage? Les sièges chauffants MARCHENT." },
-  { title: "Valauto Multi (45 sec)", content: "On couvre tous les segments: VW pour fiabilité, Skoda pour budget, Audi pour prestige, Cupra pour jeunes, Seat pour entrée, BYD pour économies max. Pas 1 réponse, 6 solutions. Chez vous combien de véhicules?" },
-];
+/* ---------------- BRAND CARDS & MODAL ---------------- */
+function renderBrandCard(key){
+  const b = BRANDS[key];
+  const mainStats = b.stats.slice(0,3);
+  return `
+  <div class="brand-card" style="--accent-c:${b.color}" onclick="openBrand('${key}')">
+    <div class="head">
+      <span class="name">${esc(b.name)}</span>
+      <span class="swatch" style="background:${b.color}"></span>
+    </div>
+    <div class="body">
+      ${mainStats.map(s=>`<div class="stat"><span>${esc(s.label)}</span><b>${trendArrow(s.trend)} ${esc(s.value)}</b></div>`).join('')}
+      <div class="tagline">${esc(b.tagline)}</div>
+    </div>
+  </div>`;
+}
 
-const MOCKS = [
-  { title: "Mock #1: Citroën Particulier", scenario: "Client cherche électrique pour famille, budget limité. Objections: prix, autonomie, recharge.", expected: "Tu dois: accueillir (3 min) → pitcher C5 (5 min) → gérer prix (3 min) → présenter LLD (3 min) → essai" },
-  { title: "Mock #2: Kia Premium", scenario: "Client riche, hésite Tesla vs EV6. Va dire 'Tesla plus rapide'.", expected: "Pitch vs Tesla (6 min) → confort argument (4 min) → répondre objection (3 min) → essai" },
-  { title: "Mock #3: Valauto B2B", scenario: "PDG PME 30 véhicules, pas confiance électrique, coût, infrastructure.", expected: "TCO calcul (profit visible) → multi-marques → J30 opérationnel → demander ressources" },
-];
+function renderBrandDetails(key){
+  const b = BRANDS[key];
+  const modal = document.getElementById('modal');
+  modal.innerHTML = `
+    <div class="mhead">
+      <div>
+        <h3>${esc(b.name)}</h3>
+        <p>${esc(b.tagline)}</p>
+      </div>
+      <button class="close" id="modal-close">✕</button>
+    </div>
+    <div class="mbody">
+      <div class="stat-grid">
+        ${b.stats.map(s=>`<div class="stat-box"><div class="label">${esc(s.label)}</div><div class="value">${trendArrow(s.trend)} ${esc(s.value)}</div><div class="sub">${esc(s.sub)}</div></div>`).join('')}
+      </div>
 
-const TIMELINE = [
-  { num: 1, title: "Citroën Fondamentaux", tasks: ["Lire gamme (C3, C3 Aircross, C5, e-C3)", "Tableau comparatif (modèle, prix, autonomie)", "Comprendre 5 objections clés", "Pitch 30 sec (3x enregistrement)"] },
-  { num: 2, title: "Citroën Tarif & Objections", tasks: ["Tarifs + LLD vs crédit", "TCO vs Peugeot/Renault", "Top 10 objections (fiches prêtes)", "Record réponses aux 3 plus dures"] },
-  { num: 3, title: "Kia Expert EV", tasks: ["Portfolio: Niro, EV6, EV9", "Charge rapide (800V avantage)", "Pitch EV6 vs Tesla Model 3", "Argumentaire '10 ans garantie'"] },
-  { num: 4, title: "Valauto Overview", tasks: ["1-liner par marque (VW, Audi, Skoda, Cupra, Seat, BYD)", "Stratégie 'pas 1 réponse, 6 solutions'", "TCO comparatif 6 marques", "Pitch multi-marques"] },
-  { num: 5, title: "Valauto Deep Dive B2B", tasks: ["ROI pour PME (-30% coûts énergie)", "KPI B2B (maintenance -60%, énergie -70%)", "Top 5 objections B2B", "Pitch pour décideur PME"] },
-  { num: 6, title: "Simulations Entretien", tasks: ["Mock #1: Citroën particulier (budget limité)", "Mock #2: Kia premium (Tesla vs EV6)", "Mock #3: Valauto B2B (PME 30 véhicules)", "Recording + self-assessment chaque mock"] },
-  { num: 7, title: "Plan 100j + Révision", tasks: ["100-Day Action Plan (J1-30, J31-60, J61-100)", "KPI: CA/mois, ventes, NPS", "Relire fiches + pitches clés", "Confidence check: suis-je prêt?"] },
-];
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 8px">
+        <h4 style="margin:0">Gamme de véhicules</h4>
+        <button class="btn-mini" id="flash-btn" type="button">🧠 Réviser la gamme</button>
+      </div>
+      <div class="table-scroll">
+        <table class="gamme">
+          <thead><tr><th>Modèle</th><th>Segment</th><th>Énergie</th><th>À retenir</th></tr></thead>
+          <tbody>
+            ${b.gamme.map(g=>`<tr><td><b>${esc(g.modele)}</b></td><td>${esc(g.segment)}</td><td><span class="tag">${esc(g.energie)}</span></td><td>${esc(g.note)}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
 
-// LOAD CONTENT
-document.addEventListener('DOMContentLoaded', () => {
-  // Timeline
+      <h4 style="margin:18px 0 8px">Points clés pour l'entretien</h4>
+      <ul class="points">
+        ${b.points.map(p=>`<li>${esc(p)}</li>`).join('')}
+      </ul>
+
+      ${b.links && b.links.length ? `<div class="ext-links">${b.links.map(renderResourceLink).join('')}</div>` : ''}
+    </div>
+  `;
+  modal.querySelector('#modal-close').addEventListener('click', closeModal);
+  modal.querySelector('#flash-btn').addEventListener('click', () => startFlashcards(key));
+}
+
+function openBrand(key){
+  renderBrandDetails(key);
+  document.getElementById('overlay').classList.add('show');
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('show'); }
+document.getElementById('overlay').addEventListener('click', e => { if(e.target.id==='overlay') closeModal(); });
+
+function startFlashcards(key){
+  const b = BRANDS[key];
+  const modal = document.getElementById('modal');
+  let order = shuffle(b.gamme.map((_,i)=>i));
+  let idx = 0;
+  let showBack = false;
+
+  function render(){
+    const g = b.gamme[order[idx]];
+    modal.querySelector('.mbody').innerHTML = `
+      <div class="flash-card" id="flashcard">
+        <div class="fc-label">${showBack ? 'Segment · Énergie · À retenir' : 'Modèle'}</div>
+        <div class="fc-content">${showBack ? esc(g.segment) : esc(g.modele)}</div>
+        ${showBack ? `<div class="fc-sub">${esc(g.energie)} — ${esc(g.note)}</div>` : `<div class="fc-sub">Clique sur la carte pour révéler la réponse</div>`}
+      </div>
+      <div class="flash-controls">
+        <button class="btn-mini" id="fc-prev" type="button">← Précédent</button>
+        <span class="flash-progress">${idx+1} / ${order.length}</span>
+        <button class="btn-mini" id="fc-next" type="button">Suivant →</button>
+      </div>
+      <div class="row-actions" style="justify-content:center">
+        <button class="btn-mini" id="fc-shuffle" type="button">🔀 Mélanger</button>
+        <button class="btn-mini" id="fc-back" type="button">← Retour à la fiche</button>
+      </div>
+    `;
+    modal.querySelector('#flashcard').addEventListener('click', () => { showBack = !showBack; render(); });
+    modal.querySelector('#fc-prev').addEventListener('click', () => { idx = (idx-1+order.length)%order.length; showBack=false; render(); });
+    modal.querySelector('#fc-next').addEventListener('click', () => { idx = (idx+1)%order.length; showBack=false; render(); });
+    modal.querySelector('#fc-shuffle').addEventListener('click', () => { order = shuffle(b.gamme.map((_,i)=>i)); idx=0; showBack=false; render(); });
+    modal.querySelector('#fc-back').addEventListener('click', () => renderBrandDetails(key));
+  }
+  render();
+}
+
+/* ---------------- ACTION PLAN RENDERING ---------------- */
+function renderPlan(pageKey, planItems){
+  const container = document.getElementById('plan-'+pageKey);
   let html = '';
-  TIMELINE.forEach(d => {
-    html += `<div class="day-item"><h3>J${d.num} — ${d.title}</h3><ul>${d.tasks.map(t => `<li>${t}</li>`).join('')}</ul></div>`;
+  planItems.forEach((wk, wi) => {
+    html += `<div class="week"><div class="wk-head"><div class="wk-num">S${wi+1}</div><div class="wk-title">${esc(wk.titre)}</div></div><div class="wk-goal">🎯 ${esc(wk.goal)}</div><ul class="checklist">`;
+    wk.items.forEach((it, ii) => {
+      const workId = `${pageKey}-${wi}-${ii}`;
+      const checkboxId = `chk-${workId}`;
+      WORKMETA[workId] = it.work || {type:"notes"};
+      html += `<li id="li-${checkboxId}">
+        <div class="item-top">
+          <input type="checkbox" id="${checkboxId}">
+          <label for="${checkboxId}">${esc(it.text)}</label>
+          <button class="work-toggle" data-work="${workId}" type="button">📖 Apprendre & travailler</button>
+        </div>
+        <div class="workspace" id="ws-${workId}"></div>
+      </li>`;
+    });
+    html += `</ul></div>`;
   });
-  document.getElementById('timeline-content').innerHTML = html;
+  container.innerHTML = html;
 
-  // Flashcards
-  loadFlashcards();
-
-  // Objections
-  html = '';
-  OBJECTIONS.forEach(o => {
-    html += `<div class="objection-box"><div class="obj-q">❓ ${o.q}</div><div class="obj-a">✅ ${o.a}</div></div>`;
+  container.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    cb.addEventListener('change', () => toggleItem(pageKey, cb.id));
   });
-  document.getElementById('objections-content').innerHTML = html;
-
-  // Pitches
-  html = '';
-  PITCHES.forEach(p => {
-    html += `<div class="pitch-box"><p style="margin:0 0 12px;color:var(--muted);font-size:13px"><strong>${p.title}</strong></p><p style="margin:0;color:var(--text);font-size:13px;line-height:1.6">${p.content}</p></div>`;
+  container.querySelectorAll('.work-toggle').forEach(btn=>{
+    btn.addEventListener('click', () => toggleWorkspacePanel(btn));
   });
-  document.getElementById('pitches-content').innerHTML = html;
 
-  // Mocks
-  html = '';
-  MOCKS.forEach(m => {
-    html += `<div class="mock-scenario"><h3>${m.title}</h3><p class="scenario-text"><strong>Scénario:</strong> ${m.scenario}</p><div class="expected"><strong>À maîtriser:</strong> ${m.expected}</div></div>`;
+  loadProgress(pageKey);
+}
+
+function toggleWorkspacePanel(btn){
+  const workId = btn.dataset.work;
+  const panel = document.getElementById('ws-'+workId);
+  const opened = panel.classList.toggle('open');
+  btn.textContent = opened ? '▲ Fermer' : '📖 Apprendre & travailler';
+  if(opened && !panel.dataset.built){
+    buildWorkspace(panel, workId, WORKMETA[workId]);
+    panel.dataset.built = '1';
+  }
+}
+
+function buildWorkspace(panel, workId, work){
+  work = work || {type:"notes"};
+  let html = '';
+  if(work.lesson){
+    html += `<div class="lesson-box"><div class="lesson-label">🎓 À savoir</div><div class="lesson-text">${formatLesson(work.lesson)}</div></div>`;
+  }
+  if(work.resources && work.resources.length){
+    html += `<div class="resource-links">${work.resources.map(renderResourceLink).join('')}</div>`;
+  }
+  html += `<div class="practice-label">✍️ À toi de jouer</div><div class="practice-area" data-practice></div>`;
+  panel.innerHTML = html;
+
+  panel.querySelectorAll('[data-open-brand]').forEach(btn => {
+    btn.addEventListener('click', () => openBrand(btn.dataset.openBrand));
   });
-  document.getElementById('mocks-content').innerHTML = html;
 
-  // Tab switching
-  document.querySelectorAll('nav.tabs button').forEach(btn => {
-    btn.addEventListener('click', e => {
-      document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('section.page').forEach(p => p.classList.remove('active'));
-      e.target.classList.add('active');
-      document.getElementById('page-'+e.target.dataset.page).classList.add('active');
-      window.scrollTo({top:0,behavior:'smooth'});
+  const practiceEl = panel.querySelector('[data-practice]');
+  if(work.type === "table"){
+    buildTable(practiceEl, workId, work.columns, work.seed);
+  } else {
+    buildNotes(practiceEl, workId, !!work.counter);
+  }
+}
+
+function buildNotes(panel, workId, withCounter){
+  const key = 'note-'+workId;
+  let saved = '';
+  try{ saved = localStorage.getItem(key) || ''; }catch(e){}
+  panel.innerHTML = `<textarea placeholder="Écris ici tes notes, ta réponse ou ton brouillon…"></textarea>${withCounter ? '<div class="counter" data-counter></div>' : ''}<div class="save-indicator" data-saved>Enregistré ✓</div>`;
+  const ta = panel.querySelector('textarea');
+  ta.value = saved;
+  const counterEl = panel.querySelector('[data-counter]');
+  const savedEl = panel.querySelector('[data-saved]');
+
+  function updateCounter(){
+    if(!counterEl) return;
+    const words = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+    const seconds = Math.round(words/2.2);
+    counterEl.textContent = `${words} mots · environ ${seconds} sec à l'oral`;
+  }
+  updateCounter();
+
+  let t;
+  ta.addEventListener('input', () => {
+    updateCounter();
+    clearTimeout(t);
+    t = setTimeout(() => {
+      try{ localStorage.setItem(key, ta.value); }catch(e){}
+      savedEl.classList.add('show');
+      setTimeout(() => savedEl.classList.remove('show'), 1200);
+    }, 400);
+  });
+}
+
+function emptyRow(columns){
+  const o = {};
+  columns.forEach(c => o[c] = '');
+  return o;
+}
+
+function appendRow(tbody, columns, rowData, onChange){
+  const tr = document.createElement('tr');
+  columns.forEach(c => {
+    const td = document.createElement('td');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = rowData[c] || '';
+    let t;
+    input.addEventListener('input', () => { clearTimeout(t); t = setTimeout(onChange, 400); });
+    td.appendChild(input);
+    tr.appendChild(td);
+  });
+  const tdBtn = document.createElement('td');
+  const rm = document.createElement('button');
+  rm.className = 'remove-row';
+  rm.type = 'button';
+  rm.title = 'Supprimer la ligne';
+  rm.textContent = '✕';
+  rm.addEventListener('click', () => { tr.remove(); onChange(); });
+  tdBtn.appendChild(rm);
+  tr.appendChild(tdBtn);
+  tbody.appendChild(tr);
+}
+
+function buildTable(panel, workId, columns, seed){
+  const key = 'tbl-'+workId;
+  let rows;
+  try{
+    const raw = localStorage.getItem(key);
+    rows = raw ? JSON.parse(raw) : null;
+  }catch(e){ rows = null; }
+  if(!rows || !rows.length){
+    rows = (seed && seed.length ? seed : [{}]).map(r => Object.assign(emptyRow(columns), r));
+  }
+
+  panel.innerHTML = `
+    <div class="table-scroll">
+      <table class="worktable">
+        <thead><tr>${columns.map(c=>`<th>${esc(c)}</th>`).join('')}<th></th></tr></thead>
+        <tbody data-body></tbody>
+      </table>
+    </div>
+    <div class="row-actions">
+      <button class="btn-mini" data-add type="button">+ Ajouter une ligne</button>
+      <span class="save-indicator" data-saved>Enregistré ✓</span>
+    </div>`;
+
+  const tbody = panel.querySelector('[data-body]');
+  const savedEl = panel.querySelector('[data-saved]');
+
+  function persist(){
+    const data = Array.from(tbody.children).map(tr => {
+      const obj = {};
+      columns.forEach((c,ci) => { obj[c] = tr.children[ci].querySelector('input').value; });
+      return obj;
+    });
+    try{ localStorage.setItem(key, JSON.stringify(data)); }catch(e){}
+    savedEl.classList.add('show');
+    setTimeout(() => savedEl.classList.remove('show'), 1200);
+  }
+
+  rows.forEach(r => appendRow(tbody, columns, r, persist));
+
+  panel.querySelector('[data-add]').addEventListener('click', () => {
+    appendRow(tbody, columns, emptyRow(columns), persist);
+    persist();
+  });
+}
+
+/* ---------------- CHECKBOX PROGRESS ---------------- */
+function toggleItem(pageKey, id){
+  const cb = document.getElementById(id);
+  const li = document.getElementById('li-'+id);
+  li.classList.toggle('done', cb.checked);
+  try{
+    const raw = localStorage.getItem('prepa-entretiens-'+pageKey);
+    const state = raw ? JSON.parse(raw) : {};
+    state[id] = cb.checked;
+    localStorage.setItem('prepa-entretiens-'+pageKey, JSON.stringify(state));
+  }catch(e){}
+  updateProgress(pageKey);
+}
+
+function loadProgress(pageKey){
+  try{
+    const raw = localStorage.getItem('prepa-entretiens-'+pageKey);
+    const state = raw ? JSON.parse(raw) : {};
+    Object.keys(state).forEach(id => {
+      const cb = document.getElementById(id);
+      if(cb){ cb.checked = state[id]; document.getElementById('li-'+id).classList.toggle('done', state[id]); }
+    });
+  }catch(e){}
+  updateProgress(pageKey);
+}
+
+function updateProgress(pageKey){
+  const boxes = document.querySelectorAll(`#plan-${pageKey} input[type=checkbox]`);
+  const total = boxes.length;
+  let done = 0;
+  boxes.forEach(b => { if(b.checked) done++; });
+  const pct = total ? Math.round(done/total*100) : 0;
+  const fill = document.getElementById('progress-'+pageKey);
+  const label = document.getElementById('progress-label-'+pageKey);
+  if(fill) fill.style.width = pct+'%';
+  if(label) label.textContent = pct+'%';
+}
+
+/* ---------------- EXPORT ---------------- */
+function downloadText(text, filename){
+  const blob = new Blob([text], {type:'text/markdown;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function planToMarkdown(pageKey, planItems){
+  let md = `# Plan d'action — ${PAGE_TITLES[pageKey]}\n\n`;
+  planItems.forEach((wk, wi) => {
+    md += `## Semaine ${wi+1} — ${wk.titre}\n_Objectif : ${wk.goal}_\n\n`;
+    wk.items.forEach((it, ii) => {
+      const workId = `${pageKey}-${wi}-${ii}`;
+      md += `### ${it.text}\n`;
+      const work = it.work || {type:"notes"};
+      if(work.type === "table"){
+        let raw = null;
+        try{ raw = localStorage.getItem('tbl-'+workId); }catch(e){}
+        const rows = raw ? JSON.parse(raw) : [];
+        const hasContent = rows.some(r => work.columns.some(c => (r[c]||'').trim()));
+        if(hasContent){
+          md += '| ' + work.columns.join(' | ') + ' |\n';
+          md += '| ' + work.columns.map(()=>'---').join(' | ') + ' |\n';
+          rows.forEach(r => { md += '| ' + work.columns.map(c => (r[c]||'').replace(/\|/g,'/') || ' ').join(' | ') + ' |\n'; });
+        } else {
+          md += '_Pas encore rempli._\n';
+        }
+      } else {
+        let note = '';
+        try{ note = localStorage.getItem('note-'+workId) || ''; }catch(e){}
+        md += (note.trim() ? note.trim() : '_Pas encore rempli._') + '\n';
+      }
+      md += '\n';
     });
   });
+  return md;
+}
 
-  // Intensive sub-tabs
-  document.querySelectorAll('.intensive-nav button').forEach(btn => {
-    btn.addEventListener('click', e => {
-      document.querySelectorAll('.intensive-nav button').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.intensive-sub').forEach(s => s.classList.remove('active'));
-      e.target.classList.add('active');
-      document.querySelector('[data-int-page="'+e.target.dataset.intensive+'"]').classList.add('active');
-    });
-  });
+function exportPlan(pageKey){
+  downloadText(planToMarkdown(pageKey, PLANS[pageKey]), `plan-${pageKey}.md`);
+}
 
-  // Objection toggle
-  document.querySelectorAll('.objection-box').forEach(box => {
-    box.addEventListener('click', () => box.classList.toggle('open'));
-  });
+function exportAll(){
+  let md = `# Préparation entretiens vendeur automobile — Louis\n\n`;
+  ['citroen','kia','valauto'].forEach(pk => { md += planToMarkdown(pk, PLANS[pk]) + '\n---\n\n'; });
+  downloadText(md, 'preparation-entretiens-complete.md');
+}
 
-  // Flashcard flip
-  document.addEventListener('click', e => {
-    if(e.target.closest('.flashcard-container')) {
-      e.target.closest('.flashcard-container').classList.toggle('flipped');
-    }
-  });
+/* ---------------- INIT ---------------- */
+document.getElementById('grid-citroen').innerHTML = renderBrandCard('citroen');
+document.getElementById('grid-kia').innerHTML = renderBrandCard('kia');
+document.getElementById('grid-valauto').innerHTML = ['seat','cupra','skoda','byd','vw','audi'].map(renderBrandCard).join('');
 
-  // Flashcard brand change
-  document.getElementById('fc-brand').addEventListener('change', loadFlashcards);
+renderPlan('citroen', PLANS.citroen);
+renderPlan('kia', PLANS.kia);
+renderPlan('valauto', PLANS.valauto);
+
+['citroen','kia','valauto'].forEach(pk => {
+  const btn = document.getElementById('export-'+pk);
+  if(btn) btn.addEventListener('click', () => exportPlan(pk));
 });
+const exportAllBtn = document.getElementById('export-all');
+if(exportAllBtn) exportAllBtn.addEventListener('click', exportAll);
 
-function loadFlashcards(){
-  const brand = document.getElementById('fc-brand')?.value || 'citroen';
-  const cards = FLASHCARDS[brand] || [];
-  let html = '';
-  cards.forEach((c, i) => {
-    html += `<div class="flashcard-container"><div class="fc-label">${i+1}/${cards.length}</div><div class="fc-front">${c.q}</div><div class="fc-back">${c.a}</div></div>`;
-  });
-  document.getElementById('fc-cards-container').innerHTML = html;
-}
-
-function nextFlashcard(){
-  const brand = document.getElementById('fc-brand').value;
-  FLASHCARDS[brand].sort(() => Math.random() - 0.5);
-  loadFlashcards();
-}
-
-function shuffleFlashcards(){
-  const brand = document.getElementById('fc-brand').value;
-  FLASHCARDS[brand].sort(() => Math.random() - 0.5);
-  loadFlashcards();
-}
+/* ---------------- NAV ---------------- */
+document.getElementById('tabs').addEventListener('click', e=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('section.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+btn.dataset.page).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
 </script>
-
 </body>
 </html>
