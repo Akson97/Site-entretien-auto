@@ -51,6 +51,18 @@ nav.tabs button.active{background:var(--accent);border-color:var(--accent);color
 .ov-brand:hover{border-color:var(--accent)}
 .ov-brand b{color:var(--good);font-weight:700}
 
+.home-global{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:22px}
+.home-global-stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 22px;text-align:center;flex:1;min-width:160px}
+.home-global-stat b{display:block;font-size:26px;color:var(--good)}
+.home-global-stat span{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.home-card{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:18px;cursor:pointer;transition:transform .15s ease,border-color .15s ease}
+.home-card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.home-card-head{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:700;font-size:15.5px}
+.home-metric{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin:10px 0 4px}
+.home-metric b{color:var(--text)}
+.home-metric:first-of-type{margin-top:0}
+
 main{max-width:1180px;margin:0 auto;padding:28px 24px 80px}
 section.page{display:none;animation:fade .25s ease}
 section.page.active{display:block}
@@ -189,6 +201,8 @@ table.gamme,table.worktable{min-width:560px}
   .overview-bar{padding:0 14px;margin-top:10px}
   h2.section-title{font-size:16px;margin:26px 0 12px}
   .card-grid{grid-template-columns:1fr}
+  .home-grid{grid-template-columns:1fr}
+  .home-global{flex-direction:column}
   .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .overlay{padding:0;align-items:stretch;overflow:hidden}
   .modal{border-radius:0;max-width:100%;min-height:100%;max-height:100%;margin-bottom:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -203,6 +217,36 @@ table.gamme,table.worktable{min-width:560px}
   .export-row{justify-content:stretch}
   .export-row .btn-mini{flex:1;justify-content:center}
 }
+
+/* ---- PDF / print report ---- */
+.print-only{display:none}
+@media print{
+  body > *:not(#print-report){display:none !important}
+  #print-report{display:block !important}
+}
+.print-report{background:#fff;color:#181818;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;min-height:100vh;padding:16px 20px;box-sizing:border-box}
+.print-page{padding:0 0 24px;page-break-after:always}
+.print-page:last-child{page-break-after:auto}
+.print-page h1{font-size:21px;margin:0 0 2px;color:#111}
+.print-date{color:#666;font-size:11.5px;margin:0 0 18px}
+.print-stats{display:flex;gap:14px;margin-bottom:22px}
+.print-stat{border:1px solid #ccc;border-radius:8px;padding:10px 20px;text-align:center}
+.print-stat b{display:block;font-size:22px;color:#1a56db}
+.print-stat span{font-size:10.5px;color:#666;text-transform:uppercase;letter-spacing:.3px}
+.print-page h2{font-size:15px;border-bottom:2px solid #111;padding-bottom:4px;margin:22px 0 12px}
+.print-week{margin-bottom:14px;page-break-inside:avoid}
+.print-week h3{font-size:13px;margin:0 0 3px;color:#1a56db}
+.print-week .print-goal{font-size:11px;color:#666;margin:0 0 8px}
+.print-task{margin:0 0 8px;padding-left:8px;border-left:3px solid #e2e2e2}
+.print-task.done{border-left-color:#1a8a5a}
+.print-task-title{font-weight:600;font-size:12px;margin-bottom:3px;color:#181818}
+.print-note{font-size:11.5px;color:#333;margin:0 0 4px;white-space:pre-wrap}
+.print-note.empty{color:#999;font-style:italic}
+table.print-table{width:100%;border-collapse:collapse;font-size:10.5px;margin:4px 0}
+table.print-table th,table.print-table td{border:1px solid #ddd;padding:4px 6px;text-align:left}
+table.print-table th{background:#f2f2f2}
+ul.print-checklist{margin:0 0 4px;padding-left:18px;font-size:11.5px;color:#333}
+ul.print-checklist li{margin-bottom:3px}
 </style>
 </head>
 <body>
@@ -214,7 +258,8 @@ table.gamme,table.worktable{min-width:560px}
       <div class="t2">Citroën · Kia · Valauto</div>
     </div>
     <nav class="tabs" id="tabs">
-      <button data-page="citroen" class="active" title="Citroën SOFIDA"><span class="brand-dot" style="background:#c4131a"></span>Citroën</button>
+      <button data-page="accueil" class="active">🏠 Accueil</button>
+      <button data-page="citroen" title="Citroën SOFIDA"><span class="brand-dot" style="background:#c4131a"></span>Citroën</button>
       <button data-page="kia" title="Kia SERVA"><span class="brand-dot" style="background:#bb162b"></span>Kia</button>
       <button data-page="valauto" title="Valauto"><span class="brand-dot" style="background:#001e50"></span>Valauto</button>
     </nav>
@@ -231,8 +276,17 @@ table.gamme,table.worktable{min-width:560px}
 <main>
 
   <!-- ACCUEIL -->
+  <section class="page active" id="page-accueil">
+    <div class="hero">
+      <h1>Bienvenue Louis 👋</h1>
+      <p>Voici où tu en es. Le <strong>sprint 7-14 jours</strong> est ta priorité immédiate pour l'entretien ; le <strong>plan 60 jours</strong> est ce que tu pourras présenter une fois embauché(e).</p>
+    </div>
+    <div class="home-global" id="home-global"></div>
+    <div class="home-grid" id="home-stats"></div>
+  </section>
+
   <!-- CITROEN -->
-  <section class="page active" id="page-citroen">
+  <section class="page" id="page-citroen">
     <div class="hero">
       <h1>Citroën — Vendeur automobile B2C</h1>
       <p>Poste axé clientèle particuliers : découverte des besoins, essai, financement (LOA/LLD/crédit), reprise, livraison. Citroën est la 3ᵉ marque du marché français et retrouve de la puissance commerciale en 2025.</p>
@@ -247,7 +301,7 @@ table.gamme,table.worktable{min-width:560px}
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progress-citroen"></div></div>
       <div class="progress-label"><span id="progress-label-citroen">0%</span> du plan complété</div>
-      <div class="export-row"><button class="btn-mini" id="export-citroen" type="button">📥 Exporter mes notes (.md)</button></div>
+      <div class="export-row"><button class="btn-mini" id="export-citroen" type="button">📄 Exporter en PDF</button></div>
     </div>
 
     <h2 class="section-title"><span class="num">📊</span>Plan 60 jours pour être rentable</h2>
@@ -276,7 +330,7 @@ table.gamme,table.worktable{min-width:560px}
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progress-kia"></div></div>
       <div class="progress-label"><span id="progress-label-kia">0%</span> du plan complété</div>
-      <div class="export-row"><button class="btn-mini" id="export-kia" type="button">📥 Exporter mes notes (.md)</button></div>
+      <div class="export-row"><button class="btn-mini" id="export-kia" type="button">📄 Exporter en PDF</button></div>
     </div>
 
     <h2 class="section-title"><span class="num">📊</span>Plan 60 jours pour être rentable</h2>
@@ -305,7 +359,7 @@ table.gamme,table.worktable{min-width:560px}
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progress-valauto"></div></div>
       <div class="progress-label"><span id="progress-label-valauto">0%</span> du plan complété</div>
-      <div class="export-row"><button class="btn-mini" id="export-valauto" type="button">📥 Exporter mes notes (.md)</button></div>
+      <div class="export-row"><button class="btn-mini" id="export-valauto" type="button">📄 Exporter en PDF</button></div>
     </div>
 
     <h2 class="section-title"><span class="num">📊</span>Plan 60 jours pour être rentable</h2>
@@ -325,7 +379,7 @@ table.gamme,table.worktable{min-width:560px}
 Semaine intensive 7 jours • Trois marques: Citroën, Kia, Valauto<br>
 Plan 60 jours inclus par marque • Mise à jour: Août 2026
 </p>
-<div class="export-row" style="justify-content:flex-start;margin-top:10px"><button class="btn-mini" id="export-all" type="button">📥 Tout exporter (3 marques) en .md</button></div>
+<div class="export-row" style="justify-content:flex-start;margin-top:10px"><button class="btn-mini" id="export-all" type="button">📄 Exporter tout en PDF (3 marques)</button></div>
 </footer>
     </main>
 
@@ -334,6 +388,8 @@ Plan 60 jours inclus par marque • Mise à jour: Août 2026
 <div class="overlay" id="overlay">
   <div class="modal" id="modal"></div>
 </div>
+
+<div id="print-report" class="print-only print-report"></div>
 
 <script>
 /* ---------------- DATA ---------------- */
@@ -1272,94 +1328,162 @@ function updateProgress(pageKey, kind){
   updateOverview();
 }
 
+function totalFlashcardsMastered(){
+  let mastered = 0;
+  try{
+    for(let i=0;i<localStorage.length;i++){
+      const key = localStorage.key(i);
+      if(key && key.indexOf('fc-') === 0){
+        const known = JSON.parse(localStorage.getItem(key) || '{}');
+        mastered += Object.values(known).filter(Boolean).length;
+      }
+    }
+  }catch(e){}
+  return mastered;
+}
+
 function updateOverview(){
+  const brandStats = {};
   ['citroen','kia','valauto'].forEach(pk => {
     const plan4 = document.querySelectorAll(`#plan-${pk} input[type=checkbox]`);
     const plan100 = document.querySelectorAll(`#plan100-${pk} input[type=checkbox]`);
+    let done4 = 0; plan4.forEach(b => { if(b.checked) done4++; });
+    let done100 = 0; plan100.forEach(b => { if(b.checked) done100++; });
+    const pct4 = plan4.length ? Math.round(done4/plan4.length*100) : 0;
+    const pct100 = plan100.length ? Math.round(done100/plan100.length*100) : 0;
     const total = plan4.length + plan100.length;
-    let done = 0;
-    plan4.forEach(b => { if(b.checked) done++; });
-    plan100.forEach(b => { if(b.checked) done++; });
-    const pct = total ? Math.round(done/total*100) : 0;
+    const pctCombined = total ? Math.round((done4+done100)/total*100) : 0;
+    brandStats[pk] = {pct4, pct100, pctCombined};
     const el = document.getElementById('ov-'+pk);
-    if(el) el.textContent = pct+'%';
+    if(el) el.textContent = pctCombined+'%';
+  });
+  renderHome(brandStats);
+}
+
+const BRAND_META = {
+  citroen:{name:"Citroën", color:"#c4131a"},
+  kia:{name:"Kia", color:"#bb162b"},
+  valauto:{name:"Valauto", color:"#001e50"}
+};
+
+function renderHome(brandStats){
+  const globalEl = document.getElementById('home-global');
+  const gridEl = document.getElementById('home-stats');
+  if(!globalEl || !gridEl) return;
+
+  const pcts = Object.values(brandStats).map(s => s.pctCombined);
+  const globalPct = pcts.length ? Math.round(pcts.reduce((a,b)=>a+b,0)/pcts.length) : 0;
+
+  globalEl.innerHTML = `
+    <div class="home-global-stat"><b>${globalPct}%</b><span>Progression globale</span></div>
+    <div class="home-global-stat"><b>${totalFlashcardsMastered()}</b><span>Cartes maîtrisées</span></div>
+  `;
+
+  gridEl.innerHTML = ['citroen','kia','valauto'].map(pk => {
+    const meta = BRAND_META[pk];
+    const s = brandStats[pk] || {pct4:0, pct100:0};
+    return `<div class="home-card" data-page="${pk}">
+      <div class="home-card-head"><span class="brand-dot" style="background:${meta.color}"></span>${meta.name}</div>
+      <div class="home-metric"><span>Sprint 7-14 jours</span><b>${s.pct4}%</b></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${s.pct4}%"></div></div>
+      <div class="home-metric"><span>Plan 60 jours</span><b>${s.pct100}%</b></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${s.pct100}%;background:linear-gradient(90deg,var(--good),var(--accent))"></div></div>
+    </div>`;
+  }).join('');
+
+  gridEl.querySelectorAll('.home-card').forEach(card => {
+    card.addEventListener('click', () => switchPage(card.dataset.page));
   });
 }
 
-/* ---------------- EXPORT ---------------- */
-function downloadText(text, filename){
-  const blob = new Blob([text], {type:'text/markdown;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 2000);
+/* ---------------- EXPORT (PDF via impression navigateur) ---------------- */
+function taskStateHtml(workId, work){
+  work = work || {type:"notes"};
+  if(work.type === "table"){
+    let raw = null;
+    try{ raw = localStorage.getItem('tbl-'+workId); }catch(e){}
+    const rows = raw ? JSON.parse(raw) : [];
+    const filled = rows.filter(r => work.columns.some(c => (r[c]||'').trim()));
+    if(!filled.length) return `<p class="print-note empty">Pas encore rempli.</p>`;
+    return `<table class="print-table"><thead><tr>${work.columns.map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${filled.map(r=>`<tr>${work.columns.map(c=>`<td>${esc(r[c]||'')}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  }
+  if(work.type === "flashcards"){
+    const cardsCount = flashcardDeck(work).length;
+    let known = {};
+    try{ known = JSON.parse(localStorage.getItem('fc-'+workId) || '{}'); }catch(e){}
+    const mastered = Object.values(known).filter(Boolean).length;
+    return `<p class="print-note">🧠 Flashcards : ${mastered} / ${cardsCount} cartes maîtrisées.</p>`;
+  }
+  let note = '';
+  try{ note = localStorage.getItem('note-'+workId) || ''; }catch(e){}
+  if(!note.trim()) return `<p class="print-note empty">Pas encore rempli.</p>`;
+  return `<p class="print-note">${esc(note.trim()).replace(/\n/g,'<br>')}</p>`;
 }
 
-function planToMarkdown(pageKey, planItems){
-  let md = `# Plan d'action — ${PAGE_TITLES[pageKey]}\n\n`;
-  planItems.forEach((wk, wi) => {
-    md += `## ${wk.titre}\n_Objectif : ${wk.goal}_\n\n`;
+function sprintSectionHtml(pageKey){
+  let html = '';
+  let total = 0, done = 0;
+  let state = {};
+  try{ state = JSON.parse(localStorage.getItem('prepa-entretiens-'+pageKey) || '{}'); }catch(e){}
+  PLANS[pageKey].forEach((wk, wi) => {
+    html += `<div class="print-week"><h3>${esc(wk.titre)}</h3><p class="print-goal">${esc(wk.goal)}</p>`;
     wk.items.forEach((it, ii) => {
       const workId = `${pageKey}-${wi}-${ii}`;
-      md += `### ${it.text}\n`;
-      const work = it.work || {type:"notes"};
-      if(work.type === "table"){
-        let raw = null;
-        try{ raw = localStorage.getItem('tbl-'+workId); }catch(e){}
-        const rows = raw ? JSON.parse(raw) : [];
-        const hasContent = rows.some(r => work.columns.some(c => (r[c]||'').trim()));
-        if(hasContent){
-          md += '| ' + work.columns.join(' | ') + ' |\n';
-          md += '| ' + work.columns.map(()=>'---').join(' | ') + ' |\n';
-          rows.forEach(r => { md += '| ' + work.columns.map(c => (r[c]||'').replace(/\|/g,'/') || ' ').join(' | ') + ' |\n'; });
-        } else {
-          md += '_Pas encore rempli._\n';
-        }
-      } else if(work.type === "flashcards"){
-        const cardsCount = flashcardDeck(work).length;
-        let known = {};
-        try{ known = JSON.parse(localStorage.getItem('fc-'+workId) || '{}'); }catch(e){}
-        const mastered = Object.values(known).filter(Boolean).length;
-        md += `Flashcards de révision : ${mastered} / ${cardsCount} maîtrisées.\n`;
-      } else {
-        let note = '';
-        try{ note = localStorage.getItem('note-'+workId) || ''; }catch(e){}
-        md += (note.trim() ? note.trim() : '_Pas encore rempli._') + '\n';
-      }
-      md += '\n';
+      const isDone = !!state['chk-'+workId];
+      total++; if(isDone) done++;
+      html += `<div class="print-task ${isDone?'done':''}"><div class="print-task-title">${isDone?'✅':'☐'} ${esc(it.text)}</div>${taskStateHtml(workId, it.work)}</div>`;
     });
+    html += `</div>`;
   });
-  return md;
+  return {html, total, done};
 }
 
-function plan100ToMarkdown(pageKey){
-  let md = `## Plan 60 jours — ${PAGE_TITLES[pageKey]}\n\n`;
+function plan60SectionHtml(pageKey){
+  let html = '';
+  let total = 0, done = 0;
   let state = {};
   try{ state = JSON.parse(localStorage.getItem('prepa-entretiens-100-'+pageKey) || '{}'); }catch(e){}
   PLAN100[pageKey].forEach((phase, pi) => {
-    md += `### ${phase.titre}\n_Objectif : ${phase.objectif} — KPI : ${phase.kpi}_\n\n`;
+    html += `<div class="print-week"><h3>${esc(phase.titre)}</h3><p class="print-goal"><strong>Objectif :</strong> ${esc(phase.objectif)} — <strong>KPI :</strong> ${esc(phase.kpi)}</p><ul class="print-checklist">`;
     phase.items.forEach((item, ii) => {
       const id = `chk100-${pageKey}-${pi}-${ii}`;
-      md += `- [${state[id] ? 'x' : ' '}] ${item}\n`;
+      const isDone = !!state[id];
+      total++; if(isDone) done++;
+      html += `<li>${isDone?'✅':'☐'} ${esc(item)}</li>`;
     });
-    md += '\n';
+    html += `</ul></div>`;
   });
-  return md;
+  return {html, total, done};
 }
 
-function exportPlan(pageKey){
-  const md = planToMarkdown(pageKey, PLANS[pageKey]) + plan100ToMarkdown(pageKey);
-  downloadText(md, `plan-${pageKey}.md`);
+function buildPrintReport(pageKey){
+  const sprint = sprintSectionHtml(pageKey);
+  const plan60 = plan60SectionHtml(pageKey);
+  const sprintPct = sprint.total ? Math.round(sprint.done/sprint.total*100) : 0;
+  const plan60Pct = plan60.total ? Math.round(plan60.done/plan60.total*100) : 0;
+  const dateStr = new Date().toLocaleDateString('fr-FR', {day:'numeric', month:'long', year:'numeric'});
+  return `<div class="print-page">
+    <h1>Louis — Bilan de préparation ${esc(BRAND_META[pageKey] ? BRAND_META[pageKey].name : PAGE_TITLES[pageKey])}</h1>
+    <p class="print-date">Généré le ${dateStr}</p>
+    <div class="print-stats">
+      <div class="print-stat"><b>${sprintPct}%</b><span>Sprint 7-14 jours</span></div>
+      <div class="print-stat"><b>${plan60Pct}%</b><span>Plan 60 jours</span></div>
+    </div>
+    <h2>Sprint 7-14 jours</h2>
+    ${sprint.html}
+    <h2>Plan 60 jours</h2>
+    ${plan60.html}
+  </div>`;
 }
 
-function exportAll(){
-  let md = `# Préparation entretiens vendeur automobile — Louis\n\n`;
-  ['citroen','kia','valauto'].forEach(pk => { md += planToMarkdown(pk, PLANS[pk]) + plan100ToMarkdown(pk) + '\n---\n\n'; });
-  downloadText(md, 'preparation-entretiens-complete.md');
+function exportPdf(pageKey){
+  document.getElementById('print-report').innerHTML = buildPrintReport(pageKey);
+  window.print();
+}
+
+function exportPdfAll(){
+  document.getElementById('print-report').innerHTML = ['citroen','kia','valauto'].map(buildPrintReport).join('');
+  window.print();
 }
 
 /* ---------------- INIT ---------------- */
@@ -1377,10 +1501,10 @@ updateOverview();
 
 ['citroen','kia','valauto'].forEach(pk => {
   const btn = document.getElementById('export-'+pk);
-  if(btn) btn.addEventListener('click', () => exportPlan(pk));
+  if(btn) btn.addEventListener('click', () => exportPdf(pk));
 });
 const exportAllBtn = document.getElementById('export-all');
-if(exportAllBtn) exportAllBtn.addEventListener('click', exportAll);
+if(exportAllBtn) exportAllBtn.addEventListener('click', exportPdfAll);
 
 /* ---------------- NAV ---------------- */
 function switchPage(pageKey){
