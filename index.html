@@ -50,6 +50,7 @@ nav.tabs button.active{background:var(--accent);border-color:var(--accent);color
 .ov-brand{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--text);font-size:12.5px;transition:border-color .15s ease}
 .ov-brand:hover{border-color:var(--accent)}
 .ov-brand b{color:var(--good);font-weight:700}
+.ov-sync-status{font-size:12px;color:var(--muted)}
 
 .home-global{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:22px}
 .home-global-stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 22px;text-align:center;flex:1;min-width:160px}
@@ -273,6 +274,8 @@ ul.print-checklist li{margin-bottom:3px}
   <button class="ov-brand" data-page="kia"><span class="brand-dot" style="background:#bb162b"></span>Kia <b id="ov-kia">0%</b></button>
   <button class="ov-brand" data-page="hyundai"><span class="brand-dot" style="background:#002c5f"></span>Hyundai <b id="ov-hyundai">0%</b></button>
   <button class="ov-brand" data-page="valauto"><span class="brand-dot" style="background:#001e50"></span>Valauto <b id="ov-valauto">0%</b></button>
+  <button class="ov-brand" id="sync-now-btn" type="button">🔄 Synchroniser maintenant</button>
+  <span id="sync-status" class="ov-sync-status"></span>
 </div>
 
 <main>
@@ -1076,24 +1079,53 @@ function applySyncData(data){
     Object.keys(data).forEach(k => localStorage.setItem(k, data[k]));
   }catch(e){}
 }
-let syncTimer = null;
-function scheduleSync(){
-  clearTimeout(syncTimer);
-  syncTimer = setTimeout(() => {
-    fetch('/api/sync', {
+function showSyncStatus(ok, detail){
+  const el = document.getElementById('sync-status');
+  if(!el) return;
+  el.textContent = ok ? '✅ Synchronisé' : ('❌ ' + (detail || 'Échec de synchro'));
+  el.style.color = ok ? 'var(--good)' : '#ff6b6b';
+  clearTimeout(el._hideTimer);
+  el._hideTimer = setTimeout(() => { el.textContent = ''; }, 5000);
+}
+async function performSync(manual){
+  if(manual) showSyncStatus_loading();
+  try{
+    const r = await fetch('/api/sync', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(collectSyncData())
-    }).catch(()=>{});
-  }, 1200);
+    });
+    if(!r.ok){
+      const errText = await r.text().catch(()=>'');
+      console.error('Sync POST failed', r.status, errText);
+      if(manual) showSyncStatus(false, `Erreur ${r.status}: ${errText.slice(0,80)}`);
+      return;
+    }
+    if(manual) showSyncStatus(true);
+  }catch(e){
+    console.error('Sync POST error', e);
+    if(manual) showSyncStatus(false, e.message);
+  }
+}
+function showSyncStatus_loading(){
+  const el = document.getElementById('sync-status');
+  if(!el) return;
+  clearTimeout(el._hideTimer);
+  el.style.color = 'var(--muted)';
+  el.textContent = '⏳ Synchronisation…';
+}
+let syncTimer = null;
+function scheduleSync(){
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => performSync(false), 1200);
 }
 async function loadFromServer(){
   try{
     const r = await fetch('/api/sync');
-    if(!r.ok) return;
+    if(!r.ok){ console.error('Sync GET failed', r.status); return; }
     const payload = await r.json();
     if(payload && payload.data) applySyncData(payload.data);
-  }catch(e){}
+  }catch(e){ console.error('Sync GET error', e); }
 }
 
 /* ---------------- BRAND CARDS & MODAL ---------------- */
@@ -1718,6 +1750,8 @@ document.getElementById('overview-bar').addEventListener('click', e=>{
   if(!btn) return;
   switchPage(btn.dataset.page);
 });
+const syncNowBtn = document.getElementById('sync-now-btn');
+if(syncNowBtn) syncNowBtn.addEventListener('click', () => performSync(true));
 </script>
 </body>
 </html>
