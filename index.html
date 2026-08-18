@@ -255,12 +255,13 @@ ul.print-checklist li{margin-bottom:3px}
   <div class="top-inner">
     <div class="brandmark">
       <div class="t1">Louis — Prépa entretiens vendeur automobile</div>
-      <div class="t2">Citroën · Kia · Valauto</div>
+      <div class="t2">Citroën · Kia · Hyundai · Valauto</div>
     </div>
     <nav class="tabs" id="tabs">
       <button data-page="accueil" class="active">🏠 Accueil</button>
       <button data-page="citroen" title="Citroën SOFIDA"><span class="brand-dot" style="background:#c4131a"></span>Citroën</button>
       <button data-page="kia" title="Kia SERVA"><span class="brand-dot" style="background:#bb162b"></span>Kia</button>
+      <button data-page="hyundai" title="Hyundai"><span class="brand-dot" style="background:#002c5f"></span>Hyundai</button>
       <button data-page="valauto" title="Valauto"><span class="brand-dot" style="background:#001e50"></span>Valauto</button>
     </nav>
   </div>
@@ -270,6 +271,7 @@ ul.print-checklist li{margin-bottom:3px}
   <span class="ov-label">Progression globale :</span>
   <button class="ov-brand" data-page="citroen"><span class="brand-dot" style="background:#c4131a"></span>Citroën <b id="ov-citroen">0%</b></button>
   <button class="ov-brand" data-page="kia"><span class="brand-dot" style="background:#bb162b"></span>Kia <b id="ov-kia">0%</b></button>
+  <button class="ov-brand" data-page="hyundai"><span class="brand-dot" style="background:#002c5f"></span>Hyundai <b id="ov-hyundai">0%</b></button>
   <button class="ov-brand" data-page="valauto"><span class="brand-dot" style="background:#001e50"></span>Valauto <b id="ov-valauto">0%</b></button>
 </div>
 
@@ -343,6 +345,35 @@ ul.print-checklist li{margin-bottom:3px}
 
   </section>
 
+  <!-- HYUNDAI -->
+  <section class="page" id="page-hyundai">
+    <div class="hero">
+      <h1>Hyundai — Vendeur automobile B2C</h1>
+      <p>Hyundai mise sur le design (Ioniq 5 élue voiture de l'année 2022), la plateforme électrique E-GMP (recharge 800V) et une garantie 5 ans kilométrage illimité. Marque sœur de Kia (même groupe), avec un positionnement et une gamme très proches — sache les distinguer clairement.</p>
+    </div>
+
+    <h2 class="section-title"><span class="num">1</span>Fiche marque</h2>
+    <div class="card-grid" id="grid-hyundai"></div>
+
+    <h2 class="section-title"><span class="num">2</span>Plan de révision — sprint 7 à 14 jours</h2>
+    <p class="section-hint">🎯 Jour 1-7 = l'essentiel à savoir avant l'entretien avec le responsable des ventes. Jour 8-14 = pour approfondir si tu as une 2ᵉ semaine devant toi.</p>
+    <div class="timeline" id="plan-hyundai"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-hyundai"></div></div>
+      <div class="progress-label"><span id="progress-label-hyundai">0%</span> du plan complété</div>
+      <div class="export-row"><button class="btn-mini" id="export-hyundai" type="button">📄 Exporter en PDF</button></div>
+    </div>
+
+    <h2 class="section-title"><span class="num">📊</span>Plan 60 jours pour être rentable</h2>
+    <p class="section-hint">💬 Un plan court, chiffré et réaliste à présenter en entretien : de quoi donner au responsable des ventes une vision claire de ta valeur dès les 2 premiers mois — pas ce qu'il faut faire avant l'entretien.</p>
+    <div class="timeline" id="plan100-hyundai"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress100-hyundai"></div></div>
+      <div class="progress-label"><span id="progress100-label-hyundai">0%</span> du plan 60 jours complété</div>
+    </div>
+
+  </section>
+
   <!-- VALAUTO -->
   <section class="page" id="page-valauto">
     <div class="hero">
@@ -376,7 +407,7 @@ ul.print-checklist li{margin-bottom:3px}
 <footer>
 <p style="margin:0;font-size:12px">
 <strong>Préparation entretiens — Vendeur automobile</strong><br>
-Semaine intensive 7 jours • Trois marques: Citroën, Kia, Valauto<br>
+Semaine intensive 7 jours • Quatre marques: Citroën, Kia, Hyundai, Valauto<br>
 Plan 60 jours inclus par marque • Mise à jour: Août 2026
 </p>
 <div class="export-row" style="justify-content:flex-start;margin-top:10px"><button class="btn-mini" id="export-all" type="button">📄 Exporter tout en PDF (3 marques)</button></div>
@@ -458,6 +489,38 @@ const BRANDS = {
       "Le mix électrifié à 57 % (vs 45 % marché) positionne Kia en avance sur la transition — bon fil rouge pour parler conseil client et TCO.",
       "Connaître la logique de nommage EV2 à EV9 (taille croissante) pour orienter rapidement un client vers le bon modèle.",
       "La Picanto redémarre fort : savoir vendre l'entrée de gamme est aussi valorisé que vendre un Sportage."
+    ]
+  },
+
+  hyundai:{
+    name:"Hyundai", color:"#002c5f",
+    tagline:"Design primé (Ioniq 5), plateforme électrique E-GMP, garantie 5 ans kilométrage illimité.",
+    links:[{label:"Configurateur officiel Hyundai", url:"https://www.hyundai.com/fr/"}],
+    stats:[
+      {label:"Immatriculations VP 2025 (estimation)", value:"≈ 96 000", sub:"environ 4,3 % de part de marché"},
+      {label:"Part de marché VP (estimation)", value:"≈ 4,3 %", sub:"généralement devant Kia sur le marché français"},
+      {label:"Modèle le plus vendu", value:"Tucson", sub:"cœur de gamme SUV familial"},
+      {label:"Vitrine technologique", value:"Ioniq 5", sub:"élue Voiture Mondiale et Européenne de l'Année 2022"},
+      {label:"Garantie", value:"5 ans", sub:"kilométrage illimité — sans plafond, à la différence de beaucoup de concurrents"},
+      {label:"CA indicatif 2025 (estimation)", value:"≈ 2,3 Md€", sub:"≈ 96 000 VP × ~24 000 € prix moyen indicatif"}
+    ],
+    gamme:[
+      {modele:"i10", segment:"Citadine", energie:"Essence", note:"Entrée de gamme, très bon rapport prix/équipement"},
+      {modele:"i20", segment:"Citadine polyvalente", energie:"Essence / hybride léger", note:"Face à Clio, 208 et Polo"},
+      {modele:"Bayon", segment:"SUV urbain", energie:"Essence", note:"Version SUV de l'i20"},
+      {modele:"Kona", segment:"SUV compact", energie:"Essence / hybride / 100% électrique", note:"Gamme la plus polyvalente, du thermique à l'électrique"},
+      {modele:"Tucson", segment:"SUV familial", energie:"Essence / hybride / hybride rechargeable", note:"Best-seller Hyundai, cœur de gamme"},
+      {modele:"Santa Fe", segment:"SUV 7 places", energie:"Hybride", note:"Haut de gamme familial, image premium accessible"},
+      {modele:"Ioniq 5", segment:"Crossover électrique", energie:"100% électrique", note:"Vitrine technologique 800V, élue voiture de l'année 2022"},
+      {modele:"Ioniq 6", segment:"Berline électrique", energie:"100% électrique", note:"Design aérodynamique, autonomie longue distance"},
+      {modele:"Ioniq 9", segment:"Grand SUV électrique 7 places", energie:"100% électrique", note:"Haut de gamme électrique familial, nouveauté récente"}
+    ],
+    points:[
+      "Hyundai et Kia partagent le même groupe (Hyundai Motor Group) et des plateformes techniques communes, mais se différencient sur le design et la garantie : 5 ans kilométrage illimité chez Hyundai contre 7 ans / 150 000 km chez Kia — sache expliquer cette nuance sans jamais dénigrer la marque sœur.",
+      "L'Ioniq 5 a été élue Voiture Mondiale et Européenne de l'Année 2022 : un argument de crédibilité technologique fort et vérifiable, à ressortir spontanément.",
+      "La plateforme électrique E-GMP (800V) permet une recharge ultra-rapide (10-80 % en environ 18 minutes sur Ioniq 5/6) — un argument clé face à l'objection sur les temps de recharge.",
+      "Le Tucson reste le cœur de gamme et se décline en hybride et hybride rechargeable : bon point d'entrée pour un client qui hésite encore entre thermique et électrique.",
+      "La garantie 5 ans est sans plafond de kilométrage (contrairement à beaucoup de concurrents qui plafonnent à 100 000-150 000 km) : un vrai argument pour les gros rouleurs, à mettre en avant plus que la seule durée."
     ]
   },
 
@@ -764,6 +827,71 @@ const PLANS = {
           lesson:"Fixe des objectifs mesurables et progressifs : par exemple un nombre de rendez-vous tenus, un taux de transformation cible, un nombre de ventes. Évite les objectifs flous du type « bien connaître la gamme » — préfère « connaître les 20 modèles et leurs prix sans notes »."}}
       ]}
   ],
+  hyundai:[
+    {label:"J1-2", titre:"Jour 1-2 — Gamme & chiffres clés", goal:"Mémoriser la gamme et les chiffres avant tout le reste : c'est ce qu'un responsable des ventes teste en premier",
+      items:[
+        {text:"Apprendre la gamme complète (citadines, SUV, 100% électrique) et savoir la distinguer de celle de Kia", work:{type:"table", columns:["Modèle","Segment","Énergie","Argument différenciant"], seed:[{"Modèle":"i10"},{"Modèle":"i20"},{"Modèle":"Bayon"},{"Modèle":"Kona"},{"Modèle":"Tucson"},{"Modèle":"Santa Fe"},{"Modèle":"Ioniq 5"},{"Modèle":"Ioniq 6"},{"Modèle":"Ioniq 9"}],
+          lesson:"La fiche marque Hyundai de ce site liste toute la gamme (segment, énergie, positionnement pour chaque modèle). Utilise-la pour remplir ce tableau, puis lance le mode flashcards pour vérifier ce que tu as retenu.\n\nVa ensuite vérifier les tout derniers tarifs et finitions sur le configurateur officiel, ils changent régulièrement.",
+          resources:[{label:"Ouvrir la fiche marque Hyundai", brand:"hyundai"},{label:"Configurateur officiel Hyundai", url:"https://www.hyundai.com/fr/"}]}},
+        {text:"Réviser toute la gamme Hyundai (9 modèles) en flashcards jusqu'à l'automatisme", work:{type:"flashcards", brand:"hyundai",
+          lesson:"Entraîne-toi jusqu'à savoir situer instantanément chaque modèle Hyundai (segment, énergie, point clé), de l'i10 à l'Ioniq 9. C'est la base pour orienter un client vers le bon modèle en quelques secondes — et pour ne pas te tromper avec la gamme Kia le jour de l'entretien."}},
+        {text:"Maîtriser l'argument garantie 5 ans kilométrage illimité et savoir la comparer à Kia", work:{type:"notes", counter:true,
+          prompt:"Rédige 2-3 phrases : la durée et la particularité de la garantie (illimitée en kilométrage), en quoi elle rassure un client, et la nuance avec la garantie 7 ans/150 000 km de Kia (plus longue mais plafonnée).",
+          lesson:"La garantie Hyundai est de 5 ans, sans aucun plafond de kilométrage — un vrai atout pour un gros rouleur, à la différence de nombreux concurrents qui plafonnent à 100 000-150 000 km. Face à un client qui compare avec Kia (7 ans/150 000 km, même groupe), reste factuel : Kia dure plus longtemps mais est plafonnée, Hyundai est plus courte mais illimitée — le bon choix dépend du kilométrage annuel du client."}},
+        {text:"Réviser les chiffres clés Hyundai (part de marché, ventes, Ioniq 5) en flashcards avant l'entretien", work:{type:"flashcards", statsBrand:"hyundai",
+          lesson:"Ce jeu reprend les chiffres de la fiche marque (part de marché, immatriculations, distinctions de l'Ioniq 5...). Un recruteur qui entend un chiffre exact et à jour retient tout de suite que tu as fait tes devoirs — entraîne-toi jusqu'à les ressortir sans hésiter, tu as l'entretien jeudi."}}
+      ]},
+    {label:"J3-4", titre:"Jour 3-4 — Différenciateurs & process de vente", goal:"Savoir situer Hyundai face à Kia et à la concurrence, et comprendre le fonctionnement commercial",
+      items:[
+        {text:"Comparer Hyundai à Kia et aux marques généralistes sur 2-3 points clés", work:{type:"table", columns:["Critère","Hyundai","Kia / généraliste"], seed:[{"Critère":"Garantie"},{"Critère":"Design / image"},{"Critère":"Gamme électrique"}],
+          lesson:"Hyundai et Kia partagent le même groupe et des plateformes techniques communes, mais se différencient par le design et la garantie (5 ans illimité chez Hyundai vs 7 ans/150 000 km chez Kia). Remplis le tableau avec ces bases avant de le préciser avec les fiches produits."}},
+        {text:"Comprendre la plateforme électrique E-GMP et la recharge ultra-rapide 800V", work:{type:"table", columns:["Sujet","Ce qu'il faut savoir"], seed:[{"Sujet":"Plateforme E-GMP"},{"Sujet":"Recharge 800V (Ioniq 5/6)"},{"Sujet":"Autonomie WLTP"}],
+          lesson:"La plateforme E-GMP (partagée avec Kia) permet une architecture 800V : sur Ioniq 5 et Ioniq 6, la charge passe de 10 à 80 % en environ 18 minutes sur une borne compatible. C'est un argument technologique fort face à l'objection « ça met trop longtemps à charger »."}},
+        {text:"Découvrir le configurateur Hyundai et les tarifs par finition", work:{type:"notes",
+          prompt:"Note où trouver la grille tarifaire à jour et ce que tu dois avoir sous la main en rendez-vous client (tarifs, finitions, promotions en cours).",
+          lesson:"Le configurateur officiel te permet de simuler n'importe quelle finition avec le tarif exact du mois : c'est le document à avoir toujours sous la main en rendez-vous client.",
+          resources:[{label:"Configurateur officiel Hyundai", url:"https://www.hyundai.com/fr/"}]}},
+        {text:"Comprendre les offres Hyundai Finance (LOA, LLD, crédit) et leurs avantages", work:{type:"table", columns:["Offre Hyundai Finance","Avantages","Cas d'usage"], seed:[{},{},{}],
+          lesson:"Hyundai Finance propose les mêmes grandes familles que le marché : LOA (option d'achat en fin de contrat), LLD (restitution systématique, loyers tout compris) et crédit classique. L'avantage de passer par la marque plutôt qu'une banque généraliste : des taux souvent négociés et des offres promotionnelles ponctuelles par modèle, à vérifier sur le configurateur."}}
+      ]},
+    {label:"J5-6", titre:"Jour 5-6 — Objections & argumentaires", goal:"Savoir vendre une transition vers l'électrique et répondre aux objections courantes",
+      items:[
+        {text:"Préparer un argumentaire TCO simple pour convaincre un client hésitant sur l'Ioniq 5 ou le Kona Electric", work:{type:"notes", counter:true,
+          lesson:"Le TCO (coût total de possession) additionne : prix d'achat net de reprise, financement, énergie, entretien, assurance et décote — sur toute la durée de détention. Une électrique coûte souvent plus cher à l'achat mais moins cher à l'usage (énergie, entretien réduit car moins de pièces d'usure) : c'est cette addition complète qu'il faut montrer à un client qui ne regarde que le prix catalogue.",
+          example:"Exemple : « Sur 5 ans, une Ioniq 5 coûte plus cher à l'achat qu'un Tucson essence équivalent — mais avec un plein électrique à la maison nettement moins cher qu'un plein essence, et un entretien réduit (pas de vidange, moins de pièces d'usure), le coût total de possession devient inférieur dès la 3ᵉ ou 4ᵉ année, sans compter la garantie 5 ans illimitée qui rassure sur la fiabilité. »"}},
+        {text:"Travailler le traitement d'objections spécifiques (autonomie, revente, image de marque coréenne)", work:{type:"table", columns:["Objection","Réponse préparée"], seed:[{},{},{}],
+          lesson:"Les objections les plus fréquentes sur l'électrique portent sur l'autonomie réelle, la revente et la recharge à domicile. Réponds toujours avec un chiffre vérifiable (autonomie WLTP, garantie) plutôt qu'une opinion générale.",
+          example:"Exemple pour l'objection « Une marque coréenne, ça revend mal » : Reformuler (« Vous vous demandez si vous allez retrouver votre argent à la revente ») → Valider (« C'est une question légitime ») → Répondre avec un fait (« L'Ioniq 5 a été élue voiture de l'année 2022 et Hyundai offre une garantie 5 ans illimitée — deux éléments qui soutiennent la valeur de revente ») → Vérifier (« Est-ce que la revente à moyen terme est un critère important pour vous, ou plutôt l'usage au quotidien ? »)."}},
+        {text:"Identifier le parcours lead digital → prise de rendez-vous → vente en concession", work:{type:"notes",
+          prompt:"Note les étapes du parcours digital avant la concession, et ce que toi, vendeur, dois apporter que le digital ne donne pas (essai, conseil personnalisé).",
+          lesson:"La majorité des acheteurs commencent leur recherche en ligne (configurateur, avis, comparateurs) avant de prendre rendez-vous en concession. Le rôle du vendeur est alors de reprendre ce parcours là où le client l'a laissé — concentre-toi sur ce que le digital ne peut pas donner : l'essai et le conseil personnalisé."}}
+      ]},
+    {label:"J7", titre:"Jour 7 — Synthèse avant l'entretien", goal:"Être prêt à pitcher et à répondre aux questions du responsable des ventes",
+      items:[
+        {text:"Préparer un pitch de 2 minutes : pourquoi Hyundai, pourquoi moi, pourquoi maintenant", work:{type:"notes", counter:true,
+          lesson:"Structure ton pitch en 3 temps : pourquoi Hyundai (une raison concrète et vérifiable, comme l'Ioniq 5 élue voiture de l'année ou la garantie 5 ans illimitée), pourquoi toi (2-3 qualités ou expériences transférables), pourquoi maintenant (ta disponibilité et ta motivation immédiate). Vise 220 à 260 mots pour tenir dans 2 minutes à l'oral.",
+          example:"Exemple (à adapter avec tes propres mots, ne pas apprendre par cœur) : « Je postule chez Hyundai parce que c'est une marque qui a fait ses preuves technologiquement — l'Ioniq 5 a été élue voiture de l'année 2022, et la garantie 5 ans kilométrage illimité montre une vraie confiance dans la fiabilité produit. J'ai envie de vendre une marque que je peux défendre avec des arguments solides, pas juste un discours commercial. Côté profil, j'ai une vraie appétence pour le contact client et j'apprends vite : je m'adapte rapidement à une gamme et à un argumentaire produit. Et je suis disponible immédiatement, avec une vraie motivation à m'investir sur la durée. »"}},
+        {text:"Lister 3 questions à poser au recruteur sur l'accompagnement et la formation interne", work:{type:"table", columns:["Question à poser"], seed:[{},{},{}],
+          lesson:"Les meilleures questions montrent que tu projettes déjà dans le poste : sur la formation initiale, sur le mode de rémunération (fixe + commissions), sur les objectifs des 3 premiers mois, ou sur l'accompagnement par un vendeur senior. Évite les questions dont la réponse est déjà sur le site Hyundai."}},
+        {text:"Formaliser un plan de montée en compétence sur 60 jours à présenter en entretien", work:{type:"table", columns:["Palier","Objectif","Action clé"], seed:[{"Palier":"Jour 1-30"},{"Palier":"Jour 31-60"}],
+          lesson:"Découpe ton plan en 2 paliers de 30 jours : jour 1-30 = maîtrise produit et outils, jour 31-60 = autonomie sur les rendez-vous simples avec un premier objectif de ventes chiffré. Un plan court et concret convainc plus qu'une liste de vœux : ça montre que tu sais te fixer des jalons réalistes."}},
+        {text:"Faire un entretien blanc avec un proche en jouant un client difficile", work:{type:"notes",
+          prompt:"Après l'exercice, note à chaud : ce qui s'est bien passé, l'objection sur laquelle tu as bloqué, ce que tu changes avant jeudi.",
+          lesson:"Demande à ton proche de jouer un client qui compare Hyundai à Kia et qui doute du prix. Ton objectif n'est pas de « gagner » la discussion mais de rester calme, de reformuler ses doutes et de répondre avec des faits — c'est exactement ce qu'un recruteur veut voir en situation."}}
+      ]},
+    {label:"J8-14", titre:"Jour 8-14 — Approfondissement (si tu as une 2ᵉ semaine)", goal:"Pour aller plus loin si le temps le permet, sans que ce soit indispensable pour l'entretien",
+      items:[
+        {text:"Faire un essai ou une visite concession sur Tucson et Kona", work:{type:"notes",
+          prompt:"Note tes impressions sur : qualité perçue de l'habitacle, ergonomie de l'écran, volume de coffre, confort de conduite.",
+          lesson:"Avant de t'y rendre, configure les modèles sur le site officiel pour connaître tarifs et finitions disponibles. En showroom ou pendant l'essai, concentre-toi sur ce que les clients remarquent en premier : qualité perçue, écran tactile, coffre, confort.",
+          resources:[{label:"Configurateur officiel Hyundai", url:"https://www.hyundai.com/fr/"}]}},
+        {text:"Comprendre le rôle des avis clients et de la présence digitale dans la décision d'achat", work:{type:"notes",
+          prompt:"Note où trouver les avis Google de la concession et comment tu les utiliserais concrètement si un client hésite encore.",
+          lesson:"Avant de se déplacer en concession, la majorité des clients consultent les avis Google et les comparatifs en ligne. Une concession avec de bons avis convertit mieux : sache où trouver et comment les présenter si un client hésite encore."}},
+        {text:"Définir des objectifs personnels mesurables pour les 90 premiers jours", work:{type:"table", columns:["Objectif","Échéance","Indicateur de succès"], seed:[{},{},{}],
+          lesson:"Fixe des objectifs mesurables et progressifs : par exemple un nombre de rendez-vous tenus, un taux de transformation cible, un nombre de ventes. Évite les objectifs flous du type « bien connaître la gamme » — préfère « connaître les 9 modèles et leurs prix sans notes »."}}
+      ]}
+  ],
   valauto:[
     {label:"J1-2", titre:"Jour 1-2 — Les 6 marques & chiffres clés", goal:"Mémoriser les gammes et les chiffres des 6 marques avant tout le reste : c'est ce qu'un responsable des ventes teste en premier",
       items:[
@@ -860,6 +988,22 @@ const PLAN100 = {
         "Cap sur la suite : premières pistes B2B/flottes électriques repérées pour élargir le portefeuille"
       ]}
   ],
+  hyundai:[
+    {titre:"PHASE 1 : J1-30 (Maîtrise produit & premières ventes)", objectif:"Expert produit Hyundai, capable de vendre seul", kpi:"2-3 ventes, 0 callback non résolu, NPS > 6",
+      items:[
+        "Semaine 1 : Gamme complète (9 modèles) maîtrisée • Distinction claire avec Kia • Tarifs par finition",
+        "Semaine 2 : 10 objections + réponses prêtes • LLD vs crédit vs LOA • TCO vs Kia/Renault/Peugeot",
+        "Semaine 3-4 : Premiers essais en showroom • 5 ventes accomplies • Process client maîtrisé (accueil → découverte → essai → devis)",
+        "À demander : accès showroom gratuit • CRM formation (2h) • 1 mentor 2x/semaine • 5+ leads qualifiés/semaine"
+      ]},
+    {titre:"PHASE 2 : J31-60 (Autonomie commerciale & résultats concrets)", objectif:"Vendeur autonome, déjà rentable pour la concession", kpi:"CA > 15k€, 6+ ventes, NPS > 7",
+      items:[
+        "Semaine 5-6 : Négociation prix/marges maîtrisée • Financement personnalisé • Objections avancées",
+        "Semaine 7-8 : Cycle vente solo (découverte → conclure) • Suivi client post-vente • Cross-selling",
+        "À day 60 : 6+ ventes accomplies • Récurrence > 0 (clients reviennent) • Feedback manager positif",
+        "Cap sur la suite : premières bases de prospection active posées pour construire un portefeuille durable"
+      ]}
+  ],
   valauto:[
     {titre:"PHASE 1 : J1-30 (Expert B2B multi-marques & premiers deals)", objectif:"Comprendre 6 marques (VW, Audi, Škoda, Cupra, Seat, BYD), TCO PME", kpi:"2-3 ventes pro, 0 callback, NPS > 6",
       items:[
@@ -908,6 +1052,7 @@ function brandSeedRows(col){
 const PAGE_TITLES = {
   citroen:"Citroën — Vendeur automobile B2C",
   kia:"Kia — Entretien avec la recruteuse",
+  hyundai:"Hyundai — Vendeur automobile B2C",
   valauto:"Valauto — Vendeur véhicules pour professionnels"
 };
 const WORKMETA = {};
@@ -1344,7 +1489,7 @@ function totalFlashcardsMastered(){
 
 function updateOverview(){
   const brandStats = {};
-  ['citroen','kia','valauto'].forEach(pk => {
+  ['citroen','kia','hyundai','valauto'].forEach(pk => {
     const plan4 = document.querySelectorAll(`#plan-${pk} input[type=checkbox]`);
     const plan100 = document.querySelectorAll(`#plan100-${pk} input[type=checkbox]`);
     let done4 = 0; plan4.forEach(b => { if(b.checked) done4++; });
@@ -1363,6 +1508,7 @@ function updateOverview(){
 const BRAND_META = {
   citroen:{name:"Citroën", color:"#c4131a"},
   kia:{name:"Kia", color:"#bb162b"},
+  hyundai:{name:"Hyundai", color:"#002c5f"},
   valauto:{name:"Valauto", color:"#001e50"}
 };
 
@@ -1379,7 +1525,7 @@ function renderHome(brandStats){
     <div class="home-global-stat"><b>${totalFlashcardsMastered()}</b><span>Cartes maîtrisées</span></div>
   `;
 
-  gridEl.innerHTML = ['citroen','kia','valauto'].map(pk => {
+  gridEl.innerHTML = ['citroen','kia','hyundai','valauto'].map(pk => {
     const meta = BRAND_META[pk];
     const s = brandStats[pk] || {pct4:0, pct100:0};
     return `<div class="home-card" data-page="${pk}">
@@ -1482,24 +1628,27 @@ function exportPdf(pageKey){
 }
 
 function exportPdfAll(){
-  document.getElementById('print-report').innerHTML = ['citroen','kia','valauto'].map(buildPrintReport).join('');
+  document.getElementById('print-report').innerHTML = ['citroen','kia','hyundai','valauto'].map(buildPrintReport).join('');
   window.print();
 }
 
 /* ---------------- INIT ---------------- */
 document.getElementById('grid-citroen').innerHTML = renderBrandCard('citroen');
 document.getElementById('grid-kia').innerHTML = renderBrandCard('kia');
+document.getElementById('grid-hyundai').innerHTML = renderBrandCard('hyundai');
 document.getElementById('grid-valauto').innerHTML = ['seat','cupra','skoda','byd','vw','audi'].map(renderBrandCard).join('');
 
 renderPlan('citroen', PLANS.citroen);
 renderPlan('kia', PLANS.kia);
+renderPlan('hyundai', PLANS.hyundai);
 renderPlan('valauto', PLANS.valauto);
 renderPlan100('citroen');
 renderPlan100('kia');
+renderPlan100('hyundai');
 renderPlan100('valauto');
 updateOverview();
 
-['citroen','kia','valauto'].forEach(pk => {
+['citroen','kia','hyundai','valauto'].forEach(pk => {
   const btn = document.getElementById('export-'+pk);
   if(btn) btn.addEventListener('click', () => exportPdf(pk));
 });
