@@ -1057,6 +1057,45 @@ const PAGE_TITLES = {
 };
 const WORKMETA = {};
 
+/* ---------------- CROSS-DEVICE SYNC ---------------- */
+const SYNC_PREFIXES = ['prepa-entretiens-', 'note-', 'tbl-', 'fc-'];
+function collectSyncData(){
+  const data = {};
+  try{
+    for(let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i);
+      if(k && SYNC_PREFIXES.some(p => k.indexOf(p) === 0)){
+        data[k] = localStorage.getItem(k);
+      }
+    }
+  }catch(e){}
+  return data;
+}
+function applySyncData(data){
+  try{
+    Object.keys(data).forEach(k => localStorage.setItem(k, data[k]));
+  }catch(e){}
+}
+let syncTimer = null;
+function scheduleSync(){
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => {
+    fetch('/api/sync', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(collectSyncData())
+    }).catch(()=>{});
+  }, 1200);
+}
+async function loadFromServer(){
+  try{
+    const r = await fetch('/api/sync');
+    if(!r.ok) return;
+    const payload = await r.json();
+    if(payload && payload.data) applySyncData(payload.data);
+  }catch(e){}
+}
+
 /* ---------------- BRAND CARDS & MODAL ---------------- */
 function renderBrandCard(key){
   const b = BRANDS[key];
@@ -1260,6 +1299,7 @@ function buildNotes(panel, workId, withCounter){
     clearTimeout(t);
     t = setTimeout(() => {
       try{ localStorage.setItem(key, ta.value); }catch(e){}
+      scheduleSync();
       savedEl.classList.add('show');
       setTimeout(() => savedEl.classList.remove('show'), 1200);
     }, 400);
@@ -1329,6 +1369,7 @@ function buildTable(panel, workId, columns, seed){
       return obj;
     });
     try{ localStorage.setItem(key, JSON.stringify(data)); }catch(e){}
+    scheduleSync();
     savedEl.classList.add('show');
     setTimeout(() => savedEl.classList.remove('show'), 1200);
   }
@@ -1397,6 +1438,7 @@ function buildFlashcards(panel, workId, work, onBack){
 
   function persist(){
     try{ localStorage.setItem(key, JSON.stringify(known)); }catch(e){}
+    scheduleSync();
   }
 
   function render(){
@@ -1441,6 +1483,7 @@ function toggleItem(pageKey, id, kind){
     state[id] = cb.checked;
     localStorage.setItem('prepa-entretiens-'+kind+pageKey, JSON.stringify(state));
   }catch(e){}
+  scheduleSync();
   updateProgress(pageKey, kind);
 }
 
@@ -1633,27 +1676,30 @@ function exportPdfAll(){
 }
 
 /* ---------------- INIT ---------------- */
-document.getElementById('grid-citroen').innerHTML = renderBrandCard('citroen');
-document.getElementById('grid-kia').innerHTML = renderBrandCard('kia');
-document.getElementById('grid-hyundai').innerHTML = renderBrandCard('hyundai');
-document.getElementById('grid-valauto').innerHTML = ['seat','cupra','skoda','byd','vw','audi'].map(renderBrandCard).join('');
+function initApp(){
+  document.getElementById('grid-citroen').innerHTML = renderBrandCard('citroen');
+  document.getElementById('grid-kia').innerHTML = renderBrandCard('kia');
+  document.getElementById('grid-hyundai').innerHTML = renderBrandCard('hyundai');
+  document.getElementById('grid-valauto').innerHTML = ['seat','cupra','skoda','byd','vw','audi'].map(renderBrandCard).join('');
 
-renderPlan('citroen', PLANS.citroen);
-renderPlan('kia', PLANS.kia);
-renderPlan('hyundai', PLANS.hyundai);
-renderPlan('valauto', PLANS.valauto);
-renderPlan100('citroen');
-renderPlan100('kia');
-renderPlan100('hyundai');
-renderPlan100('valauto');
-updateOverview();
+  renderPlan('citroen', PLANS.citroen);
+  renderPlan('kia', PLANS.kia);
+  renderPlan('hyundai', PLANS.hyundai);
+  renderPlan('valauto', PLANS.valauto);
+  renderPlan100('citroen');
+  renderPlan100('kia');
+  renderPlan100('hyundai');
+  renderPlan100('valauto');
+  updateOverview();
 
-['citroen','kia','hyundai','valauto'].forEach(pk => {
-  const btn = document.getElementById('export-'+pk);
-  if(btn) btn.addEventListener('click', () => exportPdf(pk));
-});
-const exportAllBtn = document.getElementById('export-all');
-if(exportAllBtn) exportAllBtn.addEventListener('click', exportPdfAll);
+  ['citroen','kia','hyundai','valauto'].forEach(pk => {
+    const btn = document.getElementById('export-'+pk);
+    if(btn) btn.addEventListener('click', () => exportPdf(pk));
+  });
+  const exportAllBtn = document.getElementById('export-all');
+  if(exportAllBtn) exportAllBtn.addEventListener('click', exportPdfAll);
+}
+loadFromServer().finally(initApp);
 
 /* ---------------- NAV ---------------- */
 function switchPage(pageKey){
