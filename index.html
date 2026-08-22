@@ -1822,15 +1822,18 @@ function initApp(){
   document.getElementById('grid-citroen').innerHTML = renderBrandCard('citroen');
   document.getElementById('grid-kia').innerHTML = renderBrandCard('kia');
   document.getElementById('grid-hyundai').innerHTML = renderBrandCard('hyundai');
+  document.getElementById('grid-alpine').innerHTML = renderBrandCard('alpine');
   document.getElementById('grid-valauto').innerHTML = ['seat','cupra','skoda','byd','vw','audi'].map(renderBrandCard).join('');
 
   renderPlan('citroen', PLANS.citroen);
   renderPlan('kia', PLANS.kia);
   renderPlan('hyundai', PLANS.hyundai);
+  renderPlan('alpine', PLANS.alpine);
   renderPlan('valauto', PLANS.valauto);
   renderPlan100('citroen');
   renderPlan100('kia');
   renderPlan100('hyundai');
+  renderPlan100('alpine');
   renderPlan100('valauto');
   updateOverview();
 
