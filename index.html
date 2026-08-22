@@ -263,6 +263,7 @@ ul.print-checklist li{margin-bottom:3px}
       <button data-page="citroen" title="Citroën SOFIDA"><span class="brand-dot" style="background:#c4131a"></span>Citroën</button>
       <button data-page="kia" title="Kia SERVA"><span class="brand-dot" style="background:#bb162b"></span>Kia</button>
       <button data-page="hyundai" title="Hyundai"><span class="brand-dot" style="background:#002c5f"></span>Hyundai</button>
+      <button data-page="alpine" title="Alpine"><span class="brand-dot" style="background:#00205b"></span>Alpine</button>
       <button data-page="valauto" title="Valauto"><span class="brand-dot" style="background:#001e50"></span>Valauto</button>
     </nav>
   </div>
@@ -273,6 +274,7 @@ ul.print-checklist li{margin-bottom:3px}
   <button class="ov-brand" data-page="citroen"><span class="brand-dot" style="background:#c4131a"></span>Citroën <b id="ov-citroen">0%</b></button>
   <button class="ov-brand" data-page="kia"><span class="brand-dot" style="background:#bb162b"></span>Kia <b id="ov-kia">0%</b></button>
   <button class="ov-brand" data-page="hyundai"><span class="brand-dot" style="background:#002c5f"></span>Hyundai <b id="ov-hyundai">0%</b></button>
+  <button class="ov-brand" data-page="alpine"><span class="brand-dot" style="background:#00205b"></span>Alpine <b id="ov-alpine">0%</b></button>
   <button class="ov-brand" data-page="valauto"><span class="brand-dot" style="background:#001e50"></span>Valauto <b id="ov-valauto">0%</b></button>
   <button class="ov-brand" id="sync-now-btn" type="button">🔄 Synchroniser maintenant</button>
   <span id="sync-status" class="ov-sync-status"></span>
@@ -373,6 +375,35 @@ ul.print-checklist li{margin-bottom:3px}
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progress100-hyundai"></div></div>
       <div class="progress-label"><span id="progress100-label-hyundai">0%</span> du plan 60 jours complété</div>
+    </div>
+
+  </section>
+
+  <!-- ALPINE -->
+  <section class="page" id="page-alpine">
+    <div class="hero">
+      <h1>Alpine — Vendeur sportive ultra-niche française</h1>
+      <p>Alpine est une marque sportive premium ultra-niche (~ 650 ventes/an). L'A110 est une légende : sportive légère (< 1 100 kg), tenue de route pure, alternative française à Porsche 911. Cible : passionnés d'automobile, entrepreneurs, conducteurs uniques. L'A310 électrique arrive bientôt.</p>
+    </div>
+
+    <h2 class="section-title"><span class="num">1</span>Fiche marque</h2>
+    <div class="card-grid" id="grid-alpine"></div>
+
+    <h2 class="section-title"><span class="num">2</span>Plan de révision — sprint 7 à 14 jours</h2>
+    <p class="section-hint">🎯 Jour 1-7 = l'essentiel à savoir avant l'entretien avec le responsable des ventes. Jour 8-14 = pour approfondir si tu as une 2ᵉ semaine devant toi.</p>
+    <div class="timeline" id="plan-alpine"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-alpine"></div></div>
+      <div class="progress-label"><span id="progress-label-alpine">0%</span> du plan complété</div>
+      <div class="export-row"><button class="btn-mini" id="export-alpine" type="button">📄 Exporter en PDF</button></div>
+    </div>
+
+    <h2 class="section-title"><span class="num">📊</span>Plan 60 jours pour être rentable</h2>
+    <p class="section-hint">💬 Un plan court, chiffré et réaliste à présenter en entretien : de quoi donner au responsable des ventes une vision claire de ta valeur dès les 2 premiers mois — pas ce qu'il faut faire avant l'entretien.</p>
+    <div class="timeline" id="plan100-alpine"></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress100-alpine"></div></div>
+      <div class="progress-label"><span id="progress100-label-alpine">0%</span> du plan 60 jours complété</div>
     </div>
 
   </section>
@@ -693,6 +724,33 @@ const BRANDS = {
       "La gamme électrique s'étoffe autour de la plateforme PPE (Q6 e-tron) : argument technique fort pour les flottes orientées TCO et image RSE.",
       "Positionnement premium : pertinent pour des dirigeants et cadres, avec un discours orienté véhicule de fonction et avantage en nature plutôt que pur TCO utilitaire."
     ]
+  },
+
+  alpine:{
+    name:"Alpine", color:"#00205b",
+    tagline:"Marque sportive française, héritière de la tradition de performance, A110 cult.",
+    links:[{label:"Site officiel Alpine", url:"https://www.alpine-automobiles.fr/"}],
+    stats:[
+      {label:"Immatriculations VP 2025 (estimation)", value:"≈ 650", sub:"marque ultra-niche, fabrication limitée"},
+      {label:"Part de marché VP", value:"< 0,05 %", sub:"production annuelle environ 600-700 unités"},
+      {label:"Modèle emblématique", value:"A110", sub:"sportive légère, < 1 100 kg, 0-100 en 4,4s"},
+      {label:"Héritage", value:"60+ ans de tradition", sub:"Alpine A110 Berlinette mythique (1962-1977)"},
+      {label:"Positionnement", value:"Ultra-premium sportif", sub:"Alternative aux Porsche 911 et Lotus sur le marché français"},
+      {label:"CA indicatif 2025 (estimation)", value:"≈ 0,025 Md€", sub:"≈ 650 VP × ~38 000 € prix moyen indicatif"}
+    ],
+    gamme:[
+      {modele:"A110", segment:"Sportive légère", energie:"Essence turbo 252 ch", note:"Cœur de gamme, 0-100 en 4,4s, < 1 100 kg, tenue de route légendaire"},
+      {modele:"A110 S", segment:"Sportive légère haute performance", energie:"Essence turbo 292 ch", note:"Version sportive, +40 ch, freins Brembo, châssis affiné"},
+      {modele:"A110 R", segment:"Sportive extrême", energie:"Essence turbo 300 ch", note:"Édition limitée, plus radicale, suspension renforcée, pneus Michelin Pilot Sport"},
+      {modele:"A310 (future)", segment:"Coupé sportif électrique", energie:"100% électrique (annoncée)", note:"Nouveau modèle en développement, déclinera la DNA sportive en électrique"}
+    ],
+    points:[
+      "Alpine est une marque niche ultra-premium : avantage clé est la légèreté, la tenue de route et l'âme sportive, pas les équipements tech ou le luxe matériaux.",
+      "L'A110 est une légende vivante en France : loin devant comme sportive pure de moins de 1 100 kg — argument de différenciation face aux Porsche 911.",
+      "Clientèle passionnée d'automobiles : en vente, préférer le discours de tradition (60+ ans Alpine, héritière de la Berlinette) et performance que de confort ou connectivité.",
+      "La future A310 électrique sera stratégique pour l'image de marque : savoir en parler montre une compréhension de l'évolution de la marque (transition électrique sans perdre l'âme sportive).",
+      "Marque non-familiale par excellence : revoir le contexte client (conducteur unique, passion auto) avant d'en parler — pertinent pour cadres dynamiques ou entrepreneurs, moins pour familles."
+    ]
   }
 };
 
@@ -895,6 +953,40 @@ const PLANS = {
           lesson:"Fixe des objectifs mesurables et progressifs : par exemple un nombre de rendez-vous tenus, un taux de transformation cible, un nombre de ventes. Évite les objectifs flous du type « bien connaître la gamme » — préfère « connaître les 9 modèles et leurs prix sans notes »."}}
       ]}
   ],
+  alpine:[
+    {label:"J1-2", titre:"Jour 1-2 — L'A110 & l'ADN sportif", goal:"Maîtriser la gamme ultra-niche et l'héritage 60+ ans",
+      items:[
+        {text:"Mémoriser la gamme Alpine (A110, A110 S, A110 R, A310 future) et ses caractéristiques clés", work:{type:"table", columns:["Modèle","Motorisation","Puissance","0-100 km/h","Poids","Argument clé"], seed:[{"Modèle":"A110"},{"Modèle":"A110 S"},{"Modèle":"A110 R"},{"Modèle":"A310 (future)"}],
+          lesson:"Alpine est ultra-niche : chaque détail compte. La gamme tient sur 2-3 doigts. Remplis le tableau avec les specs officielles, puis vérifie les prix actuels sur le configurateur. L'A110 de base part de 55 000 € environ, l'A110 R approche les 80 000 €.",
+          resources:[{label:"Ouvrir la fiche marque Alpine", brand:"alpine"},{label:"Configurateur officiel Alpine", url:"https://www.alpine-automobiles.fr/"}]}},
+        {text:"Reviser les stats clés Alpine en flashcards : immatriculations, positionnement, héritage", work:{type:"flashcards", brand:"alpine",
+          lesson:"Alpine : ~ 650 ventes/an, < 0,05 % de part de marché, mais clientèle hyper-engagée. Héritage 60+ ans avec la Berlinette (1962-1977). Plateforme châssis Renault sport, moteur Renault Nissan Alliance. Alternative française à Porsche 911 en sportive pure."}}
+      ]},
+    {label:"J3-4", titre:"Jour 3-4 — La vente en marque niche", goal:"Vendre l'émotion, la rareté et l'héritage plutôt que les équipements tech",
+      items:[
+        {text:"Préparer 3 différenciateurs face à Porsche 911 (prix, légèreté, tenue de route French touch)", work:{type:"table", columns:["Criterion","A110 Alpine","Porsche 911","Argument Alpine"], seed:[{"Criterion":"Poids"},{"Criterion":"Légèreté / perfo"},{"Criterion":"Prix d'entrée"},{"Criterion":"Héritage"}],
+          lesson:"Alpine ne se vend pas sur les équipements. Elle se vend sur : (1) légèreté extrême (< 1 100 kg vs 1 500+ pour la 911), (2) tenue de route pure sans doute, (3) prix inférieur de 20-30 %, (4) l'ADN sportif français unique. Remplis ce tableau avec ces différenciateurs."}},
+        {text:"Identifier le profil client Alpine (passionné d'auto, conducteur unique, pas famille)", work:{type:"notes", counter:true,
+          prompt:"Décris 2-3 profils clients Alpine : qui les achète, quel est leur usage typique, qu'est-ce qui les décide ?",
+          lesson:"Alpine n'est pas une voiture familiale. Ses clients sont des passionnés (amateurs de track days, de tenue de route), des conducteurs uniques, souvent des chefs d'entreprise ou cadres dynamiques. L'A110 se vend sur l'émotion pure, pas sur le confort ou la connectivité. Prépare des histoires / cas d'usage : client qui compare à la 911 mais préfère l'âme française et la légèreté ; propriétaire qui revient pour chaque nouvelle génération depuis la Berlinette."}}
+      ]},
+    {label:"J5-6", titre:"Jour 5-6 — Closing sur une marque rareté", goal:"Maîtriser les objections spécifiques à l'ultra-niche et la rareté",
+      items:[
+        {text:"Lister les objections spécifiques à Alpine : « marque petite ? », « réseau faible ? », « clientèle élitiste ? »", work:{type:"table", columns:["Objection","Réponse structurée"], seed:[{},{},{}],
+          lesson:"Alpine n'a qu'une seule usine en France (Dieppe) qui produit environ 600-700 unités/an : c'est volontairement limité pour préserver l'exclusivité et la qualité. Transforme cela en argument : rareté = valeur de revente préservée, accès limité = prestige, réseautage communauté exclusive. Pour le réseau, la force d'Alpine est chez ses partenaires (ex. Renault Sport pour la maintenance). Prépare une réponse cool qui valorise la niche plutôt que de la défendre."}},
+        {text:"Préparer une visite d'usine / showroom Alpine comme argument de vente experiential", work:{type:"notes",
+          prompt:"Note 3 points à mettre en avant lors d'une visite usine Alpine ou du showroom monobrand : ce que le client verra, sentira, retiendra.",
+          lesson:"Si possible, organise une visite de l'usine Dieppe ou du showroom monobrand Alpine à Paris. C'est un outil de vente très puissant : le client vit l'expérience, pas juste la spec. Prépare un narrative : le contrôle qualité, les handlings finaux, la pose du logo Alpine, l'histoire du bâtiment."}}
+      ]},
+    {label:"J7", titre:"Jour 7 — Synthèse spécifique Alpine", goal:"Pitcher Alpine comme une cause, pas un produit",
+      items:[
+        {text:"Préparer un pitch de 2 minutes : pourquoi Alpine, pourquoi moi, pourquoi maintenant", work:{type:"notes", counter:true,
+          lesson:"Structure ton pitch différemment que pour une marque grand public : pourquoi Alpine (ce que la marque représente pour toi personnellement : l'âme sportive française, l'exclusivité, l'héritage, pas les parts de marché), pourquoi toi (ta passion pour l'auto, ta capacité à conseiller des gens demanding, ton respect de la rareté), pourquoi maintenant (la future A310 électrique arrive bientôt et tu veux en être). Cherche l'authenticité plutôt que le discours marketing.",
+          example:"Exemple : « Je postule chez Alpine parce que j'aime les voitures, vraiment. Pas juste la mobilité : l'émotion, la tenue de route, l'héritage. Alpine représente ça mieux que personne en France — 60 ans d'histoire, une vraie sportive légère que tu peux utiliser tous les jours, pas juste un objet à garer. Les clients qui achètent une A110 ne comparent pas sur les équipements, ils comparent sur la philosophie. Et c'est mon truc : aider quelqu'un à retrouver cette passion qu'il pense avoir perdue après 20 ans de SUV familiaux. »"}},
+        {text:"Lister 2-3 questions intelligentes sur Alpine : stratégie A310, support du réseau, profil idéal client", work:{type:"table", columns:["Question à poser"], seed:[{},{}],
+          lesson:"Tes questions doivent montrer que tu penses déjà comme un vendeuer Alpine : sur la timeline et le design de l'A310, sur la formation spécifique à la vente en niche (pas juste le produit), sur le réseau de partenaires pour la maintenance/tuning post-vente. Évite les questions génériques."}}
+      ]}
+  ],
   valauto:[
     {label:"J1-2", titre:"Jour 1-2 — Les 6 marques & chiffres clés", goal:"Mémoriser les gammes et les chiffres des 6 marques avant tout le reste : c'est ce qu'un responsable des ventes teste en premier",
       items:[
@@ -1020,6 +1112,22 @@ const PLAN100 = {
         "À day 60 : 3+ deals PME • Portefeuille 10+ prospects chauds • Process vente B2B maîtrisé",
         "Cap sur la suite : premiers contacts avec des gestionnaires de flotte posés pour construire des contrats multi-véhicules"
       ]}
+  ],
+  alpine:[
+    {titre:"PHASE 1 : J1-30 (L'âme Alpine & clientèle passionnée)", objectif:"Maîtriser l'A110 et la philosophie niche, attirer les passionnés", kpi:"1-2 ventes, 0 callback, NPS > 8",
+      items:[
+        "Semaine 1-2 : A110 (base/S/R) maîtrisée par cœur • Héritage 60 ans • A310 future roadmap",
+        "Semaine 2-3 : Clients niche identifiés (passionnés, entrepreneurs, cadres dynamiques) • Différenciateurs vs 911",
+        "Semaine 3-4 : Premiers essais en circuit ou route de montagne • Valider « l'expérience » plus que le produit",
+        "À demander : accès usine Dieppe (visite) • Showroom Paris monobrand • 1 mentor commercial niche"
+      ]},
+    {titre:"PHASE 2 : J31-60 (Vendeur de passion & communauté)", objectif:"Bâtir une relation client sur l'émotion et l'exclusivité, fidéliser propriétaires", kpi:"2+ ventes, 1+ reprise, NPS > 8",
+      items:[
+        "Semaine 5-8 : Suivi propriétaires existants (essai A310 future) • Réseau utilisateurs Alpine activé",
+        "Semaine 7-8 : Premier client passé au showroom companion (visite usine / track day) • Prospects chauds générés",
+        "À day 60 : 2+ ventes conclues • Portefeuille passionnés en cours • Crédibilité auprès du réseau Dieppe établie",
+        "Cap sur la suite : premières bases de communauté propriétaires posées pour fidélisation durable"
+      ]}
   ]
 };
 const PHASE_COLORS = ['var(--accent)','var(--good)','var(--warn)'];
@@ -1056,6 +1164,7 @@ const PAGE_TITLES = {
   citroen:"Citroën — Vendeur automobile B2C",
   kia:"Kia — Entretien avec la recruteuse",
   hyundai:"Hyundai — Vendeur automobile B2C",
+  alpine:"Alpine — Vendeur sportive ultra-niche",
   valauto:"Valauto — Vendeur véhicules pour professionnels"
 };
 const WORKMETA = {};
@@ -1564,7 +1673,7 @@ function totalFlashcardsMastered(){
 
 function updateOverview(){
   const brandStats = {};
-  ['citroen','kia','hyundai','valauto'].forEach(pk => {
+  ['citroen','kia','hyundai','alpine','valauto'].forEach(pk => {
     const plan4 = document.querySelectorAll(`#plan-${pk} input[type=checkbox]`);
     const plan100 = document.querySelectorAll(`#plan100-${pk} input[type=checkbox]`);
     let done4 = 0; plan4.forEach(b => { if(b.checked) done4++; });
@@ -1584,6 +1693,7 @@ const BRAND_META = {
   citroen:{name:"Citroën", color:"#c4131a"},
   kia:{name:"Kia", color:"#bb162b"},
   hyundai:{name:"Hyundai", color:"#002c5f"},
+  alpine:{name:"Alpine", color:"#00205b"},
   valauto:{name:"Valauto", color:"#001e50"}
 };
 
@@ -1600,7 +1710,7 @@ function renderHome(brandStats){
     <div class="home-global-stat"><b>${totalFlashcardsMastered()}</b><span>Cartes maîtrisées</span></div>
   `;
 
-  gridEl.innerHTML = ['citroen','kia','hyundai','valauto'].map(pk => {
+  gridEl.innerHTML = ['citroen','kia','hyundai','alpine','valauto'].map(pk => {
     const meta = BRAND_META[pk];
     const s = brandStats[pk] || {pct4:0, pct100:0};
     return `<div class="home-card" data-page="${pk}">
@@ -1703,7 +1813,7 @@ function exportPdf(pageKey){
 }
 
 function exportPdfAll(){
-  document.getElementById('print-report').innerHTML = ['citroen','kia','hyundai','valauto'].map(buildPrintReport).join('');
+  document.getElementById('print-report').innerHTML = ['citroen','kia','hyundai','alpine','valauto'].map(buildPrintReport).join('');
   window.print();
 }
 
@@ -1724,7 +1834,7 @@ function initApp(){
   renderPlan100('valauto');
   updateOverview();
 
-  ['citroen','kia','hyundai','valauto'].forEach(pk => {
+  ['citroen','kia','hyundai','alpine','valauto'].forEach(pk => {
     const btn = document.getElementById('export-'+pk);
     if(btn) btn.addEventListener('click', () => exportPdf(pk));
   });
